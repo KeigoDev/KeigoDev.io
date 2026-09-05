@@ -1236,22 +1236,28 @@ section {
   margin-top: 36px;
 }
 
-.gallery-toggle {
+button.gallery-toggle {
+  appearance: none;
+  -webkit-appearance: none;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-top: 22px;
   padding: 11px 16px;
-  border: 1px solid var(--teal);
-  background: var(--teal-soft);
-  color: var(--teal);
-  font: 600 12px 'JetBrains Mono', monospace;
+  border: 1px solid #3FDCC8;
+  border-radius: 0;
+  background: rgba(63, 220, 200, .1);
+  color: #3FDCC8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
   cursor: pointer;
   transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 
-.gallery-toggle span { font-size: 18px; line-height: 0; }
-.gallery-toggle:hover, .gallery-toggle:focus-visible { background: var(--teal); color: #06110F; transform: translateY(-2px); }
+button.gallery-toggle span { font-size: 18px; line-height: 0; }
+button.gallery-toggle:hover, button.gallery-toggle:focus-visible { background: #3FDCC8; color: #06110F; transform: translateY(-2px); }
 .education-gallery[hidden] { display: none; }
 
 .gallery-heading {
