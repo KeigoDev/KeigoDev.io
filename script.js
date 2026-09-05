@@ -213,6 +213,41 @@ document.querySelectorAll('.proj-card, .cert-card').forEach(card => card.addEven
   card.style.setProperty('--my', `${event.clientY - rect.top}px`);
 }));
 
+// Graduation gallery lightbox
+const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryToggle = document.getElementById('galleryToggle');
+const educationGallery = document.getElementById('educationGallery');
+if (galleryToggle && educationGallery) {
+  galleryToggle.addEventListener('click', () => {
+    const isOpen = galleryToggle.getAttribute('aria-expanded') === 'true';
+    galleryToggle.setAttribute('aria-expanded', String(!isOpen));
+    educationGallery.hidden = isOpen;
+    galleryToggle.innerHTML = isOpen
+      ? 'View Graduation Photos <span aria-hidden="true">+</span>'
+      : 'Hide Graduation Photos <span aria-hidden="true">−</span>';
+  });
+}
+
+if (galleryItems.length) {
+  const lightbox = document.createElement('div');
+  lightbox.className = 'gallery-lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Graduation photo viewer');
+  lightbox.innerHTML = '<button class="gallery-close" type="button" aria-label="Close photo viewer">&times;</button><img alt="Expanded graduation photo">';
+  document.body.appendChild(lightbox);
+  const lightboxImage = lightbox.querySelector('img');
+  const closeLightbox = () => { lightbox.classList.remove('open'); document.body.classList.remove('menu-open'); };
+
+  galleryItems.forEach(item => item.addEventListener('click', () => {
+    lightboxImage.src = item.dataset.full;
+    lightboxImage.alt = item.querySelector('img').alt;
+    lightbox.classList.add('open');
+  }));
+  lightbox.addEventListener('click', event => { if (event.target === lightbox || event.target.closest('.gallery-close')) closeLightbox(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
+}
+
 // Animated connected-node network behind the hero.
 const netCanvas = document.getElementById('netcanvas');
 if (netCanvas) {
