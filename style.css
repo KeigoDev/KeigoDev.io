@@ -1179,6 +1179,21 @@ section {
   font-family: 'IBM Plex Mono', monospace;
 }
 
+.cert-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--teal);
+  font: 600 11.5px 'JetBrains Mono', monospace;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.cert-link:hover,
+.cert-link:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 @media (max-width: 780px) {
   .cert-grid {
     grid-template-columns: 1fr;
