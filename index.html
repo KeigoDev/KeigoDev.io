@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matthew Ferrer — Business Analyst & Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="brand-mark">MF</span> Matthew Ferrer</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:matthew.p.ferrer@gmail.com" class="nav-cta">Say hello</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="wrap hero">
+    <canvas id="netcanvas" aria-hidden="true"></canvas>
+    <div>
+      <div class="terminal">
+        <div class="terminal-bar"><span></span><span></span><span></span><span class="fname">query.sql</span></div>
+        <div class="terminal-body"><div><span class="prompt">$</span> <span id="typedLine"></span></div><div class="terminal-out" id="typedOut">-&gt; role: Business Planning &amp; Analytics, Officer @ Citi<br>-&gt; focus: BI reporting, SQL automation, data science</div></div>
+      </div>
+      <div class="hero-eyebrow">Business Planning & Analytics · Data Science</div>
+      <h1>Matthew Ferrer</h1>
+      <p class="hero-role">I turn messy operational data into dashboards and models that businesses actually act on — built at the intersection of business analysis and data science.</p>
+      <div class="hero-loc">📍Rizal, Philippines</div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="kpi-panel">
+      <div class="kpi-panel-head">
+        <h4 class="kpi-panel-title">Career snapshot</h4>
+        <span>LIVE VIEW</span>
+      </div>
+      <div class="kpi-grid">
+        <button class="kpi-cell" data-target="experience" type="button">
+          <div class="kpi-num"><span class="count" data-target="35">0</span><small>%</small></div>
+          <div class="kpi-label">Avg. reduction in manual reporting effort</div>
+        </button>
+        <button class="kpi-cell" data-target="certifications" type="button">
+          <div class="kpi-num"><span class="count" data-target="8">0</span></div>
+          <div class="kpi-label">Professional certifications across BI & data science</div>
+        </button>
+        <button class="kpi-cell" data-target="projects" type="button">
+          <div class="kpi-num"><span class="count" data-target="5">0</span></div>
+          <div class="kpi-label">Featured end-to-end analytics projects</div>
+        </button>
+        <button class="kpi-cell" data-target="skills" type="button">
+          <div class="kpi-num"><span class="count" data-target="5">0</span><small>+</small></div>
+          <div class="kpi-label">BI platforms used in production</div>
+        </button>
+      </div>
+      <div class="kpi-chart">
+        <svg viewBox="0 0 300 64" preserveAspectRatio="none">
+          <polyline id="sparkline" fill="none" stroke="#AD7F26" stroke-width="2"
+            points="0,52 30,48 60,50 90,38 120,40 150,26 180,30 210,18 240,20 270,10 300,8"
+            stroke-dasharray="500" stroke-dashoffset="500"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="section-label">About</span>
+        <h2 class="section-about-title">Background</h2>
+        <div class="about-text">
+          <p>I'm a Business Planning & Analytics Officer at Citi, based out of Taguig, where I sit between operations, procurement, and technology — turning raw supplier and payment data into dashboards that leadership actually relies on for decisions.</p>
+          <p class="pull">My work lives where business analysis meets data science: understanding what a stakeholder needs, then building the pipeline and visualization that gets them there.</p>
+          <p>Day to day that means building and maintaining reporting across Tableau, MicroStrategy, Quantum GEP, Zephyr, and SAP Fieldglass for APAC Balance of Trade and Procure-to-Pay operations, automating pipelines with SQL, and governing supplier master data so the numbers people see are numbers they can trust.</p>
+          <p>I studied Information Technology at STI College Ortigas-Cainta, and outside of work I build data science projects — from NLP language modeling to customer experience dashboards — to keep sharpening the technical half of that equation.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item selectable" tabindex="0">
+          <div class="tl-year">Oct 2025 — Present</div>
+          <div class="tl-title">Business Planning & Analytics, Officer</div>
+          <div class="tl-sub">Citi, BGC Taguig</div>
+        </div>
+        <div class="tl-item selectable" tabindex="0">
+          <div class="tl-year">2024 - 2025</div>
+          <div class="tl-title">Technical Project Coordinator</div>
+          <div class="tl-sub">BE3 Power Solutions Enterprise, Taytay Rizal</div>
+        </div>
+        <div class="tl-item selectable" tabindex="0">
+          <div class="tl-year">2021 - 2022</div>
+          <div class="tl-title">Database Administrator</div>
+          <div class="tl-sub">Provincial Public Employment Service Office, Rizal</div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section-surface">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-label">Experience</span>
+        <h2>Where I've worked</h2>
+      </div>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Business Planning & Analytics, Officer</div>
+            <div class="exp-org">Citi, BGC Taguig</div>
+          </div>
+          <div class="exp-dates">OCT 2025 — OCT 2026</div>
+        </div>
+        <ul class="exp-list">
+          <li>Managed enterprise-scale business intelligence and reporting solutions across Tableau, MicroStrategy, Quantum GEP, Zephyr, and SAP Fieldglass, supporting APAC Balance of Trade and Procure-to-Pay operations.</li>
+          <li>Designed and delivered executive-level dashboards giving real-time visibility into supplier performance, payment risk, operational KPIs, and procurement health for business leadership.</li>
+          <li>Automated reporting pipelines using Tableau and SQL, cutting manual reporting effort by 30–40% while improving consistency, scalability, and operational efficiency.</li>
+          <li>Improved enterprise data quality through supplier master data governance, SQL validation, and reporting standardization, raising reporting accuracy across multiple business units.</li>
+          <li>Translated complex operational data into actionable insights supporting payment prioritization, supplier risk mitigation, and business decision-making.</li>
+          <li>Partnered with stakeholders across operations, procurement, finance, and technology to deliver scalable reporting solutions, process improvements, and AI-driven analytics initiatives.</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="tag">Tableau</span><span class="tag">MicroStrategy</span><span class="tag">SQL</span>
+          <span class="tag">Quantum GEP</span><span class="tag">Zephyr</span><span class="tag">SAP Fieldglass</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-label">Projects</span>
+        <h2>Selected work</h2>
+        <p>Independent projects applying statistical modeling and BI tooling to real datasets, end to end.</p>
+      </div>
+
+      <div class="proj-filters" id="projFilters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="sql">SQL</button>
+        <button class="filter-btn" data-filter="tableau">Tableau</button>
+        <button class="filter-btn" data-filter="powerbi">Power BI</button>
+        <button class="filter-btn" data-filter="nlp">NLP</button>
+      </div>
+
+      <div class="proj-grid" id="projGrid">
+
+        <div class="proj-card" data-tags="python nlp">
+          <div class="proj-kicker">Natural Language Processing</div>
+          <h3>Statistical Language Modeling</h3>
+          <p class="proj-desc">Built reusable Python modules for text preprocessing and n-gram based probabilistic sentence generation from scratch.</p>
+          <div class="proj-tags">
+            <span class="tag">Python</span><span class="tag">NLTK</span><span class="tag">NumPy</span>
+            <span class="tag">Matplotlib</span><span class="tag">Probability</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/KeigoDev/Ngram---Statistical-Language-Modeling" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>
+          </div>
+          <button class="proj-more">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail">
+            <div class="proj-detail-inner">
+              <ul>
+                <li>Performed text preprocessing, tokenization, vocabulary construction, n-gram frequency analysis, and probabilistic text generation using reusable Python modules.</li>
+                <li>Developed reusable NLP modules for preprocessing, tokenization, vocabulary generation, probability estimation, and probabilistic sentence generation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-tags="sql tableau">
+          <div class="proj-kicker">Business Intelligence</div>
+          <h3>Amazon Product Insights & Customer Experience Optimization</h3>
+          <p class="proj-desc">Used SQL and Tableau to turn 1,464 Amazon product ratings and reviews into recommendations for revenue growth, product quality, marketing, and customer experience.</p>
+          <div class="proj-tags">
+            <span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">Data Cleaning</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/KeigoDev/SQL-Amazon#amazon-product-insights--customer-experience-optimization-project" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>
+            <a href="https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset" target="_blank" rel="noopener">Dataset <span aria-hidden="true">↗</span></a>
+            <a href="https://public.tableau.com/views/AmazonInsights_17589781396940/Dashboard1?:language=en-US&amp;:sid=&amp;:redirect=auth&amp;:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">Tableau dashboard <span aria-hidden="true">↗</span></a>
+          </div>
+          <button class="proj-more">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail">
+            <div class="proj-detail-inner">
+              <ul>
+                <li>Answered business questions around revenue potential, quality improvement, marketing prioritization, customer engagement, and recommendation-system readiness.</li>
+                <li>Cleaned and transformed price, discount, rating-count, and category fields in MySQL, including missing-value imputation and business-friendly category standardization.</li>
+                <li>Engineered estimated revenue as discounted price multiplied by rating count to compare product and category performance.</li>
+                <li>Designed an interactive Tableau dashboard with category drill-downs, product comparisons, rating distributions, revenue performance, and marketing opportunities.</li>
+                <li>Prepared structured review data for future sentiment analysis, customer segmentation, forecasting, and recommendation-engine development.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-tags="python">
+          <div class="proj-kicker">Financial Performance Analysis</div>
+          <h3>Bank Branch Deposit Analysis</h3>
+          <p class="proj-desc">Analyzed 2010–2016 branch deposits to uncover financial trends, geographic concentration, and branch-level growth opportunities for strategic banking decisions.</p>
+          <div class="proj-tags">
+            <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span>
+            <span class="tag">Jupyter</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/KeigoDev/Python-Cleaning-Visualization-JPChase#-bank-branch-deposit-analysis-20102016" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>
+            <a href="https://www.kaggle.com/datasets/chasebank/bank-deposits" target="_blank" rel="noopener">Dataset <span aria-hidden="true">↗</span></a>
+          </div>
+          <button class="proj-more">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail">
+            <div class="proj-detail-inner">
+              <ul>
+                <li>Prepared branch-level banking data by converting date fields, handling missing values, validating deposit columns, and removing duplicates.</li>
+                <li>Created Branch Age, Years Since Acquisition, Total Deposits, Growth %, and CAGR metrics for performance comparison.</li>
+                <li>Analyzed deposit trends from 2010 to 2016, top and declining branches, geographic contributions by state and city, and performance risk indicators.</li>
+                <li>Built line and bar visualizations for deposit trends, top-performing branches, and declining branches, with geographic analysis using branch coordinates.</li>
+                <li>Found steady deposit growth through 2015, a notable decline in 2016, concentrated contributions from a small number of branches, and regional opportunities for expansion and optimization.</li>
+                <li>Established a foundation for predictive deposit modeling, branch clustering, automated monitoring dashboards, and deeper analysis of 2016 anomalies.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-tags="tableau">
+          <div class="proj-kicker">Customer Experience Intelligence</div>
+          <h3>British Airways Passenger Sentiment Dashboard</h3>
+          <p class="proj-desc">Built a unified Tableau view of passenger sentiment to help British Airways stakeholders guide service enhancements and strategic planning.</p>
+          <div class="proj-tags">
+            <span class="tag">Tableau</span><span class="tag">Customer Experience</span><span class="tag">Dashboard Design</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://public.tableau.com/views/AirwayDashboardByKeigo/Dashboard1?:language=en-US&amp;:sid=&amp;:redirect=auth&amp;:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">Tableau dashboard <span aria-hidden="true">↗</span></a>
+          </div>
+          <button class="proj-more">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail">
+            <div class="proj-detail-inner">
+              <ul>
+                <li>Created a unified passenger sentiment view to support service improvement and strategic planning decisions.</li>
+                <li>Found seat comfort ratings in Asia-Pacific trailed Europe by 20%, identifying a priority area for cabin redesign.</li>
+                <li>Identified a 15% summer dip in food and beverage satisfaction, revealing menu rotation and provisioning opportunities.</li>
+                <li>Confirmed cabin staff courtesy as the highest-rated experience dimension at 4.5/5, validating training investments.</li>
+                <li>Recommendations supported a menu overhaul and targeted cabin upgrades, contributing to a reported 10% satisfaction lift within six months.</li>
+                <li>Dashboard automation reduced manual reporting by 30 hours monthly and supported a 5% improvement in overall Net Promoter Score.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card" data-tags="powerbi excel retail">
+          <div class="proj-kicker">Retail Sales Intelligence</div>
+          <h3>Coca-Cola Retail Sales Dashboard</h3>
+          <p class="proj-desc">Built a Power BI dashboard from Coca-Cola retail sales data to explore product performance, sales patterns, and commercial trends.</p>
+          <div class="proj-tags"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Retail Analytics</span></div>
+          <div class="proj-links">
+            <a href="project-assets/coca-cola/coca-cola-retail-sales-dashboard.pbix" download>PBIX report <span aria-hidden="true">↓</span></a>
+            <a href="project-assets/coca-cola/coca-cola-sales.xlsx" download>Dataset <span aria-hidden="true">↓</span></a>
+          </div>
+          <button class="proj-more" type="button">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail"><div class="proj-detail-inner"><ul>
+            <li>Prepared the Coca-Cola retail sales workbook for analysis and connected it to a Power BI reporting workflow.</li>
+            <li>Designed an interactive view for comparing sales performance across products and retail activity.</li>
+          </ul></div></div>
+        </div>
+
+        <div class="proj-card" data-tags="powerbi covid healthcare">
+          <div class="proj-kicker">Global Health Analytics</div>
+          <h3>WHO COVID-19 Global Dashboard</h3>
+          <p class="proj-desc">Created a Power BI dashboard using WHO daily reporting data to track global COVID-19 cases, deaths, and regional trends over time.</p>
+          <div class="proj-tags"><span class="tag">Power BI</span><span class="tag">WHO Dataset</span><span class="tag">Time Series</span></div>
+          <div class="proj-links">
+            <a href="project-assets/covid-19/who-covid-19-dashboard.pbix" download>PBIX report <span aria-hidden="true">↓</span></a>
+            <a href="project-assets/covid-19/who-covid-19-global-daily-data.csv" download>Dataset <span aria-hidden="true">↓</span></a>
+          </div>
+          <button class="proj-more" type="button">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail"><div class="proj-detail-inner"><ul>
+            <li>Analyzed date-reported, country, WHO region, new cases, cumulative cases, new deaths, and cumulative deaths fields.</li>
+            <li>Structured the dashboard around geographic comparison, cumulative impact, daily change, and trend monitoring.</li>
+          </ul></div></div>
+        </div>
+
+        <div class="proj-card" data-tags="powerbi excel beverage">
+          <div class="proj-kicker">Consumer Goods Analytics</div>
+          <h3>Sales of Beverage Companies</h3>
+          <p class="proj-desc">Developed a Power BI report to compare beverage company sales performance and surface patterns across a consumer goods dataset.</p>
+          <div class="proj-tags"><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Sales Analysis</span></div>
+          <div class="proj-links">
+            <a href="project-assets/beverage-sales/beverage-sales-dashboard.pbix" download>PBIX report <span aria-hidden="true">↓</span></a>
+            <a href="project-assets/beverage-sales/beverage-sales-dataset.xlsx" download>Dataset <span aria-hidden="true">↓</span></a>
+          </div>
+          <button class="proj-more" type="button">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail"><div class="proj-detail-inner"><ul>
+            <li>Prepared the beverage sales workbook for interactive reporting and company-level comparison.</li>
+            <li>Built a visual analysis workflow for identifying sales leaders, category patterns, and commercial opportunities.</li>
+          </ul></div></div>
+        </div>
+
+        <div class="proj-card" data-tags="sql python">
+          <div class="proj-kicker">Academic Capstone</div>
+          <h3>Project Monitoring &amp; Inventory Management System</h3>
+          <p class="proj-desc">Designed a practical monitoring system that brings project progress and inventory visibility into one operational workflow.</p>
+          <div class="proj-tags"><span class="tag">SQL</span><span class="tag">Database Design</span><span class="tag">Systems Analysis</span></div>
+          <button class="proj-more" type="button">Details <span class="chevron">▾</span></button>
+          <div class="proj-detail"><div class="proj-detail-inner"><ul>
+            <li>Mapped project and inventory workflows into a structured system for status tracking, accountability, and replenishment visibility.</li>
+            <li>Applied requirements analysis, relational data modeling, and reporting concepts to a real operational use case.</li>
+          </ul></div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section-surface">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-label">Skills</span>
+        <h2>Toolkit</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Technical</h3>
+          <div class="skill-rows">
+            <button class="skill-row" type="button" data-level="65"><div class="skill-top"><span class="skill-name">SQL</span><span class="skill-level">Intermediate</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="45"><div class="skill-top"><span class="skill-name">Python (Pandas)</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="55"><div class="skill-top"><span class="skill-name">Tableau</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">Power BI</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="80"><div class="skill-top"><span class="skill-name">Excel — Pivot Tables, Power Query</span><span class="skill-level">Advanced</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">ETL / ELT</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="45"><div class="skill-top"><span class="skill-name">Looker Studio</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="25"><div class="skill-top"><span class="skill-name">R</span><span class="skill-level">Beginner</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools & Platforms</h3>
+          <div class="skill-rows">
+            <button class="skill-row" type="button" data-level="80"><div class="skill-top"><span class="skill-name">Google Workspace</span><span class="skill-level">Advanced</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="80"><div class="skill-top"><span class="skill-name">Notion</span><span class="skill-level">Advanced</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">MicroStrategy</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">SAP Fieldglass</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">Quantum GEP</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="50"><div class="skill-top"><span class="skill-name">Zephyr</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="55"><div class="skill-top"><span class="skill-name">ClickUp / Jira / Slack</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+            <button class="skill-row" type="button" data-level="25"><div class="skill-top"><span class="skill-name">Salesforce</span><span class="skill-level">Working</span></div><div class="meter"><div class="meter-fill"></div></div></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-label">Certifications</span>
+        <h2>Credentials</h2>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-mark">AWS</div>
+          <div>
+            <div class="cert-name">AWS Certified Cloud Practitioner</div>
+            <div class="cert-date">July 2026 · via Citi</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-mark">IBM</div>
+          <div>
+            <div class="cert-name">IBM Data Science Professional Certificate</div>
+            <div class="cert-date">May 2026</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-mark">SAP</div>
+          <div>
+            <div class="cert-name">SAP Business Analyst</div>
+            <div class="cert-date">September 2025</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-mark">GOOGLE</div>
+          <div>
+            <div class="cert-name">Google Business Intelligence Analyst Professional</div>
+            <div class="cert-date">August 2025</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-mark">META</div>
+          <div>
+            <div class="cert-name">Meta Data Analyst Professional Certificate</div>
+            <div class="cert-date">July 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" class="section-surface">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-label">Education</span>
+        <h2>Academic background</h2>
+      </div>
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">STI College Ortigas-Cainta</div>
+          <div class="edu-loc">Cainta, Rizal</div>
+          <div class="edu-degree">Bachelor of Science in Information Technology</div>
+          <div class="edu-capstone">Capstone: Project Monitoring and Inventory Management System</div>
+        </div>
+        <div class="edu-dates">2021 — 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <span class="section-label">Contact</span>
+      <h2>Let's talk about your data.</h2>
+      <p>Open to business analyst and data roles where I can help teams turn operational noise into decisions. Reach out any way that's easiest for you.</p>
+      <div class="contact-grid">
+        <div class="contact-cell">
+          <span>Email</span>
+          <button class="copy-btn" id="copyEmail">matthew.p.ferrer@gmail.com <span class="copy-note">Copied</span></button>
+        </div>
+        <div class="contact-cell">
+          <span>Phone</span>
+          <p>0945 237 4753</p>
+        </div>
+        <div class="contact-cell">
+          <span>Location</span>
+          <p> Rizal, Philippines</p>
+        </div>
+        <div class="contact-cell">
+          <span>Elsewhere</span>
+          <p><a href="#" target="_blank" rel="noopener">LinkedIn</a> · <a href="#" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 Matthew Ferrer</span>
+    <span>Built with HTML, CSS & JS</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
