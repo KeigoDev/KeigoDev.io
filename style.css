@@ -278,6 +278,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1,
@@ -1704,6 +1705,9 @@ body::before { opacity: .5; background-image: linear-gradient(rgba(63,220,200,.0
 .contact-cell a, .contact-cell p, .copy-btn { color: var(--ink); }
 .contact-cell a:hover, .copy-btn:hover { color: var(--teal); }
 @media (max-width: 900px) { #netcanvas { display: none; } }
+@media (max-width: 1100px) {
+  #netcanvas { right: 0; width: 55%; }
+}
 @media (max-width: 860px) {
   body.menu-open { overflow: hidden; }
   .nav-links { box-shadow: 0 18px 30px rgba(0,0,0,.35); }
