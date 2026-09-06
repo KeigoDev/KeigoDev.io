@@ -255,12 +255,12 @@ if (netCanvas) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let nodes = [];
   const resize = () => { const rect = netCanvas.getBoundingClientRect(); netCanvas.width = rect.width; netCanvas.height = rect.height; };
-  const seed = () => { nodes = Array.from({ length: Math.min(34, Math.floor(netCanvas.width / 34)) }, () => ({ x: Math.random() * netCanvas.width, y: Math.random() * netCanvas.height, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25 })); };
+  const seed = () => { nodes = Array.from({ length: Math.min(42, Math.floor(netCanvas.width / 28)) }, () => ({ x: Math.random() * netCanvas.width, y: Math.random() * netCanvas.height, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, pulse: Math.random() * Math.PI * 2 })); };
   const draw = () => {
     context.clearRect(0, 0, netCanvas.width, netCanvas.height);
-    nodes.forEach(node => { node.x += node.vx; node.y += node.vy; if (node.x < 0 || node.x > netCanvas.width) node.vx *= -1; if (node.y < 0 || node.y > netCanvas.height) node.vy *= -1; });
-    nodes.forEach((node, index) => nodes.slice(index + 1).forEach(other => { const distance = Math.hypot(node.x - other.x, node.y - other.y); if (distance < 130) { context.strokeStyle = `rgba(63,220,200,${.16 * (1 - distance / 130)})`; context.beginPath(); context.moveTo(node.x, node.y); context.lineTo(other.x, other.y); context.stroke(); } }));
-    nodes.forEach(node => { context.fillStyle = 'rgba(63,220,200,.55)'; context.beginPath(); context.arc(node.x, node.y, 1.6, 0, Math.PI * 2); context.fill(); });
+    nodes.forEach(node => { node.x += node.vx; node.y += node.vy; node.pulse += .025; if (node.x < 0 || node.x > netCanvas.width) node.vx *= -1; if (node.y < 0 || node.y > netCanvas.height) node.vy *= -1; });
+    nodes.forEach((node, index) => nodes.slice(index + 1).forEach(other => { const distance = Math.hypot(node.x - other.x, node.y - other.y); if (distance < 145) { context.strokeStyle = `rgba(63,220,200,${.2 * (1 - distance / 145)})`; context.lineWidth = 1; context.beginPath(); context.moveTo(node.x, node.y); context.lineTo(other.x, other.y); context.stroke(); } }));
+    nodes.forEach(node => { const radius = 1.5 + (Math.sin(node.pulse) + 1) * .65; context.fillStyle = 'rgba(63,220,200,.7)'; context.shadowColor = '#3FDCC8'; context.shadowBlur = 10; context.beginPath(); context.arc(node.x, node.y, radius, 0, Math.PI * 2); context.fill(); context.shadowBlur = 0; });
     if (!reduceMotion) requestAnimationFrame(draw);
   };
   resize(); seed(); draw();

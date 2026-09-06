@@ -34,6 +34,28 @@ body::before {
   mask-image: linear-gradient(to bottom, black, transparent 72%);
 }
 
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 34% 28% at 78% 12%, rgba(63, 220, 200, .08), transparent 72%),
+    radial-gradient(ellipse 28% 24% at 12% 42%, rgba(242, 184, 75, .045), transparent 72%);
+  animation: ambient-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 44px 44px, -44px 44px; }
+}
+
+@keyframes ambient-drift {
+  from { transform: scale(1); opacity: .72; }
+  to { transform: scale(1.08) translate3d(1%, -1%, 0); opacity: 1; }
+}
+
 @keyframes nav-drop {
   from { opacity: 0; transform: translateY(-100%); }
   to { opacity: 1; transform: translateY(0); }
@@ -1532,6 +1554,9 @@ footer {
     transition: none !important;
     animation: none !important;
   }
+
+  body::before,
+  body::after { animation: none; }
 }
 
 /* Dark analytics theme */
@@ -1544,7 +1569,7 @@ body { font-family: 'Inter', sans-serif; }
 h1, h2, h3, h4, .brand { font-family: 'Space Grotesk', sans-serif; }
 code, .mono, .section-label, .nav-links, .nav-cta, .hero-eyebrow, .terminal-body, .tag, .proj-kicker, .proj-links, .proj-more, .skill-level, .exp-org, .exp-dates, .cert-date, .edu-loc, .edu-dates, footer { font-family: 'JetBrains Mono', monospace; }
 .site-nav { background: rgba(9,12,18,.88); backdrop-filter: blur(10px); }
-body::before { opacity: .5; background-image: linear-gradient(rgba(63,220,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(63,220,200,.05) 1px,transparent 1px); mask-image: radial-gradient(ellipse 60% 50% at 50% 0%,black,transparent 75%); }
+body::before { opacity: .5; background-image: linear-gradient(rgba(63,220,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(63,220,200,.05) 1px,transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(ellipse 60% 50% at 50% 0%,black,transparent 75%); animation: grid-drift 22s linear infinite; }
 .scroll-progress { background: linear-gradient(90deg,var(--teal),var(--accent)); box-shadow: 0 0 10px rgba(63,220,200,.6); }
 .hero { position: relative; }
 #netcanvas { position: absolute; top: -20px; right: -80px; width: 60%; height: 130%; opacity: .55; pointer-events: none; z-index: 0; }
