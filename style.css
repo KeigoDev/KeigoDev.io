@@ -432,9 +432,13 @@ section {
 }
 
 .hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 52px;
+  font-weight: 700;
   line-height: 1.12;
-  max-width: 11ch;
+  letter-spacing: 0;
+  max-width: none;
+  text-shadow: 0 0 24px rgba(232, 236, 244, .08);
 }
 
 .hero-role {
