@@ -46,6 +46,95 @@ body::after {
   animation: ambient-drift 18s ease-in-out infinite alternate;
 }
 
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: var(--teal);
+  color: #06110F;
+  pointer-events: none;
+  transform: translateY(100%);
+}
+
+.page-transition::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .18;
+  background-image: linear-gradient(rgba(63, 220, 200, .2) 1px, transparent 1px), linear-gradient(90deg, rgba(63, 220, 200, .2) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.page-transition span {
+  position: relative;
+  font: 700 clamp(42px, 9vw, 120px) 'Space Grotesk', sans-serif;
+  letter-spacing: -.04em;
+  opacity: 0;
+}
+
+.page-transition small {
+  position: absolute;
+  margin-top: 150px;
+  color: rgba(6, 17, 15, .72);
+  font: 600 11px 'JetBrains Mono', monospace;
+  letter-spacing: .18em;
+}
+
+.page-transition.play {
+  animation: portfolio-wipe .9s cubic-bezier(.76, 0, .24, 1) both;
+}
+
+.page-transition.play span {
+  animation: transition-mark .9s ease both;
+}
+
+.page-transition.intro {
+  transform: translateY(0);
+  background: #090C12;
+  color: var(--teal);
+  animation: portfolio-intro 3.8s cubic-bezier(.76, 0, .24, 1) 0.15s both;
+}
+
+.page-transition.intro span {
+  animation: intro-mark 2.9s cubic-bezier(.22, 1, .36, 1) .28s both;
+}
+
+.page-transition.intro small {
+  color: var(--teal);
+  animation: intro-label 2.5s ease .62s both;
+}
+
+@keyframes portfolio-wipe {
+  0% { transform: translateY(100%); }
+  28%, 68% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes portfolio-intro {
+  0%, 58% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes intro-mark {
+  0% { opacity: 0; transform: scale(.72); letter-spacing: .12em; }
+  45%, 72% { opacity: 1; transform: scale(1); letter-spacing: -.04em; }
+  100% { opacity: 0; transform: translateY(-18px); }
+}
+
+@keyframes intro-label {
+  0%, 30% { opacity: 0; transform: translateY(10px); }
+  60%, 78% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+
+@keyframes transition-mark {
+  0%, 20% { opacity: 0; transform: scale(.84); }
+  42%, 64% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.08); }
+}
+
 @keyframes grid-drift {
   from { background-position: 0 0, 0 0; }
   to { background-position: 44px 44px, -44px 44px; }
@@ -1563,6 +1652,9 @@ footer {
 
   body::before,
   body::after { animation: none; }
+
+  .page-transition.play,
+  .page-transition.play span { animation: none; }
 }
 
 /* Dark analytics theme */

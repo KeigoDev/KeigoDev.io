@@ -14,6 +14,25 @@ updateScrollProgress();
 
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
+const brandLink = document.querySelector('.brand');
+const pageTransition = document.querySelector('.page-transition');
+
+if (pageTransition?.classList.contains('intro')) {
+  window.setTimeout(() => pageTransition.classList.remove('intro'), 4250);
+}
+
+if (brandLink && pageTransition) {
+  brandLink.addEventListener('click', event => {
+    event.preventDefault();
+    pageTransition.classList.remove('play');
+    void pageTransition.offsetWidth;
+    pageTransition.classList.add('play');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    navLinks?.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    window.setTimeout(() => pageTransition.classList.remove('play'), 950);
+  });
+}
 
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
