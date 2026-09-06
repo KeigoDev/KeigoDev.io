@@ -281,6 +281,27 @@ if (galleryItems.length) {
   }));
   lightbox.addEventListener('click', event => { if (event.target === lightbox || event.target.closest('.gallery-close')) closeLightbox(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeLightbox(); });
+
+  // Hover pop-up preview (desktop only; touch devices skip straight to the click lightbox)
+  const hoverPreview = document.querySelector('.gallery-hover-preview');
+  if (hoverPreview) {
+    const hoverPreviewImage = hoverPreview.querySelector('img');
+    const showHoverPreview = item => {
+      hoverPreviewImage.src = item.dataset.full;
+      hoverPreviewImage.alt = item.querySelector('img').alt;
+      hoverPreview.classList.add('show');
+    };
+    const hideHoverPreview = () => hoverPreview.classList.remove('show');
+
+    galleryItems.forEach(item => {
+      item.addEventListener('mouseenter', () => showHoverPreview(item));
+      item.addEventListener('mouseleave', hideHoverPreview);
+      item.addEventListener('focus', () => showHoverPreview(item));
+      item.addEventListener('blur', hideHoverPreview);
+    });
+    // Clicking should jump straight to the full lightbox, not linger on the preview
+    galleryItems.forEach(item => item.addEventListener('click', hideHoverPreview));
+  }
 }
 
 // Animated connected-node network behind the hero.

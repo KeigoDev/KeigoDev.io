@@ -1525,6 +1525,37 @@ button.gallery-toggle:hover, button.gallery-toggle:focus-visible { background: #
 .gallery-item:hover img,
 .gallery-item:focus-visible img { transform: scale(1.04); }
 
+.gallery-hover-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  background: rgba(4, 7, 12, .78);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+
+.gallery-hover-preview.show { opacity: 1; }
+
+.gallery-hover-preview img {
+  max-width: min(80vw, 720px);
+  max-height: 78vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 70px rgba(0,0,0,.55);
+  transform: scale(.94);
+  transition: transform .25s ease;
+}
+
+.gallery-hover-preview.show img { transform: scale(1); }
+
+@media (hover: none) {
+  .gallery-hover-preview { display: none; }
+}
+
 .gallery-lightbox {
   position: fixed;
   inset: 0;
