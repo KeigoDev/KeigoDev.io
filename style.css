@@ -160,11 +160,16 @@ body::after {
   50% { opacity: 1; }
 }
 
-.site-nav {
+html.intro-lock .site-nav,
+html.intro-lock .hero > div:first-child {
+  opacity: 0;
+}
+
+html:not(.intro-lock) .site-nav {
   animation: nav-drop 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.hero > div:first-child {
+html:not(.intro-lock) .hero > div:first-child {
   animation: hero-copy-enter 0.8s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -204,7 +209,11 @@ html.js .scroll-reveal.is-visible > *:nth-child(3) { animation-delay: 0.16s; }
 html.js .scroll-reveal.is-visible > *:nth-child(4) { animation-delay: 0.24s; }
 html.js .scroll-reveal.is-visible > *:nth-child(5) { animation-delay: 0.32s; }
 
-html.js .hero .terminal {
+html.js.intro-lock .hero .terminal {
+  opacity: 0;
+}
+
+html.js:not(.intro-lock) .hero .terminal {
   animation: content-fade-rise 0.8s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
