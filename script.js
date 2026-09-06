@@ -17,8 +17,21 @@ const navLinks = document.getElementById('navLinks');
 const brandLink = document.querySelector('.brand');
 const pageTransition = document.querySelector('.page-transition');
 
+let introComplete = !pageTransition?.classList.contains('intro');
+const introCallbacks = [];
+function onIntroComplete(cb) {
+  if (introComplete) cb();
+  else introCallbacks.push(cb);
+}
+
 if (pageTransition?.classList.contains('intro')) {
-  window.setTimeout(() => pageTransition.classList.remove('intro'), 4250);
+  document.documentElement.classList.add('intro-lock');
+  window.setTimeout(() => {
+    pageTransition.classList.remove('intro');
+    document.documentElement.classList.remove('intro-lock');
+    introComplete = true;
+    introCallbacks.splice(0).forEach(cb => cb());
+  }, 4250);
 }
 
 if (brandLink && pageTransition) {
@@ -212,7 +225,10 @@ function typeStep(index) {
 }
 const terminal = document.querySelector('.terminal');
 if (terminal) new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting && !typedRan) { typedRan = true; setTimeout(() => typeStep(0), 300); }
+  if (entry.isIntersecting && !typedRan) {
+    typedRan = true;
+    onIntroComplete(() => setTimeout(() => typeStep(0), 300));
+  }
 }), { threshold: .3 }).observe(terminal);
 
 // Fill skill meters as they enter view.
