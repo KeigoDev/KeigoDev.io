@@ -987,6 +987,10 @@ section {
   padding: 36px;
 }
 
+.exp-card + .exp-card {
+  margin-top: 24px;
+}
+
 .exp-top {
   display: flex;
   justify-content: space-between;
