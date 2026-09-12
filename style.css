@@ -1167,30 +1167,35 @@ section {
 
 .proj-more {
   margin-top: 20px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-  font-size: 14px;
-  color: var(--ink-faint);
+  padding: 10px 16px;
+  border-top: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--teal);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  background: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: none;
-  width: 100%;
+  background: var(--teal-soft);
+  border: 1px solid var(--teal);
+  border-radius: 999px;
+  width: fit-content;
   text-align: left;
   font-family: 'IBM Plex Sans', sans-serif;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .proj-more:hover {
-  color: var(--ink);
+  background: var(--teal);
+  color: var(--surface);
+  transform: translateY(-1px);
 }
 
 .proj-more .chevron {
   transition: transform 0.2s ease;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .proj-more.open .chevron {
