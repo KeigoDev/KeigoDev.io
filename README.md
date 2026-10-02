@@ -6,8 +6,9 @@ Citi experience: October 2025–October 2026.
 ## Included
 
 - index.html — complete portfolio content
-- style.css — responsive layout and animations
-- script.js — navigation, filtering, details, scrolling, gallery, and email copy
+- style.css — responsive layout, scroll reveals, masked headings, and decorative motion
+- script.js — navigation, animated project filtering, cover drawings, experience timeline,
+  details, scrolling, gallery, and email copy
 - favicon.svg
 - assets/ — original portrait, Citi career photo, five graduation photos, three Power BI reports,
   two Excel datasets, and one CSV dataset
