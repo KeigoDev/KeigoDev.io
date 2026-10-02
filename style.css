@@ -1907,27 +1907,20 @@ body:has(dialog[open]) {
 /* Citi photo feature */
 
 .citi-experience {
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 270px);
-  column-gap: 70px;
+  grid-template-columns: max-content minmax(220px, 270px) minmax(0, 1fr);
+  column-gap: 24px;
   align-items: start;
   grid-template-rows: auto auto auto 1fr;
   padding: 38px 0;
 }
 
 .citi-experience > .exp-top {
-  grid-column: 1;
+  grid-column: 1 / -1;
   grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.citi-experience .exp-dates {
-  text-align: left;
 }
 
 .career-summary {
+  grid-column: 1 / -1;
   max-width: 560px;
   font-size: 1rem;
   line-height: 1.8;
@@ -1936,32 +1929,54 @@ body:has(dialog[open]) {
 .citi-experience > .proj-more {
   grid-column: 1;
   grid-row: 2;
+  margin-top: 0;
 }
 
 .citi-experience > .proj-detail {
-  grid-column: 1;
+  grid-column: 1 / -1;
   grid-row: 3;
 }
 
 .citi-experience > .exp-stack {
-  grid-column: 1;
-  grid-row: 4;
-  justify-self: start;
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: end;
   align-self: start;
 }
 
 .career-photo {
   grid-column: 2;
-  grid-row: 1 / 5;
+  grid-row: 2;
   min-width: 0;
   width: 100%;
   margin: 0;
+}
+
+.career-photo-disclosure > summary {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  font-size: .875rem;
+}
+
+.career-photo-disclosure > summary span {
+  color: var(--muted);
+  font-size: .8125rem;
+}
+
+.career-photo-disclosure[open] > summary span {
+  color: var(--ink);
 }
 
 .career-photo-trigger {
   display: block;
   position: relative;
   width: 100%;
+  margin-top: 12px;
   padding: 0;
   border: 0;
   border-radius: 5px;
@@ -2017,38 +2032,65 @@ body:has(dialog[open]) {
 
 @media (max-width: 780px) {
   .citi-experience {
-    column-gap: 30px;
-    grid-template-columns: minmax(0, 1fr) 220px;
+    column-gap: 18px;
+    grid-template-columns: max-content minmax(150px, 190px) minmax(0, 1fr);
+  }
+
+  .citi-experience > .exp-stack {
+    grid-column: 3;
+    justify-self: end;
   }
 }
 
 @media (max-width: 600px) {
   .citi-experience {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+    display: grid;
+    grid-template-columns: max-content minmax(120px, 180px) minmax(0, 1fr);
+    gap: 0 12px;
   }
 
   .career-photo {
-    max-width: 320px;
-    margin: 28px auto 0;
-    order: 5;
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    margin: 0;
   }
 
-  .citi-experience > .exp-stack {
-    order: 4;
-  }
-
-  .citi-experience > .proj-detail {
-    order: 3;
+  .citi-experience > .exp-top {
+    grid-column: 1 / -1;
+    grid-row: 1;
   }
 
   .citi-experience > .proj-more {
-    order: 2;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .citi-experience > .proj-detail {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+
+  .citi-experience > .exp-stack {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    justify-self: start;
   }
 
   .career-photo figcaption {
     font-size: .875rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .career-photo-disclosure > summary {
+    gap: 4px;
+    font-size: .8125rem;
+  }
+
+  .career-photo-disclosure > summary span {
+    font-size: .75rem;
+    white-space: nowrap;
   }
 }
 
