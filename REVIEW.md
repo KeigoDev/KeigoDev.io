@@ -1,4 +1,4 @@
-# Portfolio review — September 24, 2026
+# Portfolio review — October 3, 2026
 
 ## Checks passed
 
@@ -11,6 +11,8 @@
 - Named report and dataset copies are byte-identical to the supplied uploads.
 - Nine project cards, five certification entries, six report/dataset download links,
   and five graduation gallery photos are retained.
+- Added masked heading reveals, decorative drawings on all nine project covers,
+  animated project filtering, the initial logo entrance, and experience timeline markers.
 - Citi displays OCT 2025 — OCT 2026.
 - LinkedIn is a clickable link; Say hello is an email link.
 - All content images have descriptive alternative text. The initially empty modal
@@ -27,10 +29,24 @@ touch targets, visible keyboard focus, reduced-motion handling, and hover-indepe
 controls. These are source-level checks, not evidence of successful testing on every
 device or browser.
 
+## Animation update browser checks
+
+- Exercised all seven project filters and rapid switching, including restoration
+  of all nine cards and project-count announcements.
+- Checked details panels, the graduation gallery and lightbox, mobile navigation,
+  and copy-email feedback.
+- Checked viewport widths of 320, 390, 768, and 1440 CSS pixels for horizontal
+  overflow; decorative artwork did not overlap cover titles. The converter
+  illustration scales down at the narrowest breakpoint to preserve clearance.
+- Checked focus replay does not restart an illustration while focus moves within
+  the same project card, and verified reduced-motion static states.
+- Confirmed scroll progress, active navigation, portrait zoom, and 3D cover
+  transforms remain active. No page errors or failed local asset requests were
+  reported during these checks.
+
 ## Verification limits
 
-- Live browser interaction, screenshot/layout checks, 200% zoom behavior, and real
-  phone/tablet testing were not available for this static build in this environment.
+- Physical phone/tablet testing and 200% zoom behavior were not tested.
 - CSS was reviewed as source; no standalone CSS parser was available.
 - Both Kaggle dataset URLs returned their expected page titles in web retrieval.
   This does not verify dataset downloads or account-dependent actions.

@@ -1010,7 +1010,11 @@ footer {
 
 /* Entrance and reveal animations */
 
-.hero-content,
+.hero-content > .hero-stats,
+.hero-title > .eyebrow,
+.hero-title > .hero-name,
+.hero-title > .hero-role,
+.hero-content > .hero-scroll,
 .hero-portrait {
   animation: entrance .85s var(--ease) both;
 }
@@ -2195,5 +2199,160 @@ body:has(dialog[open]) {
   .hero-portrait img,
   .hero-portrait:hover img {
     transform: none !important;
+  }
+}
+
+/* Decorative motion enhancements */
+
+.brand-dot {
+  display: inline-block;
+}
+
+.heading-line-mask {
+  display: block;
+}
+
+.heading-line {
+  display: block;
+}
+
+.project-cover {
+  position: relative;
+  height: auto;
+  min-height: 255px;
+}
+
+.project-cover > :not(.cover-illustration) {
+  position: relative;
+  z-index: 1;
+}
+
+.cover-illustration {
+  position: relative;
+  display: block;
+  align-self: center;
+  flex: 0 0 82px;
+  width: 84%;
+  max-width: none;
+  height: 82px;
+  max-height: none;
+  object-fit: contain;
+  color: currentColor;
+  opacity: .6;
+  pointer-events: none;
+  transform: none;
+}
+
+.cover-illustration .draw-line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cover-illustration .draw-node {
+  fill: currentColor;
+  stroke: none;
+}
+
+.cover-illustration .draw-bar {
+  fill: currentColor;
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.exp-card {
+  position: relative;
+}
+
+.exp-card::before,
+.exp-card::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.exp-card::before {
+  left: -20px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #c9c9c3;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1s var(--ease);
+}
+
+.exp-card::after {
+  left: -24px;
+  top: 29px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #42615b;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.exp-card.timeline-visible::before {
+  transform: scaleY(1);
+}
+
+.footer-build {
+  margin-top: 18px;
+  color: #bcbcb6;
+  font-size: 12px;
+  text-align: right;
+}
+
+.filter-animating {
+  transition: none !important;
+}
+
+@media (max-width: 780px) {
+  .exp-card::before {
+    left: -13px;
+  }
+
+  .exp-card::after {
+    left: -17px;
+  }
+}
+
+.cover-index,
+.cover-title,
+.cover-tech {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+@media (max-width: 780px) {
+  .project-cover {
+    min-height: 270px;
+  }
+
+  .cover-illustration {
+    flex-basis: 90px;
+    height: 90px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exp-card::before {
+    transform: scaleY(1);
+  }
+
+  .cover-illustration .draw-line {
+    stroke-dashoffset: 0 !important;
+  }
+
+  .cover-illustration .draw-node {
+    opacity: 1 !important;
+  }
+
+  .cover-illustration .draw-bar {
+    transform: scaleY(1) !important;
   }
 }
