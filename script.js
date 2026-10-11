@@ -583,6 +583,29 @@ if ('IntersectionObserver' in window) {
             }
           }
 
+          if (
+            entry.target.matches('.experience-tabs') &&
+            !reducedMotion.matches
+          ) {
+            entry.target.querySelectorAll('.experience-tab').forEach((tab, index) => {
+              if (tab.animate) {
+                const animation = tab.animate(
+                  [
+                    { opacity: 0, translate: '0 12px' },
+                    { opacity: 1, translate: '0 0' }
+                  ],
+                  {
+                    duration: 420,
+                    delay: index * 80,
+                    easing: 'cubic-bezier(.22, 1, .36, 1)'
+                  }
+                );
+
+                animation.onfinish = () => animation.cancel();
+              }
+            });
+          }
+
           observer.unobserve(entry.target);
         }
       });
@@ -594,7 +617,8 @@ if ('IntersectionObserver' in window) {
     '.proj-card, .exp-card, .cert-card, ' +
     '.about-grid > div:not(:first-child), ' +
     '.about-grid > div:first-child > :not(h2), ' +
-    '.section-head > .section-label, .section-head > p'
+    '.section-head > .section-label, .section-head > p, ' +
+    '.experience-tabs'
   ).forEach(element => {
     element.classList.add('reveal-ready');
 
