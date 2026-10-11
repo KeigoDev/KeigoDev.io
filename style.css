@@ -442,6 +442,157 @@ h2 {
   margin-bottom: 40px;
 }
 
+.project-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 30px auto 34px;
+}
+
+.project-tab {
+  flex: 1 1 240px;
+  max-width: 360px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 20px;
+  border: 1px solid #c9c9c3;
+  border-radius: 30px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-align: center;
+  box-shadow: 0 0 0 transparent;
+  transform: translateY(0);
+  transition:
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease;
+}
+
+.project-tab[aria-selected="true"] {
+  border-color: #42615b;
+  background: #42615b;
+  color: var(--white);
+  box-shadow: 0 5px 14px #42615b2b;
+}
+
+.project-tab:hover {
+  border-color: #42615b;
+  color: #42615b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px #24242412;
+}
+
+.project-tab[aria-selected="true"]:hover {
+  background: #354f4a;
+  color: var(--white);
+  box-shadow: 0 7px 18px #42615b38;
+}
+
+.project-tab:active {
+  transform: translateY(0) scale(.98);
+  box-shadow: 0 2px 6px #24242418;
+}
+
+.project-tabpanel[hidden] {
+  display: none;
+}
+
+.project-tabpanel:not([hidden]) {
+  animation: experience-panel-enter .25s ease both;
+}
+
+.client-project-grid {
+  margin-top: 10px;
+}
+
+.client-project-cover {
+  position: relative;
+  isolation: isolate;
+  min-height: 255px;
+}
+
+.client-project-cover::before,
+.client-project-cover::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.client-project-cover::before {
+  width: 190px;
+  height: 190px;
+  right: -42px;
+  top: 35px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .22;
+  transition: transform .6s var(--ease), opacity .4s ease;
+}
+
+.client-project-cover::after {
+  width: 130px;
+  height: 130px;
+  right: -14px;
+  top: 65px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: .14;
+  transition: transform .6s var(--ease), opacity .4s ease;
+}
+
+.client-project-card:hover .client-project-cover::before {
+  transform: scale(1.12);
+  opacity: .32;
+}
+
+.client-project-card:hover .client-project-cover::after {
+  transform: scale(.92);
+  opacity: .24;
+}
+
+.client-project-brand {
+  position: relative;
+  z-index: 1;
+  max-width: 82%;
+  font-size: clamp(26px, 2.7vw, 39px);
+  line-height: 1.05;
+  letter-spacing: -.045em;
+}
+
+.client-project-salon {
+  background: #d8d1d2;
+  color: #443238;
+}
+
+.client-project-astor {
+  background: #d2d8d2;
+  color: #293c34;
+}
+
+.client-project-marque {
+  background: #333a35;
+  color: #f1f4ec;
+}
+
+.client-project-marque .cover-tech {
+  border-color: #ffffff40;
+}
+
+.client-project-card h3 {
+  min-height: 0;
+}
+
+.client-project-card .proj-links {
+  margin-top: 20px;
+}
+
 .filter-btn {
   border: 1px solid #c9c9c3;
   border-radius: 30px;
@@ -1996,6 +2147,21 @@ body:has(dialog[open]) {
 
 /* Citi photo feature */
 
+.project-tabs {
+  flex-direction: column;
+  margin-bottom: 28px;
+}
+
+.project-tab {
+  flex-basis: auto;
+  width: 100%;
+  max-width: none;
+}
+
+.client-project-brand {
+  font-size: clamp(30px, 9vw, 40px);
+}
+
 .citi-experience {
   grid-template-columns: max-content minmax(220px, 270px) minmax(0, 1fr);
   column-gap: 24px;
@@ -2300,6 +2466,20 @@ body:has(dialog[open]) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .project-tab,
+  .project-tab:hover,
+  .project-tab:active,
+  .project-tab[aria-selected="true"] {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .client-project-cover::before,
+  .client-project-cover::after {
+    transition: none;
+  }
+
   .experience-tab,
   .experience-tab:hover,
   .experience-tab:active,
@@ -2310,6 +2490,9 @@ body:has(dialog[open]) {
   }
 
   .experience-panel:not([hidden]) {
+    animation: none;
+  }
+  .project-tabpanel:not([hidden]) {
     animation: none;
   }
   .depth-surface,
