@@ -649,6 +649,69 @@ h2 {
 
 /* Experience */
 
+.experience-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 30px 0 0;
+}
+
+.experience-tab {
+  flex: 1 1 230px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--muted);
+  text-align: center;
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
+
+.experience-tab[aria-selected="true"] {
+  border-color: #42615b;
+  background: #42615b;
+  color: var(--white);
+}
+
+.experience-tab:hover {
+  border-color: #42615b;
+  color: #42615b;
+}
+
+.experience-tab[aria-selected="true"]:hover {
+  background: #354f4a;
+  color: var(--white);
+}
+
+.experience-panel[hidden] {
+  display: none;
+}
+
+.experience-panel:not([hidden]) {
+  animation: experience-panel-enter .25s ease both;
+}
+
+@keyframes experience-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.experience-panel > .exp-card:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
 .exp-card {
   border-top: 1px solid var(--line);
   padding: 30px 0;
@@ -2043,6 +2106,15 @@ body:has(dialog[open]) {
 }
 
 @media (max-width: 600px) {
+  .experience-tabs {
+    flex-direction: column;
+  }
+
+  .experience-tab {
+    flex-basis: auto;
+    width: 100%;
+  }
+
   .citi-experience {
     display: grid;
     grid-template-columns: max-content minmax(120px, 180px) minmax(0, 1fr);
@@ -2201,6 +2273,9 @@ body:has(dialog[open]) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .experience-panel:not([hidden]) {
+    animation: none;
+  }
   .depth-surface,
   .proj-card .project-cover.depth-surface,
   .proj-card:hover .project-cover.depth-surface {
