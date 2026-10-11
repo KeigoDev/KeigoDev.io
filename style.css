@@ -664,7 +664,10 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 3px;
   background: transparent;
-  color: var(--muted);
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .01em;
   text-align: center;
   box-shadow: 0 0 0 transparent;
   transform: translateY(0);
