@@ -70,9 +70,46 @@ $$('.proj-more').forEach((button, index) => {
 
 /* Project filters */
 
-const projectCards = $$('.proj-card');
+const projectCards = $$('#projGrid .proj-card');
 const filterAnimations = new Map();
 let currentProjectFilter = 'all';
+
+const projectTabs = $$('#projects [role="tab"]');
+
+function activateProjectTab(tab) {
+  projectTabs.forEach(candidate => {
+    const selected = candidate === tab;
+    const panel = document.getElementById(candidate.getAttribute('aria-controls'));
+
+    candidate.setAttribute('aria-selected', String(selected));
+    candidate.tabIndex = selected ? 0 : -1;
+    panel.hidden = !selected;
+  });
+}
+
+projectTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => activateProjectTab(tab));
+
+  tab.addEventListener('keydown', event => {
+    let nextIndex;
+
+    if (event.key === 'ArrowRight') {
+      nextIndex = (index + 1) % projectTabs.length;
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + projectTabs.length) % projectTabs.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = projectTabs.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    projectTabs[nextIndex].focus();
+    activateProjectTab(projectTabs[nextIndex]);
+  });
+});
 
 function cancelFilterAnimations() {
   filterAnimations.forEach((animation, card) => {
@@ -584,10 +621,10 @@ if ('IntersectionObserver' in window) {
           }
 
           if (
-            entry.target.matches('.experience-tabs') &&
+            entry.target.matches('.experience-tabs, .project-tabs') &&
             !reducedMotion.matches
           ) {
-            entry.target.querySelectorAll('.experience-tab').forEach((tab, index) => {
+            entry.target.querySelectorAll('[role="tab"]').forEach((tab, index) => {
               if (tab.animate) {
                 const animation = tab.animate(
                   [
@@ -618,7 +655,7 @@ if ('IntersectionObserver' in window) {
     '.about-grid > div:not(:first-child), ' +
     '.about-grid > div:first-child > :not(h2), ' +
     '.section-head > .section-label, .section-head > p, ' +
-    '.experience-tabs'
+    '.experience-tabs, .project-tabs'
   ).forEach(element => {
     element.classList.add('reveal-ready');
 
