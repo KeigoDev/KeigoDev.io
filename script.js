@@ -434,6 +434,8 @@ if (!reducedMotion.matches && brand.animate) {
 }
 
 const experienceCards = $$('#experience .exp-card');
+const experienceTabs = $$('#experience [role="tab"]');
+let timelineObserver = null;
 
 function revealTimelineEntry(card) {
   card.classList.add('timeline-visible');
@@ -442,7 +444,7 @@ function revealTimelineEntry(card) {
 if (reducedMotion.matches || !('IntersectionObserver' in window)) {
   experienceCards.forEach(revealTimelineEntry);
 } else {
-  const timelineObserver = new IntersectionObserver(entries => {
+  timelineObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         revealTimelineEntry(entry.target);
@@ -453,6 +455,49 @@ if (reducedMotion.matches || !('IntersectionObserver' in window)) {
 
   experienceCards.forEach(card => timelineObserver.observe(card));
 }
+
+function activateExperienceTab(tab) {
+  experienceTabs.forEach(candidate => {
+    const selected = candidate === tab;
+    const panel = document.getElementById(candidate.getAttribute('aria-controls'));
+
+    candidate.setAttribute('aria-selected', String(selected));
+    candidate.tabIndex = selected ? 0 : -1;
+    panel.hidden = !selected;
+
+    if (selected && timelineObserver) {
+      panel.querySelectorAll('.exp-card').forEach(card => {
+        if (!card.classList.contains('timeline-visible')) {
+          timelineObserver.observe(card);
+        }
+      });
+    }
+  });
+}
+
+experienceTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => activateExperienceTab(tab));
+
+  tab.addEventListener('keydown', event => {
+    let nextIndex;
+
+    if (event.key === 'ArrowRight') {
+      nextIndex = (index + 1) % experienceTabs.length;
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (index - 1 + experienceTabs.length) % experienceTabs.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = experienceTabs.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    experienceTabs[nextIndex].focus();
+    activateExperienceTab(experienceTabs[nextIndex]);
+  });
+});
 
 /* Graduation gallery */
 
