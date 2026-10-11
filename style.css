@@ -666,26 +666,50 @@ h2 {
   background: transparent;
   color: var(--muted);
   text-align: center;
+  box-shadow: 0 0 0 transparent;
+  transform: translateY(0);
   transition:
-    background-color .2s ease,
-    border-color .2s ease,
-    color .2s ease;
+    background-color .22s ease,
+    border-color .22s ease,
+    color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease;
 }
 
 .experience-tab[aria-selected="true"] {
   border-color: #42615b;
   background: #42615b;
   color: var(--white);
+  box-shadow: 0 5px 14px #42615b2b;
+  animation: experience-tab-select .28s var(--ease);
 }
 
 .experience-tab:hover {
   border-color: #42615b;
   color: #42615b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px #24242412;
 }
 
 .experience-tab[aria-selected="true"]:hover {
   background: #354f4a;
   color: var(--white);
+  box-shadow: 0 7px 18px #42615b38;
+}
+
+.experience-tab:active {
+  transform: translateY(0) scale(.98);
+  box-shadow: 0 2px 6px #24242418;
+}
+
+@keyframes experience-tab-select {
+  from {
+    transform: scale(.98);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 .experience-panel[hidden] {
@@ -2273,6 +2297,15 @@ body:has(dialog[open]) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .experience-tab,
+  .experience-tab:hover,
+  .experience-tab:active,
+  .experience-tab[aria-selected="true"] {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
   .experience-panel:not([hidden]) {
     animation: none;
   }
