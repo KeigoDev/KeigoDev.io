@@ -1089,23 +1089,382 @@ h2 {
 .logo-tableau { --logo-bg: #e1edf2; --logo-ink: #276a8b; }
 .logo-powerbi { --logo-bg: #f5edcf; --logo-ink: #a87800; }
 .logo-excel { --logo-bg: #e2efe8; --logo-ink: #167c4b; }
-.logo-etl { --logo-bg: #e9e6f2; --logo-ink: #65568b; --logo-size: 12px; }
+.logo-etl { --logo-bg: #e9e6f2; --logo-ink: #65568b; }
 .logo-looker { --logo-bg: #e3ebf7; --logo-ink: #4285f4; }
 .logo-r { --logo-bg: #e1eaf7; --logo-ink: #276dc3; }
 .logo-microstrategy { --logo-bg: #e6e6e5; --logo-ink: #343434; }
 .logo-google { --logo-bg: #fff; --logo-ink: #4285f4; }
 .logo-notion { --logo-bg: #fff; --logo-ink: #181818; }
-.logo-sap { --logo-bg: #dceaf5; --logo-ink: #1474b8; --logo-size: 13px; }
-.logo-gep { --logo-bg: #e6eee8; --logo-ink: #267047; --logo-size: 13px; }
+.logo-sap { --logo-bg: #dceaf5; --logo-ink: #1474b8; }
+.logo-gep { --logo-bg: #e6eee8; --logo-ink: #267047; }
 .logo-zephyr { --logo-bg: #e6e9f4; --logo-ink: #4e5c9b; }
 .logo-clickup { --logo-bg: #f4e5e4; --logo-ink: #dc4c3f; }
 .logo-jira { --logo-bg: #e0eaf8; --logo-ink: #2765cf; }
 .logo-slack { --logo-bg: #efe4ef; --logo-ink: #7b3f7c; }
 .logo-salesforce { --logo-bg: #dff2f7; --logo-ink: #159bd7; }
-.logo-claude { --logo-bg: #f3e7dc; --logo-ink: #b6653b; font-size: 25px; }
-.logo-chatgpt { --logo-bg: #e0eee8; --logo-ink: #16866e; font-size: 26px; }
-.logo-lovable { --logo-bg: #f5e3e7; --logo-ink: #e45b78; font-size: 20px; }
-.logo-n8n { --logo-bg: #f6e7e2; --logo-ink: #d34a31; --logo-size: 14px; }
+.logo-claude { --logo-bg: #f3e7dc; --logo-ink: #b6653b; }
+.logo-chatgpt { --logo-bg: #e0eee8; --logo-ink: #16866e; }
+.logo-lovable { --logo-bg: #f5e3e7; --logo-ink: #e45b78; }
+.logo-n8n { --logo-bg: #f6e7e2; --logo-ink: #d34a31; }
+
+.sql-mark { font-size: 13px; letter-spacing: .02em; }
+
+.python-mark {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.python-mark i {
+  position: absolute;
+  width: 18px;
+  height: 14px;
+  border-radius: 7px 7px 4px 4px;
+}
+
+.python-mark i:first-child {
+  top: 2px;
+  left: 2px;
+  background: #3776ab;
+}
+
+.python-mark i:first-child::after,
+.python-mark i:last-child::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.python-mark i:first-child::after { top: 3px; right: 4px; }
+
+.python-mark i:last-child {
+  right: 2px;
+  bottom: 2px;
+  border-radius: 4px 4px 7px 7px;
+  background: #ffd343;
+}
+
+.python-mark i:last-child::after { bottom: 3px; left: 4px; }
+
+.tableau-mark {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.tableau-mark i {
+  position: absolute;
+  width: 2px;
+  height: 9px;
+  background: #276a8b;
+}
+
+.tableau-mark i::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 2px;
+  top: 3px;
+  left: -3.5px;
+  background: inherit;
+}
+
+.tableau-mark i:first-child { top: 1px; left: 13px; }
+.tableau-mark i:nth-child(2) { bottom: 1px; left: 13px; }
+.tableau-mark i:nth-child(3) { top: 10px; left: 2px; }
+.tableau-mark i:nth-child(4) { top: 10px; right: 2px; }
+.tableau-mark i:nth-child(5) { top: 10px; left: 13px; transform: scale(.7); }
+
+.powerbi-mark {
+  display: flex;
+  align-items: end;
+  gap: 2px;
+  width: 24px;
+  height: 23px;
+  padding: 0 2px 2px;
+  border-bottom: 2px solid #d5a900;
+}
+
+.powerbi-mark i {
+  width: 5px;
+  border-radius: 2px 2px 0 0;
+  background: #e2b714;
+}
+
+.powerbi-mark i:first-child { height: 9px; }
+.powerbi-mark i:nth-child(2) { height: 15px; }
+.powerbi-mark i:last-child { height: 21px; }
+
+.excel-mark {
+  position: relative;
+  display: grid;
+  width: 28px;
+  height: 24px;
+  align-items: center;
+}
+
+.excel-mark b {
+  z-index: 1;
+  display: grid;
+  width: 16px;
+  height: 19px;
+  place-items: center;
+  border-radius: 2px;
+  background: #107c41;
+  color: white;
+  font-size: 13px;
+}
+
+.excel-mark i {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 16px;
+  height: 20px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(to bottom, #21a366 0 6px, #107c41 6px 7px);
+}
+
+.etl-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 27px;
+  height: 17px;
+}
+
+.etl-mark::before,
+.etl-mark::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 17px;
+  height: 1px;
+  background: #8a7ca9;
+}
+
+.etl-mark::after { transform: rotate(22deg); }
+
+.etl-mark i {
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border: 2px solid #65568b;
+  border-radius: 50%;
+  background: #e9e6f2;
+}
+
+.etl-mark i:nth-child(2) { width: 9px; height: 9px; }
+
+.looker-mark {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  border: 5px solid #4285f4;
+  border-right-color: #34a853;
+  border-bottom-color: #fbbc05;
+  border-radius: 50%;
+}
+
+.looker-mark i {
+  position: absolute;
+  right: -8px;
+  bottom: -5px;
+  width: 9px;
+  height: 5px;
+  border-radius: 3px;
+  background: #ea4335;
+  transform: rotate(45deg);
+}
+
+.r-mark { font-family: Georgia, serif; font-size: 25px; font-style: italic; }
+.logo-microstrategy { --logo-size: 10px; letter-spacing: -.06em; }
+.logo-google { --logo-ink: #4285f4; }
+.google-mark {
+  font-family: Arial, sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: transparent;
+  background: conic-gradient(from -45deg, #4285f4 0 28%, #34a853 28% 48%, #fbbc05 48% 69%, #ea4335 69% 83%, #4285f4 83%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.google-mark i { font-style: normal; }
+.notion-mark { display: grid; width: 25px; height: 27px; place-items: center; border: 2px solid #181818; border-radius: 3px; font-family: Georgia, serif; font-size: 19px; font-weight: 800; }
+.sap-mark { display: grid; width: 33px; height: 22px; place-items: center; padding-right: 3px; clip-path: polygon(0 0, 100% 0, 100% 72%, 72% 100%, 0 100%); background: #1474b8; color: #fff; font-size: 12px; font-style: italic; }
+.gep-mark { font-size: 13px; font-weight: 800; letter-spacing: -.06em; }
+.zephyr-mark { font-size: 10px; font-weight: 700; letter-spacing: -.08em; }
+.clickup-mark {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 25px;
+}
+
+.clickup-mark i {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 12px;
+  height: 7px;
+  border-top: 4px solid #f5a623;
+  border-radius: 6px 6px 0 0;
+  transform: rotate(-38deg);
+}
+
+.clickup-mark b {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  width: 12px;
+  height: 7px;
+  border-top: 4px solid #dc4c3f;
+  border-radius: 6px 6px 0 0;
+  transform: rotate(38deg);
+}
+
+.clickup-mark::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  left: 3px;
+  height: 13px;
+  border: 4px solid #7b68ee;
+  border-top: 0;
+  border-radius: 0 0 9px 9px;
+}
+
+.jira-mark {
+  position: relative;
+  width: 24px;
+  height: 25px;
+  background: linear-gradient(145deg, #2684ff 8%, #0052cc 92%);
+  clip-path: polygon(50% 0, 100% 100%, 74% 100%, 63% 76%, 37% 76%, 26% 100%, 0 100%);
+}
+
+.jira-mark::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 9px;
+  width: 6px;
+  height: 4px;
+  background: var(--logo-bg);
+  transform: skew(-24deg);
+}
+
+.slack-mark {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.slack-mark i {
+  position: absolute;
+  width: 5px;
+  height: 13px;
+  border-radius: 3px;
+}
+
+.slack-mark i:first-child { top: 1px; left: 7px; background: #36c5f0; }
+.slack-mark i:nth-child(2) { top: 7px; right: 1px; background: #2eb67d; transform: rotate(90deg); }
+.slack-mark i:nth-child(3) { right: 7px; bottom: 1px; background: #e01e5a; }
+.slack-mark i:last-child { bottom: 7px; left: 1px; background: #ecb22e; transform: rotate(90deg); }
+
+.logo-salesforce { background: transparent; }
+.salesforce-mark {
+  position: relative;
+  z-index: 0;
+  display: grid;
+  width: 39px;
+  height: 25px;
+  place-items: center;
+  border-radius: 50%;
+  background: #159bd7;
+  color: #fff;
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: -.04em;
+}
+
+.salesforce-mark::before,
+.salesforce-mark::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: #159bd7;
+}
+
+.salesforce-mark::before { top: 1px; left: 5px; width: 19px; height: 19px; }
+.salesforce-mark::after { top: 3px; right: 3px; width: 17px; height: 17px; }
+
+.claude-mark {
+  width: 25px;
+  height: 25px;
+  background: repeating-conic-gradient(#b6653b 0deg 9deg, transparent 9deg 45deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 3px, #000 3.5px);
+  mask: radial-gradient(circle, transparent 0 3px, #000 3.5px);
+}
+
+.chatgpt-mark {
+  position: relative;
+  display: block;
+  width: 29px;
+  height: 29px;
+}
+
+.chatgpt-mark i {
+  position: absolute;
+  width: 9px;
+  height: 15px;
+  border: 2px solid #16866e;
+  border-radius: 8px;
+}
+
+.chatgpt-mark i:first-child { top: 0; left: 10px; }
+.chatgpt-mark i:nth-child(2) { top: 4px; left: 17px; transform: rotate(60deg); }
+.chatgpt-mark i:nth-child(3) { top: 12px; left: 17px; transform: rotate(120deg); }
+.chatgpt-mark i:nth-child(4) { bottom: 0; left: 10px; }
+.chatgpt-mark i:nth-child(5) { top: 12px; left: 3px; transform: rotate(60deg); }
+.chatgpt-mark i:nth-child(6) { top: 4px; left: 3px; transform: rotate(120deg); }
+
+.lovable-mark {
+  position: relative;
+  width: 22px;
+  height: 20px;
+  background: linear-gradient(135deg, #f05a78, #b84d99);
+  clip-path: polygon(50% 95%, 8% 54%, 7% 30%, 20% 15%, 36% 15%, 50% 29%, 64% 15%, 80% 15%, 93% 30%, 92% 54%);
+}
+
+.n8n-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: 26px;
+  height: 18px;
+}
+
+.n8n-mark::before,
+.n8n-mark::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 3px;
+  width: 20px;
+  height: 2px;
+  background: #d34a31;
+}
+
+.n8n-mark::after { transform: rotate(45deg); }
+.n8n-mark i { z-index: 1; width: 6px; height: 6px; border: 2px solid #d34a31; border-radius: 50%; background: #f6e7e2; }
 
 .skill-name {
   font-size: 14px;
