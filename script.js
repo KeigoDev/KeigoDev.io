@@ -35,6 +35,28 @@ $$('.nav-links a').forEach(link => {
   link.addEventListener('click', closeMenu);
 });
 
+/* Skills carousels */
+
+const skillsGrid = $('#skills .skills-grid');
+const skillMotionToggle = $('#skillMotionToggle');
+
+if (skillsGrid && skillMotionToggle) {
+  skillsGrid.querySelectorAll('.skill-track-items').forEach(items => {
+    for (let copy = 0; copy < 2; copy++) {
+      const duplicate = items.cloneNode(true);
+      duplicate.setAttribute('aria-hidden', 'true');
+      duplicate.inert = true;
+      items.parentElement.append(duplicate);
+    }
+  });
+
+  skillMotionToggle.addEventListener('click', () => {
+    const paused = skillsGrid.classList.toggle('is-paused');
+    skillMotionToggle.setAttribute('aria-pressed', String(paused));
+    skillMotionToggle.textContent = paused ? 'Resume motion' : 'Pause motion';
+  });
+}
+
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     closeMenu();
