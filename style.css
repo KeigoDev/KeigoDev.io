@@ -1158,10 +1158,6 @@ h2 {
 }
 
 .cert-mark {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .05em;
-  border: 1px solid #ccc;
   width: 72px;
   height: 55px;
   display: flex;
@@ -1169,6 +1165,80 @@ h2 {
   justify-content: center;
   flex-shrink: 0;
   border-radius: 4px;
+}
+
+.cert-mark--aws {
+  position: relative;
+  align-items: flex-start;
+  padding-top: 12px;
+  color: #232f3e;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -.08em;
+}
+
+.cert-mark--aws::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 7px;
+  left: 22px;
+  bottom: 11px;
+  border-bottom: 2px solid #ff9900;
+  border-radius: 0 0 50% 50%;
+  transform: rotate(-7deg);
+}
+
+.cert-mark--ibm {
+  color: #0f62fe;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  background: repeating-linear-gradient(to bottom, #0f62fe 0 2px, transparent 2px 4px);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cert-mark--sap {
+  width: 62px;
+  height: 39px;
+  margin: 8px 5px;
+  color: #fff;
+  background: #0875c9;
+  clip-path: polygon(0 0, 100% 0, 100% 72%, 73% 100%, 0 100%);
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 800;
+  letter-spacing: -.06em;
+}
+
+.cert-mark--google {
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -.08em;
+}
+
+.cert-mark--google span:nth-child(1),
+.cert-mark--google span:nth-child(4) { color: #4285f4; }
+.cert-mark--google span:nth-child(2),
+.cert-mark--google span:nth-child(6) { color: #ea4335; }
+.cert-mark--google span:nth-child(3) { color: #fbbc05; }
+.cert-mark--google span:nth-child(5) { color: #34a853; }
+
+.cert-mark--meta {
+  gap: 3px;
+  color: #0866ff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.04em;
+}
+
+.cert-mark--meta .meta-symbol {
+  font-family: Arial, sans-serif;
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -.16em;
 }
 
 .cert-name {
@@ -1671,9 +1741,8 @@ footer {
     gap: 13px;
   }
 
-  .cert-mark {
+  .cert-mark:not(.cert-mark--sap) {
     width: 53px;
-    font-size: 10px;
   }
 
   .cert-name {
@@ -1875,9 +1944,8 @@ footer {
     font-size: 18px;
   }
 
-  .cert-mark {
+  .cert-mark:not(.cert-mark--sap) {
     width: 65px;
-    font-size: 11px;
   }
 
   .edu-card {
