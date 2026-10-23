@@ -4,7 +4,7 @@ Brand logos belong to their owners and are shown only to name tools and certific
 
 - Gil Barbara, "SVG Logos" (CC0): python, snowflake, tableau, powerbi (microsoft-power-bi), lookerstudio (looker-icon),
   r (r-lang), notion, sap, clickup, jira, slack, salesforce, claude, chatgpt (openai-icon), lovable (lovable-icon),
-  n8n (n8n-icon), aws, ibm, google (google-icon), google-wordmark, meta-wordmark.
+  n8n (n8n-icon), numpy, aws, ibm, google (google-icon), google-wordmark, meta-wordmark.
   https://github.com/gilbarbara/logos — fetched through https://api.iconify.design and raw.githubusercontent.com
 - SVGL: excel (microsoft-excel). https://svgl.app
 - Simple Icons (CC0): microstrategy, coloured #D9232E; semrush, coloured #FF642D (Semrush brand orange). https://simpleicons.org

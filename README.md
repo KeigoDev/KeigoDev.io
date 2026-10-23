@@ -51,7 +51,7 @@ Edit colors, typography, responsive layouts, and motion in style.css.
 Colors and type sizes are tokens at the top of style.css (--bg, --ink, --accent, --step-*).
 Design: "the split stage". A photograph holds still on one half of the screen while the other half scrolls.
 Palette "charcoal and orange": ground #f4f4f2, ink and dark sections #1c1b19, one orange accent #c2410c (#a8380a for small text, #ff8c4d on dark grounds).
-Typefaces: Rokkitt for the name and headings, Literata for reading (both SIL Open Font License),
+Typefaces: Clash Display for the name and headings, Satoshi for reading (Indian Type Foundry, ITF Free Font License),
 stored in assets/fonts/, so they work offline too.
 Edit interface behavior in script.js.
 Animations live in motion.js (GSAP, ScrollTrigger and Lenis, stored in assets/vendor/).

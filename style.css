@@ -1,31 +1,39 @@
 /* Matthew Ferrer — portfolio
    Direction: the split stage. A photograph holds still on one half of the screen
    while a calm column of reading scrolls beside it.
-   Colour: charcoal and data orange. Type: Rokkitt for display, Literata for reading.
-   Both typefaces: SIL Open Font License, self-hosted (latin subset). */
+   Colour: charcoal and data orange. Type: Clash Display for the name, headings and the opening
+   line; Satoshi for reading. Both from Indian Type Foundry (ITF Free Font License), self-hosted. */
 
 @font-face {
-  font-family: 'Rokkitt';
+  font-family: 'Clash Display';
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 600;
   font-display: swap;
-  src: url('assets/fonts/rokkitt-latin.woff2') format('woff2');
+  src: url('assets/fonts/clashdisplay-600.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Literata';
+  font-family: 'Clash Display';
   font-style: normal;
-  font-weight: 200 900;
+  font-weight: 700;
   font-display: swap;
-  src: url('assets/fonts/literata-latin.woff2') format('woff2');
+  src: url('assets/fonts/clashdisplay-700.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Literata';
-  font-style: italic;
-  font-weight: 200 900;
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 400;
   font-display: swap;
-  src: url('assets/fonts/literata-italic-latin.woff2') format('woff2');
+  src: url('assets/fonts/satoshi-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/satoshi-700.woff2') format('woff2');
 }
 
 :root {
@@ -46,13 +54,13 @@
   --field-accent: #ff8c4d;
 
   /* Type */
-  --display: 'Rokkitt', 'Rockwell', 'Roboto Slab', Georgia, serif;
-  --text: 'Literata', Georgia, 'Times New Roman', serif;
+  --display: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
+  --text: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
   --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
   --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
   --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
   --step-title: clamp(1.75rem, 1rem + 1.6vw, 2.25rem);
-  --step-head: clamp(2rem, 1.2rem + 2.6vw, 3.5rem);
+  --step-head: clamp(2.25rem, 1.2rem + 2.9vw, 4rem);
 
   /* Space */
   --margin: clamp(16px, 2.2vw, 32px);
@@ -212,10 +220,10 @@ input {
 .hero-name,
 .foot-links a {
   font-family: var(--display);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  line-height: 0.9;
+  line-height: 0.92;
 }
 
 .section-title {
@@ -293,7 +301,7 @@ input {
   white-space: nowrap;
   font-family: var(--display);
   font-size: var(--step-lead);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   text-decoration: none;
   line-height: 1;
@@ -429,9 +437,12 @@ input {
 }
 
 .hero-lead {
-  font-size: var(--step-head);
+  font-family: var(--display);
+  font-size: min(var(--step-head), 3.1vw);
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
+  word-spacing: 0.04em;
 }
 
 .hero-actions {
@@ -537,48 +548,6 @@ input {
   padding: var(--section) 0;
 }
 
-.letter {
-  max-width: 36rem;
-}
-
-.letter-face {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: 50% 15%;
-  margin-bottom: 28px;
-}
-
-.letter .section-title {
-  margin-bottom: 32px;
-}
-
-.letter p + p {
-  margin-top: 1.1em;
-}
-
-mark {
-  padding: 0 .15em;
-  background: var(--marker);
-  color: var(--ink);
-}
-
-.letter .sign-off {
-  margin-top: 40px;
-  font-size: var(--step-lead);
-  font-style: italic;
-  line-height: 1.3;
-}
-
-.sign-off span {
-  display: block;
-  margin-top: 6px;
-  color: var(--muted);
-  font-size: var(--step-small);
-  font-style: normal;
-}
-
 /* Figures: quiet lines */
 
 .figures {
@@ -589,7 +558,7 @@ mark {
   margin: 0 0 40px;
   font-family: var(--display);
   font-size: var(--step-lead);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
 }
@@ -825,7 +794,7 @@ mark {
 .more-title {
   font-family: var(--display);
   font-size: var(--step-title);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
 }
@@ -1204,7 +1173,7 @@ mark {
   max-width: 14ch;
   font-family: var(--display);
   font-size: var(--step-head);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 0.95;
 }
@@ -1436,7 +1405,7 @@ mark {
 .zephyr-mark {
   font-family: var(--text);
   font-size: var(--step-small);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
 }
@@ -1706,7 +1675,7 @@ mark {
   gap: 14px;
   font-family: var(--display);
   font-size: var(--step-lead);
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
   perspective: 400px;
@@ -1955,7 +1924,7 @@ html.lenis,
 
   /* Each half of the phrase keeps to one line on a phone. */
   .hero-lead {
-    font-size: min(var(--step-head), 6.4vw);
+    font-size: min(var(--step-head), 5.8vw);
   }
 
 
@@ -1994,6 +1963,11 @@ html.lenis,
 
   .site-panel {
     padding-top: 32px;
+  }
+
+  .site-panel h3 {
+    max-width: none;
+    font-size: var(--step-title);
   }
 
   .site-panel p {
@@ -2071,6 +2045,14 @@ html.lenis,
 }
 
 @media (max-width: 560px) {
+  .site-nav {
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+    font-size: var(--step-small);
+  }
 
   .nav-cta {
     padding: 10px 14px;
