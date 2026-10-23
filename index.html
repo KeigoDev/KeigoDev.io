@@ -50,10 +50,11 @@
 <header class="site-nav">
   <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top">Matthew Ferrer</a>
   <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+    <a href="#services">What I do</a>
     <a href="#work">Work</a>
     <a href="#experience">Experience</a>
     <a href="#skills">Tools</a>
-    <a href="#credentials">Credentials</a>
+    <a href="#faq">FAQ</a>
   </nav>
   <a class="nav-cta" href="#contact">Say hello</a>
   <button id="navToggle" class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
@@ -66,7 +67,6 @@
   <div class="stage" aria-hidden="true">
     <div class="stage-frame">
       <img class="stage-img is-on" data-key="portrait" src="assets/web/matt.jpg" srcset="assets/web/matt-480w.jpg 480w, assets/web/matt.jpg 724w" sizes="(max-width: 959px) 100vw, 46vw" alt="" width="724" height="1086" fetchpriority="high">
-      <img class="stage-img" data-key="look" src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="46vw" alt="" width="724" height="1086" loading="lazy">
     </div>
   </div>
 
@@ -75,13 +75,75 @@
       <h1 class="hero-name" id="heroName"><span class="name-line"><span class="name-word">Matthew</span> <span class="name-word">Ferrer</span></span></h1>
       <div class="hero-copy">
         <p class="hero-lead">Full-stack data analyst.<br>I speak SQL and boardroom.</p>
+        <p class="hero-sub">I build the pipelines, dashboards and models teams make decisions with. Most recently APAC reporting at Citi.</p>
+        <dl class="hero-stats">
+          <div><dt>30–40%</dt><dd>less manual reporting at Citi</dd></div>
+          <div><dt>9</dt><dd>data projects you can open</dd></div>
+          <div><dt>5</dt><dd>professional certifications</dd></div>
+          <div><dt>26</dt><dd>tools across the data stack</dd></div>
+        </dl>
         <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work</a><a class="hero-link" href="mailto:matthew.p.ferrer@gmail.com">Email me</a></p>
       </div>
     </section>
 
+
+  </div>
+</div>
+
+<!-- Proof at a glance: certifications and where I have worked -->
+<section class="trust" aria-labelledby="trustHeading">
+  <div class="wrap trust-row">
+    <h2 class="trust-title" id="trustHeading">Certified by</h2>
+    <ul class="trust-logos">
+      <li><img src="assets/logos/aws.svg" alt="AWS" width="48" height="29" loading="lazy"></li>
+      <li><img src="assets/logos/ibm.svg" alt="IBM" width="60" height="24" loading="lazy"></li>
+      <li><img src="assets/logos/sap.svg" alt="SAP" width="58" height="29" loading="lazy"></li>
+      <li><img src="assets/logos/google-wordmark.svg" alt="Google" width="80" height="27" loading="lazy"></li>
+      <li><img src="assets/logos/meta-wordmark.svg" alt="Meta" width="90" height="18" loading="lazy"></li>
+    </ul>
+    <p class="trust-worked"><span>Worked at</span> Citi · Astor Realty Enterprise · BE3 Power Solutions</p>
+  </div>
+</section>
+
+<!-- What I do: three roles, each with the problem, the work and the proof -->
+<section class="services" id="services" aria-labelledby="servicesHeading">
+  <div class="wrap">
+    <h2 class="section-title" id="servicesHeading">What I do</h2>
+    <p class="services-intro">One person across the whole data stack: from the pipeline, to the dashboard, to the model.</p>
+    <ol class="service-rows">
+      <li class="service">
+        <h3>Data engineering</h3>
+        <p class="service-problem">Reports rebuilt by hand every week.</p>
+        <p class="service-work">I build pipelines that clean, validate and load data on their own, in SQL, Snowflake and ETL tools.</p>
+        <a class="service-proof" href="#experience"><strong>30–40%</strong> less manual reporting at Citi</a>
+      </li>
+      <li class="service">
+        <h3>BI &amp; analytics</h3>
+        <p class="service-problem">Dashboards nobody trusts or opens.</p>
+        <p class="service-work">I design dashboards around the decisions people make, with the filters they ask for, in Tableau, Power BI and Looker Studio.</p>
+        <a class="service-proof" href="#p-airways"><strong>2016–2023</strong> airline reviews in one view</a>
+      </li>
+      <li class="service">
+        <h3>Data science</h3>
+        <p class="service-problem">Questions a dashboard can’t answer.</p>
+        <p class="service-work">I explore and model data in Python, from cleaning and statistics to language models built from scratch.</p>
+        <a class="service-proof" href="#p-ngram"><strong>849 → 227</strong> perplexity, unigram to trigram</a>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- How I work: the second portrait holds still beside the method -->
+<div class="split split-method">
+  <div class="stage" aria-hidden="true">
+    <div class="stage-frame">
+      <img class="stage-img is-on" data-key="look" src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) 100vw, 46vw" alt="" width="724" height="1086" loading="lazy">
+    </div>
+  </div>
+
+  <div class="column">
     <section class="about" id="about" aria-labelledby="aboutHeading" data-stage="look">
       <h2 class="section-title" id="aboutHeading">How I work</h2>
-      <img class="about-photo" src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) 80vw, 1px" alt="Matthew Ferrer in a dark suit, looking to the side" width="724" height="1086" loading="lazy">
       <ol class="method">
         <li>
           <h3>Start with the question</h3>
@@ -101,19 +163,9 @@
         <li>
           <h3>Make it repeat itself</h3>
           <p>When a report runs every week, I automate it. At Citi I moved APAC reporting onto Tableau and SQL pipelines so far less of it was done by hand.</p>
-          <a class="method-link" href="#figuresHeading">See the result</a>
+          <a class="method-link" href="#services">See the result</a>
         </li>
       </ol>
-    </section>
-
-    <section class="figures" aria-labelledby="figuresHeading" data-stage="look">
-      <h2 class="figures-title" id="figuresHeading">By the numbers</h2>
-      <dl class="figure-lines">
-        <div><dt>30–40%</dt><dd>Less manual reporting at Citi, after I automated APAC reporting pipelines with Tableau and SQL.</dd></div>
-        <div><dt>1,800+</dt><dd>Keyword targets researched across three client websites.</dd></div>
-        <div><dt>100%</dt><dd>AI visibility reached on the prompts I track for Astor Realty Enterprise.</dd></div>
-        <div><dt>5</dt><dd>People on the remote team I lead across content, outreach and lead generation.</dd></div>
-      </dl>
     </section>
   </div>
 </div>
@@ -139,6 +191,7 @@
           <div class="card-body">
             <h3>British Airways passenger reviews</h3>
             <p class="project-field">Customer experience · Tableau</p>
+            <p class="project-result">7 service ratings, 5 filters, one view</p>
             <p class="project-desc">An independent Tableau dashboard of passenger reviews from 2016 to 2023, comparing ratings by month, country, aircraft and seat type.</p>
             <p class="project-tools">Tableau · Customer experience · Dashboard design</p>
             <p class="project-links">
@@ -162,6 +215,7 @@
           <div class="card-body">
             <h3>Amazon product insights &amp; customer experience</h3>
             <p class="project-field">Business intelligence · SQL, Tableau</p>
+            <p class="project-result">1,464 products cleaned in MySQL</p>
             <p class="project-desc">Cleaned 1,464 Amazon products in MySQL and built a Tableau dashboard to explore pricing, ratings and customer experience.</p>
             <p class="project-tools">SQL · Tableau · Data cleaning</p>
             <p class="project-links">
@@ -190,6 +244,7 @@
           <div class="card-body">
             <h3>Coca-Cola retail sales dashboard</h3>
             <p class="project-field">Retail sales · Power BI, Excel</p>
+            <p class="project-result">$12M in sales by brand, retailer and quarter</p>
             <p class="project-desc">A Power BI report on US retail sales of Coca-Cola brands: sales, units, average price and operating profit by brand, retailer and quarter.</p>
             <p class="project-tools">Power BI · Excel · Retail analytics</p>
             <p class="project-links">
@@ -213,6 +268,7 @@
           <div class="card-body">
             <h3>Statistical language modelling</h3>
             <p class="project-field">Natural language processing · Python</p>
+            <p class="project-result">Perplexity cut from 849 to 227</p>
             <p class="project-desc">Built n-gram language models from scratch in Python. An interpolated trigram reached the lowest perplexity: 227, against 849 for a unigram.</p>
             <p class="project-tools">Python · NLTK · NumPy · Matplotlib · Probability</p>
             <p class="project-links">
@@ -241,6 +297,7 @@
           <div class="card-body">
             <h3>Project monitoring &amp; inventory system</h3>
             <p class="project-field">Academic capstone · C#, MySQL, Figma</p>
+            <p class="project-result">Tested by staff in 4 roles</p>
             <p class="project-desc">A system for BE3 Power Solutions that brings project progress, sales and inventory into one workflow. Its screens were designed in Figma, and BE3 staff tested the build.</p>
             <p class="project-tools">SQL · Database design · Systems analysis · UI design</p>
             <details class="project-more">
@@ -562,16 +619,6 @@
 
     <section class="credentials" id="credentials" aria-labelledby="certHeading" data-stage="graduation">
       <h2 class="section-title" id="certHeading">Credentials</h2>
-      <div class="issuers">
-        <p>Certified by</p>
-        <ul class="issuer-logos" aria-label="Issuers: AWS, IBM, SAP, Google and Meta">
-          <li><img src="assets/logos/aws.svg" alt="AWS" width="48" height="29" loading="lazy"></li>
-          <li><img src="assets/logos/ibm.svg" alt="IBM" width="60" height="24" loading="lazy"></li>
-          <li><img src="assets/logos/sap.svg" alt="SAP" width="58" height="29" loading="lazy"></li>
-          <li><img src="assets/logos/google-wordmark.svg" alt="Google" width="80" height="27" loading="lazy"></li>
-          <li><img src="assets/logos/meta-wordmark.svg" alt="Meta" width="90" height="18" loading="lazy"></li>
-        </ul>
-      </div>
 
       <ul class="certs">
         <li class="cert">
@@ -608,6 +655,32 @@
       </div>
     </section>
 
+    <section class="faq" id="faq" aria-labelledby="faqHeading" data-stage="graduation">
+      <h2 class="section-title" id="faqHeading">Questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>What roles are you looking for?</summary>
+          <p>Data analyst, BI analyst and analytics engineering roles where I can work across the pipeline, the dashboard and the model.</p>
+        </details>
+        <details>
+          <summary>Can you work remotely?</summary>
+          <p>Yes. I lead a remote team for a New York company today, from Rizal, Philippines (GMT+8).</p>
+        </details>
+        <details>
+          <summary>Which tools do you use most?</summary>
+          <p>SQL, Python, Snowflake, Tableau and Power BI, with Excel and Looker Studio. The full list of 26 is under <a href="#skills">Tools</a>.</p>
+        </details>
+        <details>
+          <summary>Can I see your work in detail?</summary>
+          <p>Yes. Every project links to a live Tableau Public dashboard, a GitHub repository or a downloadable Power BI file.</p>
+        </details>
+        <details>
+          <summary>How quickly do you reply?</summary>
+          <p>Usually within a day. Email is the fastest way to reach me.</p>
+        </details>
+      </div>
+    </section>
+
     <section class="contact" id="contact" aria-labelledby="contactHeading" data-stage="portrait">
       <h2 class="contact-title" id="contactHeading"><span>Have a role or a project in mind?</span> Write to me.</h2>
       <form class="contact-field" id="contactForm" action="mailto:matthew.p.ferrer@gmail.com" method="get" enctype="text/plain">
@@ -616,7 +689,8 @@
         <input type="hidden" name="subject" value="Hello from your portfolio">
         <button class="field-send" type="submit" aria-label="Write the email"><span aria-hidden="true">→</span></button>
       </form>
-      <p class="field-note" id="fieldNote">Opens your email app with this message filled in. I usually reply within a day.</p>
+      <p class="field-note" id="fieldNote">Opens your email app with this message filled in.</p>
+      <p class="contact-promise">Reply within a day · Rizal, Philippines (GMT+8) · Open to remote roles</p>
       <dl class="contact-list">
         <div><dt>Email</dt><dd><a href="mailto:matthew.p.ferrer@gmail.com">matthew.p.ferrer@gmail.com</a> <button id="copyEmail" class="copy-btn" type="button">Copy</button></dd></div>
         <div><dt>Phone</dt><dd><a href="tel:+639608752284">+63 960 875 2284</a></dd></div>
@@ -638,6 +712,7 @@
   <div class="foot-menu">
     <p class="foot-brand"><svg class="foot-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#2b2926"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#f5f4f1" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#ff8c4d" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg>Matthew Ferrer</p>
     <nav class="foot-links" aria-label="Footer">
+      <a href="#services">What I do</a>
       <a href="#work">Work</a>
       <a href="#clients">Websites</a>
       <a href="#experience">Experience</a>
