@@ -1486,10 +1486,7 @@ a, button, summary, input {
   display: grid;
   place-items: center;
   min-width: 40px;
-  padding: 0 4px;
   height: 40px;
-  border: 1px solid var(--line);
-  background: var(--surface-2);
 }
 
 .logo-light {
@@ -1506,6 +1503,12 @@ a, button, summary, input {
   width: 26px;
   height: 26px;
   object-fit: contain;
+}
+
+/* SAP is a wide mark: let it take its width instead of shrinking into a square */
+.skill-logo img[src$="sap.svg"] {
+  width: 40px;
+  height: 20px;
 }
 
 .gep-mark,
