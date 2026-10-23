@@ -523,8 +523,9 @@ a, button, summary, input {
 .trust-logos {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 24px 56px;
   margin-top: 24px;
   list-style: none;
 }
@@ -532,28 +533,16 @@ a, button, summary, input {
 .trust-logos li {
   display: grid;
   place-items: center;
-  min-width: 132px;
-  height: 64px;
-  padding: 0 20px;
-  border: 1px solid var(--line);
-  background: var(--surface);
 }
 
-/* One calm row: every issuer in white on the dark badge */
-.logos-mono img {
-  filter: brightness(0) invert(1);
-  opacity: .88;
-}
-
-/* SAP's letters are cut out of its shape; grey keeps them readable */
-.logos-mono img[src$="sap.svg"] {
-  filter: grayscale(1);
-  opacity: 1;
-}
-
+/* Brand colours, no frames: the same treatment as the employer logos below */
 .trust-logos img {
   width: auto;
-  height: 26px;
+  height: 30px;
+}
+
+.trust-logos img[src$="meta-dark.svg"] {
+  height: 24px;
 }
 
 .trust-sub {
@@ -2076,10 +2065,6 @@ html.lenis,
 
   .brand span {
     display: none;
-  }
-
-  .trust-logos li {
-    min-width: calc(50% - 6px);
   }
 
   .cert {

@@ -20,3 +20,6 @@ Employer logos ("Worked at"):
 - astor.png: Astor Realty Enterprise's own header lockup (https://astorrealtyenterprise.com): its crest image with
   "Astor Realty / Enterprise" set in the site's own Cormorant Garamond and Inter at the site's sizes and colours.
 - be3.png: cropped from the BE3 system login screen (assets/work/be3-login.jpg), the company's logo.
+
+Dark-background versions (certification band): aws-dark.svg (letters white, smile unchanged), meta-dark.svg
+(wordmark white, symbol unchanged), ibm-dark.svg (IBM 8-bar logo in IBM Blue 50, #4589FF).

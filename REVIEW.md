@@ -11,6 +11,8 @@
 - Footer credit shortened to "Built with HTML, CSS and JavaScript."
 - "Worked at" now shows each employer's own logo and lettering: Citi (white with red arc), Astor Realty Enterprise
   (gold crest, Cormorant Garamond), BE3 (red square logo from the system's login screen). Sources in assets/logos/SOURCES.md.
+- "Certified by" in brand colours without frames, matching the employer row (AWS and Meta in their dark-background
+  versions, IBM in IBM blue).
 
 ## Reference design, made his own
 
