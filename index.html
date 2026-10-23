@@ -706,14 +706,13 @@
 <section class="contact" id="contact" aria-labelledby="contactHeading">
   <div class="wrap contact-inner">
     <h2 class="title title-center" id="contactHeading">Have a role or a project <em>in mind?</em></h2>
-    <p class="intro intro-center">Write a line below. It opens your email app with the message ready to send.</p>
+    <p class="intro intro-center" id="contactIntro">Write a line below. It opens your email app with the message ready to send.</p>
       <form class="contact-field" id="contactForm" action="mailto:matthew.p.ferrer@gmail.com" method="get" enctype="text/plain">
         <label class="field-label" for="contactMessage">Your message</label>
-        <input id="contactMessage" name="body" type="text" placeholder="A line about the role or project" autocomplete="off" aria-describedby="fieldNote" required>
+        <input id="contactMessage" name="body" type="text" placeholder="A line about the role or project" autocomplete="off" aria-describedby="contactIntro" required>
         <input type="hidden" name="subject" value="Hello from your portfolio">
         <button class="field-send" type="submit" aria-label="Write the email"><span aria-hidden="true">→</span></button>
       </form>
-      <p class="field-note" id="fieldNote">Opens your email app with this message filled in.</p>
       <ul class="promise">
         <li>Reply within a day</li>
         <li>Rizal, Philippines · GMT+8</li>
@@ -724,7 +723,6 @@
         <div><dt>Phone</dt><dd><a href="tel:+639608752284">+63 960 875 2284</a></dd></div>
         <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">matthew-ferrer-profile <span aria-hidden="true">↗</span></a></dd></div>
         <div><dt>GitHub</dt><dd><a href="https://github.com/KeigoDev" target="_blank" rel="noopener noreferrer">KeigoDev <span aria-hidden="true">↗</span></a></dd></div>
-        <div><dt>Based in</dt><dd>Rizal, Philippines · GMT+8</dd></div>
       </dl>
       <p id="copyStatus" class="copy-status" aria-live="polite"></p>
   </div>
@@ -748,15 +746,8 @@
       <a href="#skills">Tools</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div class="foot-col">
-      <p class="label">Connect</p>
-      <a href="mailto:matthew.p.ferrer@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-      <a href="https://github.com/KeigoDev" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
-    </div>
   </div>
-  <div class="wrap foot-legal"><p>© 2026 Matthew Ferrer</p><p>Rizal, Philippines</p></div>
+  <div class="wrap foot-legal"><p>© 2026 Matthew Ferrer</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div>
 </footer>
 
 <dialog class="lightbox" aria-label="Photo viewer">
