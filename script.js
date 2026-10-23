@@ -138,6 +138,24 @@ if ('IntersectionObserver' in window) {
   $$('[data-stage]').forEach(section => stageObserver.observe(section));
 }
 
+/* Experience: the panel shows the role being read */
+
+const expPanel = $('.exp-panel');
+if (expPanel && 'IntersectionObserver' in window) {
+  const jobs = $$('.jobs .job');
+  const showJob = index => {
+    expPanel.querySelectorAll('[data-job]').forEach(el => el.classList.toggle('is-on', el.dataset.job === String(index)));
+  };
+  const jobObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        showJob(jobs.indexOf(entry.target));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  jobs.forEach(job => jobObserver.observe(job));
+}
+
 /* Project drawing (the PDF converter cover) */
 
 function drawCover(svg) {
@@ -339,6 +357,72 @@ $('#copyEmail').addEventListener('click', async () => {
     status.textContent = `Copy this address: ${EMAIL}`;
   }
 });
+
+/* Hero network: 26 points, one per tool, clustered by tool group
+   (engineering, BI, data science, platforms, AI). Fixed positions, the same on every visit; decorative. */
+
+function drawNetwork() {
+  const svg = $('.hero-net');
+  if (!svg) {
+    return;
+  }
+  const ns = 'http://www.w3.org/2000/svg';
+  let seed = 26;
+  const rand = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  const clusters = [
+    { x: 760, y: 120, n: 3, r: 70 },   // data engineering
+    { x: 900, y: 330, n: 5, r: 100 },  // BI and visualisation
+    { x: 1040, y: 110, n: 3, r: 70 },  // data science
+    { x: 860, y: 640, n: 11, r: 150 }, // business platforms
+    { x: 1380, y: 700, n: 4, r: 80 }   // AI and automation
+  ];
+  const nodes = [];
+  clusters.forEach((c, ci) => {
+    for (let i = 0; i < c.n; i++) {
+      const a = rand() * Math.PI * 2;
+      const d = Math.sqrt(rand()) * c.r;
+      nodes.push({ x: c.x + Math.cos(a) * d, y: c.y + Math.sin(a) * d, c: ci });
+    }
+  });
+  const lines = [];
+  nodes.forEach((p, i) => {
+    // Each point links to its two nearest neighbours in the same cluster.
+    nodes
+      .map((q, j) => ({ j, d: Math.hypot(p.x - q.x, p.y - q.y), same: q.c === p.c }))
+      .filter(o => o.j !== i && o.same)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 2)
+      .forEach(o => {
+        if (!lines.some(l => (l[0] === o.j && l[1] === i))) {
+          lines.push([i, o.j]);
+        }
+      });
+  });
+  // Bridges between the groups: engineering to BI to science, and on to the platforms and AI.
+  [[0, 3], [7, 8], [10, 11], [9, 22]].forEach(pair => lines.push(pair));
+  const frag = document.createDocumentFragment();
+  lines.forEach(([a, b]) => {
+    const l = document.createElementNS(ns, 'line');
+    l.setAttribute('x1', nodes[a].x.toFixed(1));
+    l.setAttribute('y1', nodes[a].y.toFixed(1));
+    l.setAttribute('x2', nodes[b].x.toFixed(1));
+    l.setAttribute('y2', nodes[b].y.toFixed(1));
+    frag.append(l);
+  });
+  nodes.forEach(p => {
+    const c = document.createElementNS(ns, 'circle');
+    c.setAttribute('cx', p.x.toFixed(1));
+    c.setAttribute('cy', p.y.toFixed(1));
+    c.setAttribute('r', (1.6 + rand() * 2.4).toFixed(1));
+    frag.append(c);
+  });
+  svg.append(frag);
+}
+
+drawNetwork();
 
 /* Start */
 

@@ -1,6 +1,30 @@
 # Portfolio review — October 23, 2026
 
-## Straightforward structure, after valiotti.com (latest)
+## Experience panel, logos on dark, shorter credit (latest)
+
+- Experience: the tall sticky Citi photo (it outgrew the screen and drifted) is replaced by a panel sized to fit the
+  screen that follows the job being read: Astor website, Citi photo, BE3 dashboard, then "2021, first data role",
+  each with a one-line fact. Hidden on phones; the pinned dates were dropped.
+- Portrait caption: the degree line is replaced by "Open to remote data and BI roles".
+- Logos: no white tiles. Certification band in white (SAP in grey so its letters stay readable); tool logos keep
+  their colours, the dark ones (AWS, ChatGPT, ETL, Tableau) turn white and Notion is inverted.
+- Footer credit shortened to "Built with HTML, CSS and JavaScript."
+- "Worked at" now shows each employer's own logo and lettering: Citi (white with red arc), Astor Realty Enterprise
+  (gold crest, Cormorant Garamond), BE3 (red square logo from the system's login screen). Sources in assets/logos/SOURCES.md.
+
+## Reference design, made his own
+
+- Rebuilt in the reference's visual language (valiotti.com): dark throughout, Instrument Serif headlines with an
+  italic copper word, IBM Plex Mono labels, outlined cards, numbered service cards, logo badges, tool tiles, an FAQ
+  divided by lines, a centred close and a four-column footer. Copy, structure and images are his own.
+- Unique: stacking project cards with the live British Airways recording, the browser tour of the client sites, his
+  photographs (portrait, Citi, graduation), and a hero network of 26 points, one per tool, clustered by tool group.
+- Design rules relaxed on purpose for this look (labels above headings, mono, thin lines, outlined and numbered
+  cards, copper accent); recorded as allowed in the inspector run and impeccable config.
+- Fixed while building: round portrait stretched into an oval (image height attribute), hover states below 4.5:1.
+- Entrances slide in without fading, so content is always at full contrast (Lighthouse accessibility 100).
+
+## Straightforward structure, after valiotti.com
 
 - Borrowed the information structure, not the styling: credibility, then proof, then services, then the call to action.
 - First screen: supporting sentence and a numbers row (30–40%, 9 projects, 5 certifications, 26 tools; counts up,

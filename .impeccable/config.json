@@ -20,6 +20,30 @@
         ],
         "createdAt": "2026-10-22T22:36:13.128Z",
         "reason": "Claude: crossfade stacks (stage photos, website screenshots) sit at opacity 0 until their section or tab is active"
+      },
+      {
+        "rule": "italic-serif-display",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-23T14:38:05.191Z",
+        "reason": "Owner asked to match the reference design (valiotti.com): serif headlines with an italic copper word, spaced mono labels"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-23T14:38:05.435Z",
+        "reason": "Owner asked to match the reference design (valiotti.com): serif headlines with an italic copper word, spaced mono labels"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-10-23T14:38:05.683Z",
+        "reason": "Owner asked to match the reference design (valiotti.com): serif headlines with an italic copper word, spaced mono labels"
       }
     ]
   }
