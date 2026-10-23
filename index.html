@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Matthew Ferrer — Full-Stack Data Analyst: Data Engineering, BI and Data Science</title>
 <meta name="description" content="Matthew Ferrer, full-stack data analyst in Rizal, Philippines: data pipelines in SQL and Snowflake, Tableau and Power BI dashboards, and data science in Python.">
-<meta name="theme-color" content="#1c1b19">
+<meta name="theme-color" content="#0d0d0c">
 <meta property="og:title" content="Matthew Ferrer — Full-Stack Data Analyst">
 <meta property="og:description" content="Data engineering, BI and data science: pipelines, dashboards and models in SQL, Python, Snowflake, Tableau and Power BI.">
 <link rel="canonical" href="https://keigodev.github.io/KeigoDev.io/">
@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://keigodev.github.io/KeigoDev.io/assets/brand/og-image.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/clashdisplay-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/instrumentserif-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
@@ -48,137 +48,140 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-nav">
-  <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top">Matthew Ferrer</a>
-  <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-    <a href="#services">What I do</a>
-    <a href="#work">Work</a>
-    <a href="#experience">Experience</a>
-    <a href="#skills">Tools</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <a class="nav-cta" href="#contact">Say hello</a>
-  <button id="navToggle" class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#1c1b19"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#ecebe6" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#e8814f" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg><span>Matthew <b>Ferrer</b></span></a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#services">What I do</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Tools</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn btn-outline nav-email" href="mailto:matthew.p.ferrer@gmail.com">Email me</a>
+      <a class="btn btn-accent nav-cta" href="#contact">Say hello</a>
+      <button id="navToggle" class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    </div>
+  </div>
 </header>
 
 <main id="main">
 
-<!-- First split: the portrait holds still while the introduction scrolls -->
-<div class="split split-intro" id="top">
-  <div class="stage" aria-hidden="true">
-    <div class="stage-frame">
-      <img class="stage-img is-on" data-key="portrait" src="assets/web/matt.jpg" srcset="assets/web/matt-480w.jpg 480w, assets/web/matt.jpg 724w" sizes="(max-width: 959px) 100vw, 46vw" alt="" width="724" height="1086" fetchpriority="high">
+<!-- First screen: the claim, the proof in numbers, and the person -->
+<section class="hero" id="top" aria-labelledby="heroTitle">
+  <svg class="hero-net" viewBox="0 0 1440 820" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"></svg>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="label">Full-stack data analyst</p>
+      <h1 class="hero-title" id="heroTitle">I speak SQL and <em>boardroom.</em></h1>
+      <p class="hero-sub">I build the pipelines, dashboards and models teams make decisions with, across data engineering, BI and data science. Most recently APAC reporting at Citi.</p>
+      <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="mailto:matthew.p.ferrer@gmail.com">Email me</a></p>
+      <dl class="hero-stats">
+        <div><dt>30–40%</dt><dd>Less manual reporting at Citi</dd></div>
+        <div><dt>9</dt><dd>Data projects you can open</dd></div>
+        <div><dt>5</dt><dd>Professional certifications</dd></div>
+        <div><dt>26</dt><dd>Tools across the stack</dd></div>
+      </dl>
     </div>
+    <figure class="hero-portrait">
+      <img src="assets/web/matt.jpg" srcset="assets/web/matt-480w.jpg 480w, assets/web/matt.jpg 724w" sizes="(max-width: 959px) 60vw, 280px" alt="Matthew Ferrer in a dark suit" width="724" height="1086" fetchpriority="high">
+      <figcaption><strong>Matthew Ferrer</strong><span>Full-stack data analyst · 5 certifications</span><small class="status">Open to remote data and BI roles</small></figcaption>
+    </figure>
   </div>
+</section>
 
-  <div class="column">
-    <section class="hero" aria-labelledby="heroName" data-stage="portrait">
-      <h1 class="hero-name" id="heroName"><span class="name-line"><span class="name-word">Matthew</span> <span class="name-word">Ferrer</span></span></h1>
-      <div class="hero-copy">
-        <p class="hero-lead">Full-stack data analyst.<br>I speak SQL and boardroom.</p>
-        <p class="hero-sub">I build the pipelines, dashboards and models teams make decisions with. Most recently APAC reporting at Citi.</p>
-        <dl class="hero-stats">
-          <div><dt>30–40%</dt><dd>less manual reporting at Citi</dd></div>
-          <div><dt>9</dt><dd>data projects you can open</dd></div>
-          <div><dt>5</dt><dd>professional certifications</dd></div>
-          <div><dt>26</dt><dd>tools across the data stack</dd></div>
-        </dl>
-        <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work</a><a class="hero-link" href="mailto:matthew.p.ferrer@gmail.com">Email me</a></p>
-      </div>
-    </section>
-
-
-  </div>
-</div>
-
-<!-- Proof at a glance: certifications and where I have worked -->
+<!-- Proof at a glance -->
 <section class="trust" aria-labelledby="trustHeading">
-  <div class="wrap trust-row">
-    <h2 class="trust-title" id="trustHeading">Certified by</h2>
-    <ul class="trust-logos">
+  <div class="wrap">
+    <h2 class="label label-center" id="trustHeading">Certified by</h2>
+    <ul class="trust-logos logos-mono">
       <li><img src="assets/logos/aws.svg" alt="AWS" width="48" height="29" loading="lazy"></li>
       <li><img src="assets/logos/ibm.svg" alt="IBM" width="60" height="24" loading="lazy"></li>
       <li><img src="assets/logos/sap.svg" alt="SAP" width="58" height="29" loading="lazy"></li>
       <li><img src="assets/logos/google-wordmark.svg" alt="Google" width="80" height="27" loading="lazy"></li>
       <li><img src="assets/logos/meta-wordmark.svg" alt="Meta" width="90" height="18" loading="lazy"></li>
     </ul>
-    <p class="trust-worked"><span>Worked at</span> Citi · Astor Realty Enterprise · BE3 Power Solutions</p>
+    <p class="label label-center trust-sub">Worked at</p>
+    <ul class="worked-logos">
+      <li><img src="assets/logos/citi.svg" alt="Citi" width="58" height="38" loading="lazy"></li>
+      <li><img src="assets/logos/astor.png" alt="Astor Realty Enterprise" width="186" height="37" loading="lazy"></li>
+      <li><img src="assets/logos/be3.png" alt="BE3 Power Solutions Enterprise" width="44" height="44" loading="lazy"></li>
+    </ul>
   </div>
 </section>
 
-<!-- What I do: three roles, each with the problem, the work and the proof -->
+<!-- What I do -->
 <section class="services" id="services" aria-labelledby="servicesHeading">
   <div class="wrap">
-    <h2 class="section-title" id="servicesHeading">What I do</h2>
-    <p class="services-intro">One person across the whole data stack: from the pipeline, to the dashboard, to the model.</p>
-    <ol class="service-rows">
-      <li class="service">
+    <p class="label">What I do</p>
+    <h2 class="title" id="servicesHeading">One analyst across the <em>whole</em> data stack</h2>
+    <ol class="cards cards-3">
+      <li class="card-box">
+        <p class="card-num">01</p>
         <h3>Data engineering</h3>
-        <p class="service-problem">Reports rebuilt by hand every week.</p>
-        <p class="service-work">I build pipelines that clean, validate and load data on their own, in SQL, Snowflake and ETL tools.</p>
-        <a class="service-proof" href="#experience"><strong>30–40%</strong> less manual reporting at Citi</a>
+        <p class="card-problem">Reports rebuilt by hand every week.</p>
+        <p>I build pipelines that clean, validate and load data on their own, in SQL, Snowflake and ETL tools.</p>
+        <a class="card-proof" href="#experience"><strong>30–40%</strong> less manual reporting at Citi <span aria-hidden="true">→</span></a>
       </li>
-      <li class="service">
+      <li class="card-box">
+        <p class="card-num">02</p>
         <h3>BI &amp; analytics</h3>
-        <p class="service-problem">Dashboards nobody trusts or opens.</p>
-        <p class="service-work">I design dashboards around the decisions people make, with the filters they ask for, in Tableau, Power BI and Looker Studio.</p>
-        <a class="service-proof" href="#p-airways"><strong>2016–2023</strong> airline reviews in one view</a>
+        <p class="card-problem">Dashboards nobody trusts or opens.</p>
+        <p>I design dashboards around the decisions people make, with the filters they ask for, in Tableau, Power BI and Looker Studio.</p>
+        <a class="card-proof" href="#p-airways"><strong>2016–2023</strong> airline reviews in one view <span aria-hidden="true">→</span></a>
       </li>
-      <li class="service">
+      <li class="card-box">
+        <p class="card-num">03</p>
         <h3>Data science</h3>
-        <p class="service-problem">Questions a dashboard can’t answer.</p>
-        <p class="service-work">I explore and model data in Python, from cleaning and statistics to language models built from scratch.</p>
-        <a class="service-proof" href="#p-ngram"><strong>849 → 227</strong> perplexity, unigram to trigram</a>
+        <p class="card-problem">Questions a dashboard can’t answer.</p>
+        <p>I explore and model data in Python, from cleaning and statistics to language models built from scratch.</p>
+        <a class="card-proof" href="#p-ngram"><strong>849 → 227</strong> perplexity, unigram to trigram <span aria-hidden="true">→</span></a>
       </li>
     </ol>
   </div>
 </section>
 
-<!-- How I work: the second portrait holds still beside the method -->
-<div class="split split-method">
-  <div class="stage" aria-hidden="true">
-    <div class="stage-frame">
-      <img class="stage-img is-on" data-key="look" src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) 100vw, 46vw" alt="" width="724" height="1086" loading="lazy">
-    </div>
-  </div>
-
-  <div class="column">
-    <section class="about" id="about" aria-labelledby="aboutHeading" data-stage="look">
-      <h2 class="section-title" id="aboutHeading">How I work</h2>
-      <ol class="method">
-        <li>
+<!-- How I work -->
+<section class="method" id="about" aria-labelledby="aboutHeading">
+  <div class="wrap method-grid">
+    <figure class="method-photo">
+      <img src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) 70vw, 34vw" alt="Matthew Ferrer, looking to the side" width="724" height="1086" loading="lazy">
+    </figure>
+    <div>
+      <p class="label">How I work</p>
+      <h2 class="title" id="aboutHeading">The question first, <em>then</em> the query</h2>
+      <ol class="cards cards-2">
+        <li class="card-box">
           <h3>Start with the question</h3>
           <p>Before I touch the data, I write down what the business needs to decide. For the Amazon project that meant revenue potential, product quality and where to focus marketing.</p>
-          <a class="method-link" href="#p-amazon" data-show="p-amazon">See the Amazon project</a>
+          <a class="card-link" href="#p-amazon">See the Amazon project <span aria-hidden="true">→</span></a>
         </li>
-        <li>
+        <li class="card-box">
           <h3>Check the data first</h3>
           <p>I clean and validate before I chart anything: 1,464 Amazon products cleaned in MySQL, and supplier master data checked with SQL at Citi.</p>
-          <a class="method-link" href="#experience">See my Citi work</a>
+          <a class="card-link" href="#experience">See my Citi work <span aria-hidden="true">→</span></a>
         </li>
-        <li>
+        <li class="card-box">
           <h3>Build the view people use</h3>
           <p>A dashboard earns its place with the filters people ask for. My British Airways report switches metric, seat type, aircraft and continent in one view.</p>
-          <a class="method-link" href="#p-airways" data-show="p-airways">See the dashboard</a>
+          <a class="card-link" href="#p-airways">See the dashboard <span aria-hidden="true">→</span></a>
         </li>
-        <li>
+        <li class="card-box">
           <h3>Make it repeat itself</h3>
-          <p>When a report runs every week, I automate it. At Citi I moved APAC reporting onto Tableau and SQL pipelines so far less of it was done by hand.</p>
-          <a class="method-link" href="#services">See the result</a>
+          <p>When a report runs every week, I automate it. At Citi I moved APAC reporting onto Tableau and SQL pipelines, so far less of it was done by hand.</p>
+          <a class="card-link" href="#services">See the result <span aria-hidden="true">→</span></a>
         </li>
       </ol>
-    </section>
+    </div>
   </div>
-</div>
+</section>
 
-<!-- Work: the project names are the index; the chosen dashboard holds still beside them -->
+<!-- Selected work -->
 <section class="work" id="work" aria-labelledby="workHeading">
   <div class="wrap">
-    <div class="work-head">
-      <h2 class="section-title" id="workHeading">Selected work</h2>
-      <p>Five featured projects, then four more. Each card shows the dashboard, the tools and how I built it.</p>
-    </div>
-
-
+    <p class="label">Selected work</p>
+    <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
+    <p class="intro">Five featured projects, then four more. Each card shows the dashboard, the result and how I built it.</p>
     <div class="deck">
         <article class="project card" id="p-airways" data-tags="tableau">
           <figure class="project-media has-video">
@@ -423,7 +426,7 @@
   </div>
 </section>
 
-<!-- Websites: one square plate, three tabs -->
+<!-- Websites I run -->
 <section class="clients" id="clients" aria-labelledby="clientsHeading">
   <div class="clients-plate">
     <p class="browser-bar"><span class="browser-url" data-url-for="astor">astorrealtyenterprise.com</span><span class="browser-url" data-url-for="salon" hidden>salonprivé.com</span><span class="browser-url" data-url-for="marque" hidden>marquevaultclassics.com</span></p>
@@ -435,7 +438,8 @@
   </div>
 
   <div class="clients-copy">
-    <h2 class="section-title" id="clientsHeading">Websites I run</h2>
+    <p class="label">Client websites</p>
+    <h2 class="title" id="clientsHeading">Websites I <em>run</em></h2>
     <div class="site-tabs" role="tablist" aria-label="Client websites">
       <button class="site-tab" type="button" role="tab" id="tab-astor" aria-controls="site-astor" aria-selected="true" data-site="astor">Astor Realty</button>
       <button class="site-tab" type="button" role="tab" id="tab-salon" aria-controls="site-salon" aria-selected="false" tabindex="-1" data-site="salon">Salon Privé</button>
@@ -460,22 +464,12 @@
   </div>
 </section>
 
-<!-- Second split: photographs from work and school hold still beside the record -->
-<div class="split split-record">
-  <div class="stage" aria-hidden="true">
-    <div class="stage-frame">
-      <img class="stage-img is-on" data-key="citi" src="assets/web/matthew-at-citi.jpg" srcset="assets/web/matthew-at-citi-480w.jpg 480w, assets/web/matthew-at-citi-800w.jpg 800w, assets/web/matthew-at-citi.jpg 900w" sizes="(max-width: 959px) 100vw, 46vw" alt="" width="900" height="1599" loading="lazy">
-      <img class="stage-img" data-key="portrait" src="assets/web/matt.jpg" srcset="assets/web/matt-480w.jpg 480w, assets/web/matt.jpg 724w" sizes="46vw" alt="" width="724" height="1086" loading="lazy">
-      <img class="stage-img" data-key="graduation" src="assets/web/graduation-5.jpg" srcset="assets/web/graduation-5-480w.jpg 480w, assets/web/graduation-5-800w.jpg 800w, assets/web/graduation-5.jpg 1000w" sizes="46vw" alt="" width="1000" height="1501" loading="lazy">
-    </div>
-    <p class="stage-caption" data-for="citi">Outside Citi, BGC</p>
-    <p class="stage-caption" data-for="graduation">Graduation day, class of 2025</p>
-  </div>
-
-  <div class="column">
-    <section class="experience" id="experience" aria-labelledby="expHeading" data-stage="citi">
-      <h2 class="section-title" id="expHeading">Experience</h2>
-
+<!-- Experience -->
+<section class="experience" id="experience" aria-labelledby="expHeading">
+  <div class="wrap exp-grid">
+    <div>
+      <p class="label">Experience</p>
+      <h2 class="title" id="expHeading">Where I’ve <em>worked</em></h2>
       <ol class="jobs">
         <li class="job">
           <p class="job-dates">Sep 2026 – now</p>
@@ -556,70 +550,90 @@
           </div>
         </li>
       </ol>
-    </section>
-
-    <section class="skills" id="skills" aria-labelledby="skillsHeading" data-stage="citi">
-      <div class="sheet">
-        <h2 class="sheet-title" id="skillsHeading">Tools</h2>
-        <p class="sheet-note">From the pipeline to the dashboard to the model, plus the platforms I run.</p>
-        <div class="sheet-group">
-          <h3>Data engineering</h3>
-          <ul class="sheet-list">
-            <li><span class="sheet-item"><span class="skill-name">SQL</span><span class="skill-level">Query language</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Snowflake</span><span class="skill-level">Cloud data warehouse</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/snowflake.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">ETL / ELT</span><span class="skill-level">Data pipelines</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/etl.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-          </ul>
-        </div>
-        <div class="sheet-group">
-          <h3>BI &amp; visualisation</h3>
-          <ul class="sheet-list">
-            <li><span class="sheet-item"><span class="skill-name">Tableau</span><span class="skill-level">Data visualisation</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/tableau.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Power BI</span><span class="skill-level">Business intelligence</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/powerbi.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Excel, Pivot Tables, Power Query</span><span class="skill-level">Reporting &amp; analysis</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/excel.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Looker Studio</span><span class="skill-level">Dashboards &amp; reporting</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/lookerstudio.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">MicroStrategy</span><span class="skill-level">Enterprise analytics</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/microstrategy.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-          </ul>
-        </div>
-        <div class="sheet-group">
-          <h3>Data science</h3>
-          <ul class="sheet-list">
-            <li><span class="sheet-item"><span class="skill-name">Python (Pandas)</span><span class="skill-level">Data analysis</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/python.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">NumPy, NLTK, Matplotlib</span><span class="skill-level">Numerical &amp; language analysis</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/numpy.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">R</span><span class="skill-level">Statistical computing</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/r.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-          </ul>
-        </div>
-        <div class="sheet-group">
-          <h3>Business platforms &amp; operations</h3>
-          <ul class="sheet-list">
-            <li><span class="sheet-item"><span class="skill-name">Google Workspace</span><span class="skill-level">Productivity &amp; collaboration</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/google.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Notion</span><span class="skill-level">Workspace &amp; documentation</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/notion.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">SAP Fieldglass</span><span class="skill-level">Supplier management</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/sap.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Quantum GEP</span><span class="skill-level">Procurement</span></span><span class="skill-logo logo-gep" aria-hidden="true"><span class="gep-mark">GEP</span></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Zephyr</span><span class="skill-level">Test management</span></span><span class="skill-logo logo-zephyr" aria-hidden="true"><span class="zephyr-mark">zephyr</span></span></li>
-            <li><span class="sheet-item"><span class="skill-name">ClickUp</span><span class="skill-level">Project management</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/clickup.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Jira</span><span class="skill-level">Project tracking</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/jira.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Slack</span><span class="skill-level">Team communication</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/slack.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Salesforce</span><span class="skill-level">CRM</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/salesforce.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">SE Ranking</span><span class="skill-level">SEO &amp; rank tracking</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/seranking.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Semrush</span><span class="skill-level">SEO &amp; competitor research</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/semrush.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-          </ul>
-        </div>
-        <div class="sheet-group">
-          <h3>AI &amp; automation</h3>
-          <ul class="sheet-list">
-            <li><span class="sheet-item"><span class="skill-name">Claude</span><span class="skill-level">AI assistant</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/claude.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">ChatGPT</span><span class="skill-level">AI assistant</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/chatgpt.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">Lovable</span><span class="skill-level">AI website builder</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/lovable.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-            <li><span class="sheet-item"><span class="skill-name">n8n</span><span class="skill-level">Workflow automation</span></span><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/n8n.svg" alt="" width="28" height="28" loading="lazy"></span></li>
-          </ul>
-        </div>
-        <p class="sheet-end">26 tools across data engineering, BI and data science<br>Updated October 2026</p>
+    </div>
+    <aside class="exp-panel" aria-label="The role you are reading">
+      <div class="exp-frame">
+        <img class="exp-shot is-on" data-job="0" src="assets/work/site-astor-800w.jpg" alt="The Astor Realty Enterprise website" width="800" height="500" loading="lazy">
+        <img class="exp-shot" data-job="1" src="assets/web/matthew-at-citi-800w.jpg" alt="Matthew Ferrer outside the Citi building in BGC" width="800" height="1421" loading="lazy">
+        <img class="exp-shot" data-job="2" src="assets/work/be3-testing-800w.jpg" alt="The BE3 project monitoring and inventory dashboard" width="800" height="452" loading="lazy">
+        <div class="exp-shot exp-type" data-job="3"><span>2021</span>First data role</div>
       </div>
-    </section>
+      <div class="exp-notes">
+        <p class="exp-note is-on" data-job="0"><span>Astor Realty Enterprise</span>5-person remote team · 3 client websites</p>
+        <p class="exp-note" data-job="1"><span>Outside Citi, BGC</span>APAC reporting · 30–40% less manual work</p>
+        <p class="exp-note" data-job="2"><span>BE3 Power Solutions</span>Tested by staff in 4 roles</p>
+        <p class="exp-note" data-job="3"><span>Provincial employment office</span>Employment records database</p>
+      </div>
+    </aside>
+  </div>
+</section>
 
-    <section class="credentials" id="credentials" aria-labelledby="certHeading" data-stage="graduation">
-      <h2 class="section-title" id="certHeading">Credentials</h2>
+<!-- Tools -->
+<section class="skills" id="skills" aria-labelledby="skillsHeading">
+  <div class="wrap">
+    <p class="label">Tools</p>
+    <h2 class="title" id="skillsHeading">Works with your <em>stack</em></h2>
+    <p class="intro">26 tools across data engineering, BI and data science, plus the platforms I run day to day.</p>
+        <div class="tool-group">
+          <h3>Data engineering</h3>
+          <ul class="tiles">
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">SQL</span><span class="tile-level">Query language</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/snowflake.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Snowflake</span><span class="tile-level">Cloud data warehouse</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/etl.svg" class="logo-light" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">ETL / ELT</span><span class="tile-level">Data pipelines</span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>BI &amp; visualisation</h3>
+          <ul class="tiles">
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/tableau.svg" class="logo-light" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Tableau</span><span class="tile-level">Data visualisation</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/powerbi.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Power BI</span><span class="tile-level">Business intelligence</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/excel.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Excel, Pivot Tables, Power Query</span><span class="tile-level">Reporting &amp; analysis</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/lookerstudio.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Looker Studio</span><span class="tile-level">Dashboards &amp; reporting</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/microstrategy.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">MicroStrategy</span><span class="tile-level">Enterprise analytics</span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>Data science</h3>
+          <ul class="tiles">
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/python.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Python (Pandas)</span><span class="tile-level">Data analysis</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/numpy.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">NumPy, NLTK, Matplotlib</span><span class="tile-level">Numerical &amp; language analysis</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/r.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">R</span><span class="tile-level">Statistical computing</span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>Business platforms &amp; operations</h3>
+          <ul class="tiles">
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/google.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Google Workspace</span><span class="tile-level">Productivity &amp; collaboration</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/notion.svg" class="logo-invert" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Notion</span><span class="tile-level">Workspace &amp; documentation</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/sap.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">SAP Fieldglass</span><span class="tile-level">Supplier management</span></li>
+            <li class="tile"><span class="skill-logo logo-gep" aria-hidden="true"><span class="gep-mark">GEP</span></span><span class="tile-name">Quantum GEP</span><span class="tile-level">Procurement</span></li>
+            <li class="tile"><span class="skill-logo logo-zephyr" aria-hidden="true"><span class="zephyr-mark">zephyr</span></span><span class="tile-name">Zephyr</span><span class="tile-level">Test management</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/clickup.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">ClickUp</span><span class="tile-level">Project management</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/jira.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Jira</span><span class="tile-level">Project tracking</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/slack.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Slack</span><span class="tile-level">Team communication</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/salesforce.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Salesforce</span><span class="tile-level">CRM</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/seranking.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">SE Ranking</span><span class="tile-level">SEO &amp; rank tracking</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/semrush.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Semrush</span><span class="tile-level">SEO &amp; competitor research</span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>AI &amp; automation</h3>
+          <ul class="tiles">
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/claude.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Claude</span><span class="tile-level">AI assistant</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/chatgpt.svg" class="logo-light" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">ChatGPT</span><span class="tile-level">AI assistant</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/lovable.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">Lovable</span><span class="tile-level">AI website builder</span></li>
+            <li class="tile"><span class="skill-logo has-img" aria-hidden="true"><img src="assets/logos/n8n.svg" alt="" width="28" height="28" loading="lazy"></span><span class="tile-name">n8n</span><span class="tile-level">Workflow automation</span></li>
+          </ul>
+        </div>
+  </div>
+</section>
 
+<!-- Credentials -->
+<section class="credentials" id="credentials" aria-labelledby="certHeading">
+  <div class="wrap cred-grid">
+    <div>
+      <p class="label">Credentials</p>
+      <h2 class="title" id="certHeading">Certified, <em>and</em> verifiable</h2>
       <ul class="certs">
         <li class="cert">
           <span class="cert-name">AWS Certified Cloud Practitioner</span>
@@ -642,7 +656,7 @@
           <span class="cert-date">July 2025 · <a href="https://coursera.org/verify/professional-cert/69L1G8SYQ88P" target="_blank" rel="noopener">Verify <span aria-hidden="true">↗</span><span class="sr-only"> the Meta certificate</span></a></span>
         </li>
       </ul>
-
+    </div>
       <div class="education">
         <h3 class="edu-title">BS Information Technology</h3>
         <p class="edu-school">STI College Ortigas-Cainta · 2021–2025</p>
@@ -653,10 +667,16 @@
           <button class="photo-open" type="button" data-full="assets/web/graduation-4.jpg" aria-label="Open graduation photo 3 of 3"><img src="assets/web/graduation-4-480w.jpg" alt="Matthew Ferrer with his family at graduation" width="480" height="640" loading="lazy"></button>
         </div>
       </div>
-    </section>
+  </div>
+</section>
 
-    <section class="faq" id="faq" aria-labelledby="faqHeading" data-stage="graduation">
-      <h2 class="section-title" id="faqHeading">Questions</h2>
+<!-- Questions -->
+<section class="faq" id="faq" aria-labelledby="faqHeading">
+  <div class="wrap faq-grid">
+    <div>
+      <p class="label">FAQ</p>
+      <h2 class="title" id="faqHeading">Questions recruiters <em>ask</em></h2>
+    </div>
       <div class="faq-list">
         <details>
           <summary>What roles are you looking for?</summary>
@@ -679,10 +699,14 @@
           <p>Usually within a day. Email is the fastest way to reach me.</p>
         </details>
       </div>
-    </section>
+  </div>
+</section>
 
-    <section class="contact" id="contact" aria-labelledby="contactHeading" data-stage="portrait">
-      <h2 class="contact-title" id="contactHeading"><span>Have a role or a project in mind?</span> Write to me.</h2>
+<!-- Contact -->
+<section class="contact" id="contact" aria-labelledby="contactHeading">
+  <div class="wrap contact-inner">
+    <h2 class="title title-center" id="contactHeading">Have a role or a project <em>in mind?</em></h2>
+    <p class="intro intro-center">Write a line below. It opens your email app with the message ready to send.</p>
       <form class="contact-field" id="contactForm" action="mailto:matthew.p.ferrer@gmail.com" method="get" enctype="text/plain">
         <label class="field-label" for="contactMessage">Your message</label>
         <input id="contactMessage" name="body" type="text" placeholder="A line about the role or project" autocomplete="off" aria-describedby="fieldNote" required>
@@ -690,7 +714,11 @@
         <button class="field-send" type="submit" aria-label="Write the email"><span aria-hidden="true">→</span></button>
       </form>
       <p class="field-note" id="fieldNote">Opens your email app with this message filled in.</p>
-      <p class="contact-promise">Reply within a day · Rizal, Philippines (GMT+8) · Open to remote roles</p>
+      <ul class="promise">
+        <li>Reply within a day</li>
+        <li>Rizal, Philippines · GMT+8</li>
+        <li>Open to remote roles</li>
+      </ul>
       <dl class="contact-list">
         <div><dt>Email</dt><dd><a href="mailto:matthew.p.ferrer@gmail.com">matthew.p.ferrer@gmail.com</a> <button id="copyEmail" class="copy-btn" type="button">Copy</button></dd></div>
         <div><dt>Phone</dt><dd><a href="tel:+639608752284">+63 960 875 2284</a></dd></div>
@@ -699,33 +727,36 @@
         <div><dt>Based in</dt><dd>Rizal, Philippines · GMT+8</dd></div>
       </dl>
       <p id="copyStatus" class="copy-status" aria-live="polite"></p>
-    </section>
   </div>
-</div>
+</section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="foot-photo">
-    <img src="assets/web/graduation-2.jpg" srcset="assets/web/graduation-2-480w.jpg 480w, assets/web/graduation-2-800w.jpg 800w, assets/web/graduation-2.jpg 1000w" sizes="(max-width: 959px) 100vw, 50vw" alt="Matthew Ferrer celebrating at his commencement" width="1000" height="1333" loading="lazy">
-  </div>
-  <div class="foot-menu">
-    <p class="foot-brand"><svg class="foot-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#2b2926"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#f5f4f1" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#ff8c4d" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg>Matthew Ferrer</p>
-    <nav class="foot-links" aria-label="Footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#1c1b19"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#ecebe6" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#e8814f" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg><span>Matthew <b>Ferrer</b></span></a>
+      <p>Full-stack data analyst: data engineering, BI and data science.</p>
+      <p class="foot-built">Built with <strong>HTML</strong>, <strong>CSS</strong> and <strong>JavaScript</strong>.</p>
+    </div>
+    <nav class="foot-col" aria-label="Footer">
+      <p class="label">Navigation</p>
       <a href="#services">What I do</a>
       <a href="#work">Work</a>
       <a href="#clients">Websites</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Tools</a>
-      <a href="#credentials">Credentials</a>
-      <a href="#contact">Contact</a>
+      <a href="#faq">FAQ</a>
     </nav>
-    <div class="foot-blocks">
-      <p><a href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><br><a href="https://github.com/KeigoDev" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><br><a href="#top">Back to top <span aria-hidden="true">↑</span></a></p>
+    <div class="foot-col">
+      <p class="label">Connect</p>
+      <a href="mailto:matthew.p.ferrer@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/KeigoDev" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </div>
-    <p class="foot-built">Designed and built by hand with <strong>HTML</strong>, <strong>CSS</strong> and <strong>JavaScript</strong>. Motion with GSAP and Lenis, type in Clash Display and Satoshi, tested with Playwright, hosted on GitHub Pages.</p>
-    <p class="foot-legal">© 2026 Matthew Ferrer</p>
   </div>
+  <div class="wrap foot-legal"><p>© 2026 Matthew Ferrer</p><p>Rizal, Philippines</p></div>
 </footer>
 
 <dialog class="lightbox" aria-label="Photo viewer">
