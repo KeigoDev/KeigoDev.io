@@ -1,6 +1,22 @@
 # Portfolio review — October 23, 2026
 
-## Full-bleed project cards (latest)
+## Full-stack positioning and display fonts (latest)
+
+- Title: "Full-stack data analyst. I speak SQL and boardroom." Page title, description, link preview and structured
+  data now say full-stack data analyst (data engineering, BI, data science). Tools regrouped into Data engineering,
+  BI & visualisation, Data science, Business platforms, AI & automation (26 tools; NumPy/NLTK/Matplotlib added from
+  the n-gram project).
+- Fonts: Clash Display (name, headings, opening line) and Satoshi (reading), Fontshare, ITF Free Font License,
+  self-hosted; chosen from four rendered options. Fixed: the phone Menu button sat 4px past the screen edge.
+
+## Opening line and fonts
+
+- Opening phrase: "Data and BI analyst. I speak SQL and boardroom." (a contrast hook: technical work plus executive
+  reporting), with See my work and Email me. Fixed: the name's full-screen box was blocking clicks on these buttons.
+- Fonts: Big Shoulders (tall signage capitals) for the name and headings, Public Sans for reading, chosen from four
+  rendered options. Both self-hosted; 63 KB together, down from 162 KB. Display headings set a size larger.
+
+## Full-bleed project cards
 
 - Desktop deck cards: the screenshot or recording fills the whole card; title, tools, description, links and
   "How I did it" sit on a solid charcoal panel (bottom left, scrolls inside if long). Disclosure notes are a label in
@@ -62,7 +78,7 @@
 ## Redesign
 
 New direction from the design-taste-frontend skill, "The split stage" (seed 914519171), reviewed with ui-ux-pro-max.
-- Palette "frost and slate" (replaces greige and brass); Rokkitt + Literata (replace Archivo).
+- Palette "frost and slate" (replaces greige and brass); Rokkitt + Literata at the time (now Big Shoulders + Public Sans).
 - Layout: portrait fixed on the left of the first screen with the name crossing it; a letter-style About;
   full-width project index; websites as one plate with tabs on a dark band; a second split where the photo
   changes with the section (Citi, portrait, graduation); tools as one printed sheet; a one-field contact
