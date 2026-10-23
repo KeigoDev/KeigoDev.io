@@ -53,6 +53,48 @@
   src: url('assets/fonts/ibmplexmono-500.woff2') format('woff2');
 }
 
+/* Stand-ins sized to match the web fonts, so text does not jump when the real fonts arrive.
+   Measured in Chrome: width and line metrics of Instrument Serif on Georgia, Satoshi on Arial. */
+@font-face {
+  font-family: 'Instrument Serif Fallback';
+  font-style: normal;
+  src: local('Georgia');
+  size-adjust: 76.45%;
+  ascent-override: 129.5%;
+  descent-override: 40.55%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Instrument Serif Fallback';
+  font-style: italic;
+  src: local('Georgia Italic'), local('Georgia-Italic');
+  size-adjust: 78.87%;
+  ascent-override: 125.5%;
+  descent-override: 39.3%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Satoshi Fallback';
+  font-weight: 400;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 98.7%;
+  ascent-override: 102.3%;
+  descent-override: 24.3%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: 'Satoshi Fallback';
+  font-weight: 700;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 97%;
+  ascent-override: 104.1%;
+  descent-override: 24.7%;
+  line-gap-override: 0%;
+}
+
 :root {
   /* Colour: near-black, warm greys, one copper */
   --bg: #0d0d0c;
@@ -70,8 +112,8 @@
   --paper: #f4f4f2;
 
   /* Type */
-  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-  --sans: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Instrument Serif', 'Instrument Serif Fallback', Georgia, 'Times New Roman', serif;
+  --sans: 'Satoshi', 'Satoshi Fallback', 'Helvetica Neue', Arial, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
   --step-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
@@ -1833,7 +1875,7 @@ a, button, summary, input {
 
 .foot-grid {
   display: grid;
-  grid-template-columns: minmax(0, 9fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 4fr) repeat(3, minmax(0, 2fr));
   gap: 40px;
 }
 
@@ -2011,9 +2053,18 @@ html.lenis,
   .exp-grid,
   .cred-grid,
   .faq-grid,
-  .clients,
-  .foot-grid {
+  .clients {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Footer on smaller screens: the brand across the top, the link lists two by two */
+  .foot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+
+  .foot-brand {
+    grid-column: 1 / -1;
   }
 
   .hero-portrait {

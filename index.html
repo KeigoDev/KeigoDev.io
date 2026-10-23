@@ -37,12 +37,36 @@
 }
 </script>
 <link rel="stylesheet" href="style.css">
-<script>document.documentElement.classList.add('js');</script>
-<script src="assets/vendor/gsap.min.js" defer></script>
-<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
-<script src="assets/vendor/lenis.min.js" defer></script>
+<script>
+document.documentElement.classList.add('js');
+// The motion layer loads once the first screen has painted, so it never holds that screen up.
+(() => {
+  let started = false;
+  const loadMotion = () => {
+    if (started) return;
+    started = true;
+    ['assets/vendor/gsap.min.js', 'assets/vendor/ScrollTrigger.min.js', 'assets/vendor/lenis.min.js', 'motion.js'].forEach(src => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = false;
+      document.head.append(script);
+    });
+  };
+  try {
+    new PerformanceObserver((list, observer) => {
+      if (list.getEntriesByName('first-contentful-paint').length) {
+        observer.disconnect();
+        setTimeout(loadMotion, 0);
+      }
+    }).observe({ type: 'paint', buffered: true });
+  } catch (error) {
+    addEventListener('load', loadMotion);
+  }
+  // Safety net in case the paint signal never arrives.
+  addEventListener('load', () => setTimeout(loadMotion, 2500));
+})();
+</script>
 <script src="script.js" defer></script>
-<script src="motion.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -145,7 +169,7 @@
 <section class="method" id="about" aria-labelledby="aboutHeading">
   <div class="wrap method-grid">
     <figure class="method-photo">
-      <img src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) 70vw, 34vw" alt="Matthew Ferrer, looking to the side" width="724" height="1086" loading="lazy">
+      <img src="assets/web/matt-look.jpg" srcset="assets/web/matt-look-320w.jpg 320w, assets/web/matt-look-480w.jpg 480w, assets/web/matt-look-640w.jpg 640w, assets/web/matt-look.jpg 724w" sizes="(max-width: 959px) min(calc(100vw - 32px), 352px), 28vw" alt="Matthew Ferrer, looking to the side" width="724" height="1086" loading="lazy">
     </figure>
     <div>
       <p class="label">How I work</p>
@@ -185,7 +209,7 @@
     <div class="deck">
         <article class="project card" id="p-airways" data-tags="tableau">
           <figure class="project-media has-video">
-            <video class="project-video" muted loop playsinline preload="none" poster="assets/work/ba-metrics-poster.jpg" width="960" height="582" aria-label="Screen recording of the British Airways dashboard: switching the metric between overall rating, cabin staff, entertainment, food and ground service redraws every chart">
+            <video class="project-video" muted loop playsinline preload="none" data-poster="assets/work/ba-metrics-poster.jpg" width="960" height="582" aria-label="Screen recording of the British Airways dashboard: switching the metric between overall rating, cabin staff, entertainment, food and ground service redraws every chart">
               <source src="assets/work/ba-metrics.webm" type="video/webm">
             </video>
             <button class="video-toggle" type="button">Pause</button>
@@ -737,6 +761,20 @@
       <p>Full-stack data analyst: data engineering, BI and data science.</p>
       <p class="foot-built">Built with <strong>HTML</strong>, <strong>CSS</strong> and <strong>JavaScript</strong>.</p>
     </div>
+    <nav class="foot-col" aria-label="Featured work">
+      <p class="label">Featured work</p>
+      <a href="#p-airways">British Airways reviews</a>
+      <a href="#p-amazon">Amazon product insights</a>
+      <a href="#p-cocacola">Coca-Cola retail sales</a>
+      <a href="#p-ngram">Language modelling</a>
+      <a href="#p-capstone">Project monitoring system</a>
+    </nav>
+    <nav class="foot-col" aria-label="Websites I run">
+      <p class="label">Websites I run</p>
+      <a href="https://astorrealtyenterprise.com/" target="_blank" rel="noopener noreferrer">Astor Realty <span aria-hidden="true">↗</span></a>
+      <a href="https://xn--salonpriv-j4a.com/" target="_blank" rel="noopener noreferrer">Salon Privé <span aria-hidden="true">↗</span></a>
+      <a href="https://marquevaultclassics.com/" target="_blank" rel="noopener noreferrer">Marque Vault <span aria-hidden="true">↗</span></a>
+    </nav>
     <nav class="foot-col" aria-label="Footer">
       <p class="label">Navigation</p>
       <a href="#services">What I do</a>
