@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-22T17:35:41.541Z",
+        "reason": "Claude: flagged nodes are full-width section and column wrappers; the inset lives on their children (checked in browser)"
+      },
+      {
+        "rule": "buried-raster",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-22T22:36:13.128Z",
+        "reason": "Claude: crossfade stacks (stage photos, website screenshots) sit at opacity 0 until their section or tab is active"
+      }
+    ]
+  }
+}

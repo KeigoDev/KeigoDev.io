@@ -1,90 +1,154 @@
-# Portfolio review — October 3, 2026
+# Portfolio review — October 23, 2026
 
-## Checks passed
+## Full-bleed project cards (latest)
 
-- HTML element nesting is balanced; no duplicate IDs.
-- All local image, stylesheet, script, favicon, report, and dataset references resolve.
-- Every internal section link resolves to an existing ID.
-- JavaScript syntax passes Node's syntax check.
-- Six JPEG assets and the supplied Citi PNG decode successfully.
-- Three PBIX and two XLSX files pass ZIP container integrity checks.
-- Named report and dataset copies are byte-identical to the supplied uploads.
-- Nine project cards, five certification entries, six report/dataset download links,
-  and five graduation gallery photos are retained.
-- Added masked heading reveals, decorative drawings on all nine project covers,
-  animated project filtering, the initial logo entrance, and experience timeline markers.
-- Citi displays OCT 2025 — OCT 2026.
-- LinkedIn is a clickable link; Say hello is an email link.
-- All content images have descriptive alternative text. The initially empty modal
-  image receives its source and alternative text when a gallery photo is selected.
-- ZIP integrity and byte-for-byte correspondence of packaged website files checked.
+- Desktop deck cards: the screenshot or recording fills the whole card; title, tools, description, links and
+  "How I did it" sit on a solid charcoal panel (bottom left, scrolls inside if long). Disclosure notes are a label in
+  the top corner; BE3's extra screens sit bottom right. The small n-gram chart shows sharp on white instead of
+  being stretched. Pointer tilt removed (it would show gaps at a full-bleed edge). Phones keep picture-then-text.
 
-## Source-level interaction and accessibility review
+## Tool filter removed
 
-Reviewed code paths for the mobile menu, Escape/outside-click dismissal, project
-filters and result announcements, expandable details, graduation gallery and native
-modal, email-copy fallback, scroll progress, and active navigation.
-The layout includes phone, tablet, and desktop breakpoints, flexible grids, larger
-touch targets, visible keyboard focus, reduced-motion handling, and hover-independent
-controls. These are source-level checks, not evidence of successful testing on every
-device or browser.
+- The tool filter (7 buttons for 9 projects, each showing 1–3) was removed: it broke the card stack into single cards,
+  and every card already lists its tools. Its code, styles and markup are gone; the stack positions are now fixed.
 
-## Animation update browser checks
+## Selected work as cards
 
-- Exercised all seven project filters and rapid switching, including restoration
-  of all nine cards and project-count announcements.
-- Checked details panels, the graduation gallery and lightbox, mobile navigation,
-  and copy-email feedback.
-- Checked viewport widths of 320, 390, 768, and 1440 CSS pixels for horizontal
-  overflow; decorative artwork did not overlap cover titles. The converter
-  illustration scales down at the narrowest breakpoint to preserve clearance.
-- Checked focus replay does not restart an illustration while focus moves within
-  the same project card, and verified reduced-motion static states.
-- Confirmed scroll progress, active navigation, portrait zoom, and 3D cover
-  transforms remain active. No page errors or failed local asset requests were
-  reported during these checks.
+- Featured projects are a stacking card deck: each card holds near the top while the next slides over it; the card
+  beneath eases back to 94% and dims (GSAP ScrollTrigger, scrubbed). Phones get a plain list of cards.
+- The four smaller projects sit in a card slider (native scroll-snap, previous/next buttons that switch off at the
+  ends, arrow keys and swipe work, no autoplay).
+- Dashboards tilt slightly toward the pointer (desktop mice only).
+- Footer credit: built by hand with HTML, CSS and JavaScript; GSAP, Lenis, Rokkitt, Literata, Playwright, GitHub Pages.
+- Inspector: 0 FAIL with four rules allowed on purpose for the deck and slider (covered-text, pinned-over-picture,
+  long-pin, side-scroll); one WARN (several left edges, from the split layout).
 
-## Verification limits
+## Section rework
 
-- Physical phone/tablet testing and 200% zoom behavior were not tested.
-- CSS was reviewed as source; no standalone CSS parser was available.
-- Both Kaggle dataset URLs returned their expected page titles in web retrieval.
-  This does not verify dataset downloads or account-dependent actions.
-- GitHub, Coursera, LinkedIn, and Tableau destinations could not be verified because
-  retrieval was disabled or inaccessible. This does not establish that they are broken.
-- PBIX integrity is container-level only. Reports were not executed in Power BI;
-  DAX, visual behavior, refresh credentials, and report calculations are unverified.
-- Employment, metrics, and credentials use supplied portfolio information. AWS has
-  no verification URL in the supplied content; certification authenticity is unverified.
+- Opening: a large statement plus three facts (now, before, looking for) and two actions.
+- How I work: four steps of the working method, each with real evidence and a link to the project; the fixed photo
+  changes to a second portrait here (inline photo on phones). The small avatar is gone.
+- Selected work: the dashboard stage now takes most of the width (index 5 columns, stage 7).
+- Websites I run: full-page captures of the three live sites (taken Oct 23, 2026) in a browser frame that scrolls
+  slowly while in view; the visitor can scroll it and takes over at once. No movement under reduced motion.
+- Experience: a timeline. Dates stay in view, two achievements show upfront, the rest under "What I do".
+- Checks: inspector 0 FAIL / 0 WARN, lint 0, impeccable detector clean, Chrome and WebKit tests pass.
 
-## Citi photo update
+## Colour change
 
-- Added the supplied photo beside the Citi experience on desktop and below it on mobile.
-- Preserved the full image proportions and original file bytes.
-- Added an accessible full-size viewer, descriptive alternative text, and lazy loading.
+- Blue and teal replaced with charcoal and orange at the owner's request: page #f4f4f2, charcoal #1c1b19,
+  orange #c2410c (#a8380a for small text, #ff8c4d on dark sections). All text pairs 4.5:1 or more.
+- Logo, favicon, touch icon and link preview recoloured. Inspector 0 FAIL / 0 WARN; Chrome and WebKit click-through pass.
 
-## Content corrections already included
+## Audit pass: content, critique, motion
 
-- Citi end month updated to October 2026 as requested.
-- British Airways project framed as independent analysis; unsupported claims of
-  client implementation and business-outcome improvements removed.
-- Amazon price × rating-count metric described as an exploratory proxy, not revenue.
-- BE3 testing-role count corrected to four to match the listed roles.
-- Gallery descriptions adjusted to the supplied images.
+- impeccable critique (two independent reviews: design + detector/browser) scored 26/36 before fixes; snapshot in .impeccable/critique/.
+- Repetition removed: the five-person team, "Rizal, Philippines", 30–40%, the certification count, the BE3 capstone and
+  the Astor screenshot each now appear where they belong, not three to five times. Salon and Marque have their own lines.
+- Hero now says the role sought; the About letter tells the path instead of repeating the hero.
+- Moving proof: a 14-second recording of the live British Airways Tableau dashboard (metric switch redraws every chart),
+  muted, plays only on screen, pause button, still under reduced motion. British Airways now leads the project list.
+- Dashboard tilt on the work stage (desktop mouse only), adapted from React Bits TiltedCard without its glare.
+  React Bits itself was not installed: the site is plain HTML and the components need React.
+- MF mark in the footer turns in once; footer photo is a graduation picture instead of a fourth portrait.
+- Phones: four smaller projects sit behind "Show 4 more projects" (filters show every match).
+- Count-up figures: screen readers get the final value only; shorter count.
+- Fixed: "Say hello" button stuck 20px up (CSS transition fought GSAP); hover no longer swaps projects.
+- Checks: lint 0, design inspector 0 FAIL / 0 WARN, impeccable detector clean; Chrome and WebKit click-through pass;
+  Lighthouse mobile 93 / 100 / 100 / 100, desktop 100 / 100 / 100 / 100. Firefox could not be launched here.
+- To confirm: the Astor job starts Sep 2026 while Citi runs to Oct 2026 (one month overlap); the bank project's
+  "decline in 2016" (its chart shows 2016 highest). No CV file exists to link.
 
-## External link inventory
+## Redesign
 
-- https://coursera.org/verify/professional-cert/69L1G8SYQ88P
-- https://coursera.org/verify/professional-cert/P2NXGPOOWPXV
-- https://coursera.org/verify/professional-cert/QGIKVBSMV78C
-- https://coursera.org/verify/professional-cert/VRGFI7D1HC40
-- https://github.com/KeigoDev
-- https://github.com/KeigoDev/File_Converter#-pdf-to-word-converter
-- https://github.com/KeigoDev/Ngram---Statistical-Language-Modeling
-- https://github.com/KeigoDev/Python-Cleaning-Visualization-JPChase#-bank-branch-deposit-analysis-20102016
-- https://github.com/KeigoDev/SQL-Amazon#amazon-product-insights--customer-experience-optimization-project
-- https://public.tableau.com/views/AirwayDashboardByKeigo/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
-- https://public.tableau.com/views/AmazonInsights_17589781396940/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
-- https://www.kaggle.com/datasets/chasebank/bank-deposits
-- https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset
-- https://www.linkedin.com/in/matthew-ferrer-profile/
+New direction from the design-taste-frontend skill, "The split stage" (seed 914519171), reviewed with ui-ux-pro-max.
+- Palette "frost and slate" (replaces greige and brass); Rokkitt + Literata (replace Archivo).
+- Layout: portrait fixed on the left of the first screen with the name crossing it; a letter-style About;
+  full-width project index; websites as one plate with tabs on a dark band; a second split where the photo
+  changes with the section (Citi, portrait, graduation); tools as one printed sheet; a one-field contact
+  that writes the email; a photograph-and-menu footer. All previous content is kept.
+- Logo, favicon, touch icon and link-preview image recoloured to the new palette.
+- Checks: design inspector 0 FAIL at 1440, 768 and 390 px (one WARN: no video, by choice); lint 0;
+  colour pairs all 4.5:1 or more; Lighthouse 12.2.1 mobile 95 / 100 / 100 / 100, desktop 100 / 100 / 100 / 100
+  (local gzip server); click-through of filters, project picker, tabs (mouse and keyboard), photo viewer,
+  phone menu, contact field; reduced motion and JavaScript-off pages show all content; no overflow at
+  390, 768, 1024, 1440; no console errors.
+- Not verified: real phones, Safari/Firefox for this version, the mailto hand-off in every email app.
+
+Live address (GitHub Pages project site): https://keigodev.github.io/KeigoDev.io/
+The live site still runs the previous version until these changes are pushed.
+
+## Lighthouse 12.2.1 (local, after changes)
+
+| Run | Performance | Accessibility | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| Mobile, plain local server (no compression) | 88 | 100 | 100 | 100 |
+| Mobile, gzip server (like GitHub Pages) | 97 | 100 | 100 | 100 |
+| Desktop, plain local server | 100 | 100 | 100 | 100 |
+
+Before the changes: mobile 84 / 93 / 100 / 100, desktop 97 / 93 / 100 / 100.
+Mobile with compression: First Contentful Paint 0.8 s, Largest Contentful Paint 2.6 s,
+Cumulative Layout Shift 0. These are lab numbers on simulated slow 4G, not field data.
+
+## Fixed in this pass
+
+- Self-hosted the typefaces (assets/fonts) with a preload; removed the Google Fonts request.
+- Responsive images: 480 / 800 px (and 320 px for the small portrait) variants with srcset and sizes.
+- Hero name starts at its fitted size, so it no longer jumps when the script measures it (CLS 0).
+- About paragraph now animates from grey to black instead of nearly invisible to black (readable at every point).
+- Accessible names moved from plain spans to the heading itself (invalid aria-label removed).
+- Section headings animate as whole words, so headings stay readable to screen readers and search engines.
+- Meta logo text darkened slightly to pass contrast.
+- Opening curtain runs on desktop only; phones go straight to content.
+- Smooth scrolling (Lenis) re-syncs when anything else moves the page, so it never snaps back.
+- Experience and certificate rows no longer flash: they were visible, then vanished and faded back in when
+  their animation started. They now start hidden and open smoothly. On desktop the dates stay in view
+  beside long open entries.
+- CSS smooth scroll is off while Lenis runs. It made ScrollTrigger measure wrongly whenever it
+  recalculated mid-page (resize, opening a dropdown), which pushed the Citi photo parallax out of place.
+  Opening any dropdown now recalculates the scroll triggers.
+- SEO: canonical URL, absolute Open Graph and Twitter image URLs, og:url, a 149-character meta description,
+  Person structured data (JSON-LD, validated as JSON) built only from facts on the page, robots.txt and sitemap.xml.
+
+## Weak spots fixed (second pass)
+
+- Power BI projects now show previews rebuilt from each .pbix Report/Layout (same tile positions, chart types,
+  titles and fields) with values computed from the bundled datasets. Each carries the caption
+  "Preview rebuilt from the report's layout and dataset". Maps are shown as top-10 bar charts (noted in the tile title).
+- The previews use corrected aggregations; the .pbix files themselves still need these fixes in Power BI:
+  - Beverage and Coca-Cola: price card uses Sum of Price per Unit (1,796 / 4,362.5) → use Average ($0.48 / $0.45).
+  - Coca-Cola: margin line uses Sum of Operating Margin (4,081) → use Average (42.3%).
+  - WHO: "Active Cases" and "New Cases" cards sum Cumulative_cases across every day (about 995 billion) →
+    use the latest date's total (778.5 million); "Death Cases" likewise (latest: 7.1 million).
+    "Count of ... by Region" charts use Average, not Count; rename or change the aggregation.
+- Projects: five featured (Amazon, British Airways, Coca-Cola, language model, BE3 system), four more below,
+  separated by size and space; phones show a "More work" heading. Filters still cover all nine.
+- Cross-browser: WebKit (Safari's engine, Playwright 1.64.1) desktop and phone, no errors, no overflow,
+  font and motion working. Firefox could not be launched in this environment.
+
+## Checks run
+
+- Design inspector (design-taste-frontend) at 1440, 768 and 390 px: one remaining FAIL is a false positive
+  (text inside a closed dropdown is treated as a label above the next heading); two WARNs (font sizes counted
+  include the CSS-drawn tool logos; no video, by choice).
+- No horizontal overflow at 390, 768, 1024 and 1440 px.
+- Clicked through: project index (click, hover, keyboard focus), tool filters on desktop and phone,
+  "How I did it" dropdowns, photo viewer open and close, phone menu open and close, copy email.
+- Keyboard: tab order runs skip link → logo → navigation → hero buttons → filters → projects, with a visible focus ring
+  at every stop.
+- Reduced motion: no curtain, no smooth scrolling, no custom cursor; all content visible.
+- JavaScript off: all nine projects and every section display.
+- No console errors over http. Opened from the folder (file://) the browser logs one harmless message about the
+  font preload; the font itself still loads.
+
+## Not verified
+
+- Real phones and tablets (only emulated sizes in Chrome).
+- Firefox was not tested (could not launch here). Safari tested via WebKit only, not on a real iPhone or Mac Safari.
+- Search indexing. Note: for a GitHub Pages project site, robots.txt only counts at the domain root
+  (keigodev.github.io), so submit sitemap.xml in Google Search Console instead of relying on robots.txt.
+- Link previews on LinkedIn and chat apps can only be checked after the site is pushed (absolute image URL is set).
+- External links (Tableau Public, GitHub, Kaggle, Coursera, client websites) were not re-checked in this pass.
+- PBIX files were not opened in Power BI.
+- Content accuracy: the bank project says deposits declined in 2016, but its own yearly chart shows 2016 as the
+  highest year. Kept as written; please confirm.
