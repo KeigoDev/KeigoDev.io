@@ -1753,13 +1753,6 @@ a, button, summary, input {
   transform: translateX(3px);
 }
 
-.field-note {
-  margin-top: 12px;
-  color: var(--dim);
-  font-size: var(--step-small);
-  text-align: center;
-}
-
 .promise {
   display: flex;
   flex-wrap: wrap;
@@ -1840,7 +1833,7 @@ a, button, summary, input {
 
 .foot-grid {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 9fr) minmax(0, 3fr);
   gap: 40px;
 }
 
@@ -1888,6 +1881,17 @@ a, button, summary, input {
   color: var(--dim);
   font-family: var(--mono);
   font-size: var(--step-small);
+}
+
+.foot-legal a {
+  align-self: start;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .25s var(--ease);
+}
+
+.foot-legal a:hover {
+  color: var(--ink);
 }
 
 /* Photo viewer */
