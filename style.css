@@ -545,6 +545,12 @@ a, button, summary, input {
   height: 24px;
 }
 
+/* The g's tail makes the file taller below the line, so centring lifts the word. Drop it back onto the shared baseline. */
+.trust-logos img[src$="google-wordmark.svg"] {
+  position: relative;
+  top: 4px;
+}
+
 .trust-sub {
   margin-top: 36px;
 }
