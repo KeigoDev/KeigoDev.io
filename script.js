@@ -87,6 +87,8 @@ function onScroll() {
   const heroEnd = hero.offsetTop + hero.offsetHeight - 72;
 
   header.classList.toggle('scrolled', y > heroEnd);
+  // Over the dark first screen the bar gets a dark ground as soon as the page moves.
+  header.classList.toggle('in-hero', y > 24 && y <= heroEnd);
 
   if (!menu.classList.contains('open')) {
     const goingDown = y > lastY + 4;

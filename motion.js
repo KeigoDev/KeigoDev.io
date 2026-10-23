@@ -149,12 +149,9 @@
       });
     });
 
-    /* About and figures */
+    /* First screen: the numbers count up once the intro has landed */
 
-    const about = document.querySelector('.about');
-    rise(about, '.about > .section-title, .about-photo, .method li', { stagger: 0.08 });
-
-    q('.figure-lines > div').forEach(row => {
+    q('.hero-stats > div').forEach((row, index) => {
       const dt = row.querySelector('dt');
       const finalText = dt.textContent;
       // Screen readers read the final figure; the counting digits are visual only.
@@ -167,20 +164,25 @@
       figure.textContent = finalText;
       dt.append(spoken, figure);
       const targets = (finalText.match(/[\d,]+/g) || []).map(number => Number(number.replace(/,/g, '')));
-      const counter = { progress: 0.55 };
+      const counter = { progress: 0.4 };
       const render = () => {
         let i = 0;
         figure.textContent = finalText.replace(/[\d,]+/g, () => Math.round(targets[i++] * counter.progress).toLocaleString('en-US'));
       };
-
-      gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 88%', once: true } })
-        .from(row, { y: 24, opacity: 0, duration: 0.9, ease })
-        .to(counter, {
-          progress: 1, duration: 0.9, ease: 'power3.out', onUpdate: render,
-          onComplete: () => { figure.textContent = finalText; }
-        }, '<0.1');
+      render();
+      gsap.to(counter, {
+        progress: 1, duration: 1.1, delay: 0.9 + index * 0.08, ease: 'power3.out', onUpdate: render,
+        onComplete: () => { figure.textContent = finalText; }
+      });
     });
-    rise(document.querySelector('.figures'), '.figures-title');
+
+    /* Proof band, What I do, How I work */
+
+    rise(document.querySelector('.trust'), '.trust-title, .trust-logos li, .trust-worked', { stagger: 0.05 });
+    rise(document.querySelector('.services'), '.services > .wrap > .section-title, .services-intro');
+    q('.service').forEach(row => rise(row, ':scope > *', { stagger: 0.07, y: 20 }));
+    const about = document.querySelector('.about');
+    rise(about, '.about > .section-title, .method li', { stagger: 0.08 });
 
     /* Work: the featured cards stack. As each card arrives, the one beneath settles back and dims. */
 
@@ -337,6 +339,7 @@
     rise(document.querySelector('.education'), '.education > :not(.edu-photos)');
     rise(document.querySelector('.edu-photos'), '.photo-open', { y: 36, stagger: 0.07 });
 
+    rise(document.querySelector('.faq'), '.faq > .section-title, .faq details', { stagger: 0.06 });
     rise(document.querySelector('.contact'), '.contact > *', { stagger: 0.08 });
 
     /* Footer: the close-up settles, the menu rises */

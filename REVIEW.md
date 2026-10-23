@@ -1,6 +1,17 @@
 # Portfolio review — October 23, 2026
 
-## Full-stack positioning and display fonts (latest)
+## Straightforward structure, after valiotti.com (latest)
+
+- Borrowed the information structure, not the styling: credibility, then proof, then services, then the call to action.
+- First screen: supporting sentence and a numbers row (30–40%, 9 projects, 5 certifications, 26 tools; counts up,
+  screen readers get the final figures). The separate "By the numbers" section was removed.
+- Trust band under the first screen: AWS, IBM, SAP, Google, Meta, and Citi, Astor Realty Enterprise, BE3.
+- What I do: Data engineering, BI & analytics, Data science, each with the problem, the work and a linked proof.
+- Project cards lead with a result line. FAQ of five recruiter questions before contact. Contact promise line.
+- Fixed: phone top bar sat over the headline without a ground while scrolling the first screen.
+- Not added: testimonials (none supplied; real LinkedIn recommendations could go here).
+
+## Full-stack positioning and display fonts
 
 - Title: "Full-stack data analyst. I speak SQL and boardroom." Page title, description, link preview and structured
   data now say full-stack data analyst (data engineering, BI, data science). Tools regrouped into Data engineering,
