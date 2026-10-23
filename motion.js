@@ -76,12 +76,19 @@
       q('a[href^="#"]').forEach(link => {
         link.addEventListener('click', event => {
           const id = link.getAttribute('href');
-          const target = id === '#top' ? 0 : document.querySelector(id);
-          if (target === null) {
+          const element = id === '#top' ? null : document.querySelector(id);
+          if (id !== '#top' && element === null) {
             return;
           }
           event.preventDefault();
-          lenis.scrollTo(target, { offset: id === '#top' ? 0 : -24, duration: 1.4 });
+          // A stacked featured card scrolls to where it arrives on top (see deckScrollY in script.js).
+          const cardY = element && window.deckScrollY ? window.deckScrollY(element) : null;
+          if (id === '#top' || cardY !== null) {
+            lenis.scrollTo(id === '#top' ? 0 : cardY, { duration: 1.4 });
+          } else {
+            // Cards start with their picture, so they land below the menu bar; sections have room above their heading.
+            lenis.scrollTo(element, { offset: element.closest('.deck') ? -88 : -24, duration: 1.4 });
+          }
         });
       });
 
@@ -94,10 +101,16 @@
 
     /* First screen: the network draws itself, then the words and the portrait arrive */
 
+    // If the motion layer arrives late (a slow connection) or the visitor has already moved,
+    // the first screen stays as it is instead of replaying its entrance.
+    const intro = performance.now() < 1500 && window.scrollY < 80;
+
     const net = document.querySelector('.hero-net');
-    if (net) {
+    if (net && intro) {
       gsap.from(net.querySelectorAll('line'), { opacity: 0, duration: 1.6, stagger: 0.015, ease: 'power2.out' });
       gsap.from(net.querySelectorAll('circle'), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, stagger: 0.02, ease: 'back.out(2)' });
+    }
+    if (net) {
       // The points drift a little, forever, like live data.
       q('circle', net).forEach(dot => {
         gsap.to(dot, {
@@ -111,11 +124,14 @@
       });
     }
 
-    gsap.timeline({ defaults: { ease } })
-      .from('.hero-copy > *', { y: 28, opacity: 0, duration: 0.9, stagger: 0.09 }, 0.15)
-      .from('.hero-portrait img', { scale: 0.85, opacity: 0, duration: 1.1 }, 0.3)
-      .from('.hero-portrait figcaption > *', { y: 12, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.6)
-      .from('.nav-inner > *', { y: -16, opacity: 0, duration: 0.7, stagger: 0.05 }, 0.1);
+    if (intro) {
+      gsap.timeline({ defaults: { ease } })
+        // The words slide only: they are on screen from the first paint, which keeps the page fast to load.
+        .from('.hero-copy > *', { y: 28, duration: 0.9, stagger: 0.09 }, 0.15)
+        .from('.hero-portrait img', { scale: 0.85, opacity: 0, duration: 1.1 }, 0.3)
+        .from('.hero-portrait figcaption > *', { y: 12, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.6)
+        .from('.nav-inner > *', { y: -16, opacity: 0, duration: 0.7, stagger: 0.05 }, 0.1);
+    }
 
     // The network eases back as the first screen leaves.
     if (net) {
@@ -129,7 +145,7 @@
 
     /* First screen: the numbers count up once the intro has landed */
 
-    q('.hero-stats > div').forEach((row, index) => {
+    q('.hero-stats > div').filter(() => intro).forEach((row, index) => {
       const dt = row.querySelector('dt');
       const finalText = dt.textContent;
       // Screen readers read the final figure; the counting digits are visual only.
@@ -295,7 +311,12 @@
       ScrollTrigger.refresh();
     };
     document.fonts?.ready.then(refit);
-    window.addEventListener('load', () => ScrollTrigger.refresh());
+    // This layer loads after the first paint, so the page may have finished loading already.
+    if (document.readyState === 'complete') {
+      ScrollTrigger.refresh();
+    } else {
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    }
 
     // Opening a dropdown makes the page taller; move the later triggers with it.
     let refreshTimer;

@@ -55,7 +55,9 @@ Unique to this site: the live dashboard recording in stacking project cards, the
 websites, his own photographs, and the hero network drawn as 26 points, one per tool, clustered by tool group.
 Palette: near-black #0d0d0c, warm greys, one copper (#c2501f buttons, #e8814f text).
 Typefaces: Instrument Serif (headlines) and IBM Plex Mono (labels), SIL Open Font License; Satoshi (reading),
-ITF Free Font License. All stored in assets/fonts/, so they work offline too.
+ITF Free Font License. All stored in assets/fonts/, so they work offline too. The Satoshi files are trimmed
+to Latin letters, punctuation and arrows to load faster; the stylesheet also sets size-matched stand-ins
+(Georgia, Arial) so text does not move when the web fonts arrive.
 Edit interface behavior in script.js.
 Animations live in motion.js (GSAP, ScrollTrigger and Lenis, stored in assets/vendor/).
 If those files are missing, or a visitor has reduced motion turned on, the page still works without animation.
