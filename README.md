@@ -6,13 +6,18 @@ Citi experience: October 2025–October 2026.
 ## Included
 
 - index.html — complete portfolio content
-- style.css — responsive layout, scroll reveals, masked headings, and decorative motion
-- script.js — navigation, animated project filtering, cover drawings, experience timeline,
-  details, scrolling, gallery, and email copy
+- style.css — design tokens, responsive layout and states
+- script.js — navigation, the project card slider, website tabs, the photo that changes
+  beside each section, photo viewer, contact field and email copy
+- motion.js — entrances and scroll motion (GSAP, ScrollTrigger, Lenis)
 - favicon.svg
+- assets/web/ — compressed photos the page uses (originals stay in assets/)
+- assets/work/ — dashboard, chart and client-website screenshots shown on the page, and
+  ba-metrics.webm, a short recording of the live British Airways Tableau dashboard
 - assets/ — original portrait, Citi career photo, five graduation photos, three Power BI reports,
   two Excel datasets, and one CSV dataset
 - REVIEW.md — checks performed and remaining verification limits
+- robots.txt, sitemap.xml — search engine files (see REVIEW.md about GitHub Pages project sites)
 - SHA256SUMS.txt — checksums for the website files
 
 ## Open locally
@@ -43,7 +48,15 @@ need to be published.
 
 Edit career dates, project descriptions, and destination links in index.html.
 Edit colors, typography, responsive layouts, and motion in style.css.
+Colors and type sizes are tokens at the top of style.css (--bg, --ink, --accent, --step-*).
+Design: "the split stage". A photograph holds still on one half of the screen while the other half scrolls.
+Palette "charcoal and orange": ground #f4f4f2, ink and dark sections #1c1b19, one orange accent #c2410c (#a8380a for small text, #ff8c4d on dark grounds).
+Typefaces: Rokkitt for the name and headings, Literata for reading (both SIL Open Font License),
+stored in assets/fonts/, so they work offline too.
 Edit interface behavior in script.js.
+Animations live in motion.js (GSAP, ScrollTrigger and Lenis, stored in assets/vendor/).
+If those files are missing, or a visitor has reduced motion turned on, the page still works without animation.
+The logo is assets/brand/logo-mark.svg (also favicon.svg); the link preview image is assets/brand/og-image.jpg.
 
 Power BI files are downloads, not embedded browser dashboards. They require
 compatible Power BI software to inspect. The large WHO CSV downloads only when
