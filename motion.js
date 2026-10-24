@@ -176,7 +176,8 @@
         .from('.hero-copy > *', { y: 28, duration: 0.9, stagger: 0.09 }, 0.15)
         .from('.hero-portrait img', { scale: 0.85, opacity: 0, duration: 1.1 }, 0.3)
         .from('.hero-portrait figcaption > *', { y: 12, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.6)
-        .from('.nav-inner > *', { y: -16, opacity: 0, duration: 0.7, stagger: 0.05 }, 0.1);
+        // clearProps hands the bar back to the stylesheet; otherwise the phone menu (hidden at load) keeps opacity 0 for good.
+        .from('.nav-inner > *', { y: -16, opacity: 0, duration: 0.7, stagger: 0.05, clearProps: 'transform,opacity' }, 0.1);
     }
 
     // The network eases back as the first screen leaves.
