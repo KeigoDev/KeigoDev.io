@@ -102,13 +102,9 @@
             return;
           }
           event.preventDefault();
-          // A stacked featured card scrolls to where it arrives on top (see deckScrollY in script.js).
-          const cardY = id !== '#top' && window.deckScrollY ? window.deckScrollY(element) : null;
           let to;
           if (id === '#top') {
             to = 0;
-          } else if (cardY !== null) {
-            to = cardY;
           } else {
             // Cards start with their picture, so they land below the menu bar; sections have room above their heading.
             to = element.getBoundingClientRect().top + window.scrollY + (element.closest('.deck') ? -88 : -24);
@@ -229,7 +225,7 @@
     rise(document.querySelector('.method .cards'), '.card-box', { stagger: 0.08 });
     open(document.querySelector('.method'), document.querySelector('.method-photo'));
 
-    /* Work: the featured cards stack. As each card arrives, the one beneath settles back and dims. */
+    /* Work: each featured card's picture eases in as it arrives. */
 
     rise(document.querySelector('.work'), '.work > .wrap > .label, .work > .wrap > .title, .work > .wrap > .intro');
 
@@ -380,36 +376,5 @@
       lenis?.destroy();
       document.removeEventListener('toggle', onToggle, true);
     };
-  });
-
-  /* Work deck (desktop only, where the cards stick): as each card arrives, the one beneath
-     settles back and dims. It switches on and off when the window crosses the breakpoint. */
-
-  mm.add('(min-width: 960px) and (prefers-reduced-motion: no-preference)', () => {
-    const cards = q('.deck .card');
-    cards.forEach((card, index) => {
-      let shade = card.querySelector('.card-shade');
-      if (!shade) {
-        shade = document.createElement('span');
-        shade.className = 'card-shade';
-        shade.setAttribute('aria-hidden', 'true');
-        card.append(shade);
-      }
-      const next = cards[index + 1];
-      if (!next) {
-        return;
-      }
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: next,
-          start: 'top bottom',
-          end: () => `top ${88 + (index + 1) * 14}px`,
-          scrub: true,
-          invalidateOnRefresh: true
-        }
-      })
-        .fromTo(card, { scale: 1, transformOrigin: '50% 0%' }, { scale: 0.94, ease: 'none' }, 0)
-        .fromTo(shade, { opacity: 0 }, { opacity: 0.35, ease: 'none' }, 0);
-    });
   });
 })();

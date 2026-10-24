@@ -189,41 +189,6 @@ if ('IntersectionObserver' in window) {
   $$('.cover-illustration').forEach(svg => drawObserver.observe(svg));
 }
 
-/* Links to a featured card. On desktop the cards stick and stack, so a plain jump can land
-   with a later card on top. Scroll to the point where the chosen card arrives instead. */
-
-function deckScrollY(card) {
-  if (getComputedStyle(card).position !== 'sticky') {
-    return null;
-  }
-  const stickTop = parseFloat(getComputedStyle(card).top) || 0;
-  // Measure where the card sits in the page flow, as if it did not stick.
-  card.style.position = 'static';
-  const box = card.getBoundingClientRect();
-  card.style.position = '';
-  // The last card has no room left in the deck to stick, so it lands just under the menu bar.
-  const room = card.parentElement.getBoundingClientRect().bottom - box.bottom;
-  const landAt = Math.max(Math.min(stickTop, room), 88);
-  return Math.max(0, box.top + window.scrollY - landAt);
-}
-
-window.deckScrollY = deckScrollY;
-
-$$('a[href^="#p-"]').forEach(link => {
-  link.addEventListener('click', event => {
-    const card = document.querySelector(link.hash);
-    // With smooth scrolling on, motion.js handles the jump.
-    if (!card || document.documentElement.classList.contains('lenis')) {
-      return;
-    }
-    const y = deckScrollY(card);
-    if (y !== null) {
-      event.preventDefault();
-      window.scrollTo({ top: y, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-    }
-  });
-});
-
 /* Arrival: when an in-page link lands, the section's label is underlined and its heading settles
    (a featured card gets a copper edge instead). Focus moves there for keyboard users. */
 

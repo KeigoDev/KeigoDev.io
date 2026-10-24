@@ -1,6 +1,6 @@
 /* Matthew Ferrer — portfolio
    Design: dark, straightforward, information first (inspired by consultancy sites such as valiotti.com).
-   What is his alone: the live dashboard recording in stacking project cards, the browser tour of the
+   What is his alone: the live dashboard recording in the project cards, the browser tour of the
    client websites, his own photographs, and the hero network drawn as 26 tools in three clusters.
    Type: Instrument Serif (headlines), Satoshi (reading), IBM Plex Mono (labels).
    Instrument Serif and IBM Plex Mono: SIL Open Font License. Satoshi: ITF Free Font License. All self-hosted. */
@@ -748,11 +748,12 @@ a, button, summary, input {
   background: var(--paper);
 }
 
-/* Work: featured projects as a deck of cards that stack; more work in a card slider */
+/* Work: featured projects in a grid of cards; more work in a card slider */
 
 .deck {
   display: grid;
-  gap: 48px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 24px;
   margin-top: 56px;
 }
 
@@ -762,8 +763,58 @@ a, button, summary, input {
   background: var(--surface);
 }
 
+/* Featured cards, after valiotti.com's case studies: picture on top, words below, each card the same shape */
+
 .deck .card {
-  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Same-shaped picture area on every card; a caption or thumbnails take room from the picture, not the card. */
+.deck .card .project-media {
+  aspect-ratio: 16 / 10;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.deck .card .project-media > img,
+.deck .card .project-video {
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* The n-gram chart has its axis labels at the edges, so it is shown whole. */
+.deck #p-ngram .project-media > img {
+  object-fit: contain;
+}
+
+.deck .project-thumbs {
+  margin: 0;
+  padding: 8px;
+}
+
+.deck .card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.deck .project-field {
+  order: -1;
+  margin: 0 0 12px;
+  color: var(--accent-text);
+}
+
+.deck .project-result {
+  color: var(--ink);
+}
+
+.deck .project-links {
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 .card .project-media {
@@ -992,97 +1043,6 @@ a, button, summary, input {
 
 .photo-open:hover img {
   transform: scale(1.05);
-}
-
-/* Desktop deck: the picture fills the card, the words sit on a panel; each card holds while the next slides over */
-
-@media (min-width: 960px) {
-  .deck {
-    gap: 12vh;
-  }
-
-  .deck .card {
-    position: sticky;
-    top: calc(96px + var(--stack, 0) * 14px);
-    display: block;
-    height: min(calc(100svh - 150px), 640px);
-    overflow: hidden;
-  }
-
-  .deck .card:nth-child(2) { --stack: 1; }
-  .deck .card:nth-child(3) { --stack: 2; }
-  .deck .card:nth-child(4) { --stack: 3; }
-  .deck .card:nth-child(5) { --stack: 4; }
-  .deck .card:nth-child(6) { --stack: 5; }
-
-  .deck .card .project-media {
-    position: absolute;
-    inset: 0;
-    display: block;
-    padding: 0;
-  }
-
-  .deck .card .project-media > img,
-  .deck .card .project-video {
-    width: 100%;
-    height: 100%;
-    max-height: none;
-    object-fit: cover;
-    object-position: 50% 0;
-  }
-
-  .deck #p-ngram .project-media > img {
-    width: 52%;
-    margin-left: auto;
-    object-fit: contain;
-    object-position: 50% 50%;
-  }
-
-  .deck .card .media-note {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 2;
-    max-width: 30rem;
-    padding: 8px 12px;
-    background: var(--bg);
-    color: var(--ink);
-  }
-
-  .deck .project-thumbs {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    z-index: 2;
-    width: min(40%, 30rem);
-    margin: 0;
-    padding: 8px;
-    border: 1px solid var(--line);
-    background: var(--bg);
-  }
-
-  .deck .card-body {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-    z-index: 3;
-    width: min(46%, 34rem);
-    max-height: calc(100% - 80px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    border: 1px solid var(--line-strong);
-    background: rgba(13, 13, 12, .96);
-    scrollbar-color: var(--line-strong) var(--bg);
-  }
-
-  .card-shade {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    background: #000;
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 
 .more-work {
@@ -2104,7 +2064,6 @@ html.lenis,
     display: none;
   }
 
-  .deck .card,
   .mini {
     grid-template-columns: minmax(0, 1fr);
   }
