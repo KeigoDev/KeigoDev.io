@@ -52,7 +52,7 @@ Edit colors, typography, responsive layouts, and motion in style.css.
 Colors and type sizes are tokens at the top of style.css (--bg, --ink, --accent, --step-*).
 Design: dark and information-first, inspired by valiotti.com: serif headlines with one italic copper word,
 small mono labels, outlined cards, a numbers row, a trust band, an FAQ and a centred close.
-Unique to this site: the live dashboard recording in stacking project cards, the browser tour of the client
+Unique to this site: the live dashboard recording in the project cards, the browser tour of the client
 websites, his own photographs, and the hero network drawn as 26 points, one per tool, clustered by tool group.
 Palette: near-black #0d0d0c, warm greys, one copper (#c2501f buttons, #e8814f text).
 Typefaces: Instrument Serif (headlines) and IBM Plex Mono (labels), SIL Open Font License; Satoshi (reading),
