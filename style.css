@@ -96,7 +96,7 @@
 }
 
 :root {
-  /* Colour: near-black, warm greys, one gold */
+  /* Colour: near-black, warm greys, one violet */
   --bg: #0d0d0c;
   --surface: #151513;
   --surface-2: #1c1b19;
@@ -105,10 +105,10 @@
   --ink: #ecebe6;
   --muted: #a3a19a;
   --dim: #85837c;
-  --accent: #c9a24a;
-  --accent-hover: #b08a36;
-  --accent-text: #d9b766;
-  --accent-ink: #0d0d0c;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-text: #c7a9ff;
+  --accent-ink: #ffffff;
   --paper: #f4f4f2;
 
   /* Type */
@@ -2146,7 +2146,7 @@ html.lenis,
 }
 
 /* In-page links: press, travel, arrive.
-   1. A gold line draws under the link (and stays under the section being read). */
+   1. A violet line draws under the link (and stays under the section being read). */
 
 .nav-links a,
 .foot-col a {
@@ -2187,7 +2187,7 @@ html.lenis,
   transition-duration: 0s;
 }
 
-/* 3. On arrival the section's label is underlined in gold, then lets go; its heading settles. */
+/* 3. On arrival the section's label is underlined in violet, then lets go; its heading settles. */
 
 .label.is-arriving {
   position: relative;
@@ -2209,7 +2209,7 @@ html.lenis,
   animation: arrive-settle .9s var(--ease) both;
 }
 
-/* A featured card gets a gold edge that fades. */
+/* A featured card gets a violet edge that fades. */
 .card.is-arriving {
   animation: arrive-edge 1.8s var(--ease) both;
 }

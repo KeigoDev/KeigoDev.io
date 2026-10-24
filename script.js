@@ -190,7 +190,7 @@ if ('IntersectionObserver' in window) {
 }
 
 /* Arrival: when an in-page link lands, the section's label is underlined and its heading settles
-   (a featured card gets a gold edge instead). Focus moves there for keyboard users. */
+   (a featured card gets a violet edge instead). Focus moves there for keyboard users. */
 
 function arrive(target) {
   if (!target) {
