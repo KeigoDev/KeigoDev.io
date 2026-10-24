@@ -15,7 +15,8 @@ Citi experience: October 2025–October 2026.
 - assets/work/ — dashboard, chart and client-website screenshots shown on the page, and
   ba-metrics.webm, a short recording of the live British Airways Tableau dashboard
 - assets/ — original portrait, Citi career photo, five graduation photos, three Power BI reports,
-  two Excel datasets, and one CSV dataset
+  two Excel datasets, one CSV dataset, and the Food Affordability PH web dashboard
+  (food-affordability-dashboard.html, loads d3 from cdnjs) with its Power BI project zip
 - REVIEW.md — checks performed and remaining verification limits
 - robots.txt, sitemap.xml — search engine files (see REVIEW.md about GitHub Pages project sites)
 - SHA256SUMS.txt — checksums for the website files

@@ -102,7 +102,7 @@ document.documentElement.classList.add('js');
       <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="mailto:matthew.p.ferrer@gmail.com">Email me</a></p>
       <dl class="hero-stats">
         <div><dt>30–40%</dt><dd>Less manual reporting at Citi</dd></div>
-        <div><dt>9</dt><dd>Data projects you can open</dd></div>
+        <div><dt>10</dt><dd>Data projects you can open</dd></div>
         <div><dt>5</dt><dd>Professional certifications</dd></div>
         <div><dt>26</dt><dd>Tools across the stack</dd></div>
       </dl>
@@ -205,8 +205,37 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <p class="label">Selected work</p>
     <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
-    <p class="intro">Five featured projects, then four more. Each card shows the dashboard, the result and how I built it.</p>
+    <p class="intro">Six featured projects, then four more. Each card shows the dashboard, the result and how I built it.</p>
     <div class="deck">
+        <article class="project card" id="p-food" data-tags="powerbi python">
+          <figure class="project-media">
+            <img src="assets/work/food-affordability.jpg" srcset="assets/work/food-affordability-480w.jpg 480w, assets/work/food-affordability-800w.jpg 800w, assets/work/food-affordability.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="Interactive dashboard, The 2026 rice shock in the Philippines: GDP growth down to 2.3%, ₱62.62 per US dollar, headline inflation at 7.2% against the 2–4% target" width="1440" height="1013" loading="lazy">
+            <figcaption class="media-note">Latest project. The web version of the Power BI report, with the same pages, measures and slicers.</figcaption>
+          </figure>
+          <div class="card-body">
+            <h3>Food affordability in the Philippines, 2026</h3>
+            <p class="project-field">Economics · Power BI, Python</p>
+            <p class="project-result">Rice inflation from −17% to +20% in a year</p>
+            <p class="project-desc">A Power BI data story on official PSA, ECB, SWS and DOLE data: which regions the 2026 rice price shock hits hardest, and where relief should go first.</p>
+            <p class="project-tools">Python · Power Query · DAX · Power BI</p>
+            <p class="project-links">
+              <a href="assets/food-affordability-dashboard.html" target="_blank" rel="noopener">Open dashboard <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/KeigoDev/Food-Affordability-PH-2026-a-Power-BI-data-story-on-real-data" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>
+              <a href="assets/food-affordability-powerbi.zip" download>Power BI project <span aria-hidden="true">↓</span></a>
+            </p>
+            <details class="project-more">
+              <summary>How I did it</summary>
+              <ul>
+                <li>Pulled rice prices, inflation, GDP and exchange rates from the PSA OpenSTAT and ECB APIs into Excel with Python.</li>
+                <li>Cleaned it in Power Query: unpivoted month columns, turned unreleased-month placeholders into nulls and matched PSA's two region-naming styles.</li>
+                <li>Modelled a star schema with Calendar and Region tables and wrote 46 DAX measures, including latest against a year earlier.</li>
+                <li>Checked every layer with a Python script before sharing: queries, columns, measures and expected card values all agree.</li>
+                <li>Found that 12 of 18 regions have rice inflation above the national 20.3%, led by Western Visayas at 30.0%.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
         <article class="project card" id="p-airways" data-tags="tableau">
           <figure class="project-media has-video">
             <video class="project-video" muted loop playsinline preload="none" data-poster="assets/work/ba-metrics-poster.jpg" width="960" height="582" aria-label="Screen recording of the British Airways dashboard: switching the metric between overall rating, cabin staff, entertainment, food and ground service redraws every chart">
@@ -763,6 +792,7 @@ document.documentElement.classList.add('js');
     </div>
     <nav class="foot-col" aria-label="Featured work">
       <p class="label">Featured work</p>
+      <a href="#p-food">Food affordability PH</a>
       <a href="#p-airways">British Airways reviews</a>
       <a href="#p-amazon">Amazon product insights</a>
       <a href="#p-cocacola">Coca-Cola retail sales</a>

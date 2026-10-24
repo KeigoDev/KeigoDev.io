@@ -1013,6 +1013,7 @@ a, button, summary, input {
   .deck .card:nth-child(3) { --stack: 2; }
   .deck .card:nth-child(4) { --stack: 3; }
   .deck .card:nth-child(5) { --stack: 4; }
+  .deck .card:nth-child(6) { --stack: 5; }
 
   .deck .card .project-media {
     position: absolute;
