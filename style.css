@@ -752,9 +752,9 @@ a, button, summary, input {
 
 .deck {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-  gap: 24px;
+  gap: 48px;
   margin-top: 56px;
+  counter-reset: project;
 }
 
 .card {
@@ -763,11 +763,13 @@ a, button, summary, input {
   background: var(--surface);
 }
 
-/* Featured cards, after valiotti.com's case studies: picture on top, words below, each card the same shape */
+/* Featured projects, after Brittany Chiang's alternating feature rows (v4.brittanychiang.com):
+   a large picture beside the words, swapping sides each row; picture on top on smaller screens. */
 
 .deck .card {
   display: flex;
   flex-direction: column;
+  counter-increment: project;
 }
 
 /* Same-shaped picture area on every card; a caption or thumbnails take room from the picture, not the card. */
@@ -808,6 +810,11 @@ a, button, summary, input {
   color: var(--accent-text);
 }
 
+.deck .project-field::before {
+  content: counter(project, decimal-leading-zero) " / ";
+  color: var(--ink);
+}
+
 .deck .project-result {
   color: var(--ink);
 }
@@ -815,6 +822,35 @@ a, button, summary, input {
 .deck .project-links {
   margin-top: auto;
   padding-top: 20px;
+}
+
+@media (min-width: 960px) {
+  .deck {
+    gap: clamp(64px, 8vw, 112px);
+  }
+
+  .deck .card {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+
+  .deck .card:nth-child(even) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+
+  .deck .card:nth-child(even) .project-media {
+    order: 2;
+  }
+
+  /* The picture fills its side at the height of the words beside it. */
+  .deck .card .project-media {
+    aspect-ratio: auto;
+    min-height: 420px;
+  }
+
+  .deck .card-body {
+    padding: clamp(32px, 3.4vw, 48px);
+  }
 }
 
 .card .project-media {
