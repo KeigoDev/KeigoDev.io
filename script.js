@@ -224,6 +224,72 @@ $$('a[href^="#p-"]').forEach(link => {
   });
 });
 
+/* Arrival: when an in-page link lands, the section's label is underlined and its heading settles
+   (a featured card gets a copper edge instead). Focus moves there for keyboard users. */
+
+function arrive(target) {
+  if (!target) {
+    return;
+  }
+  const restart = el => {
+    el.classList.remove('is-arriving');
+    void el.offsetWidth;
+    el.classList.add('is-arriving');
+    setTimeout(() => el.classList.remove('is-arriving'), 1900);
+  };
+
+  if (target.matches('.card')) {
+    restart(target);
+  } else {
+    const label = target.querySelector('.label');
+    if (label) {
+      // Underline only the words, also when the label is centred.
+      const range = document.createRange();
+      range.selectNodeContents(label);
+      const text = range.getBoundingClientRect();
+      const box = label.getBoundingClientRect();
+      label.style.setProperty('--arrive-x', `${text.left - box.left}px`);
+      label.style.setProperty('--arrive-w', `${text.width}px`);
+      restart(label);
+    }
+    const title = target.querySelector('.title');
+    if (title) {
+      restart(title);
+    }
+  }
+
+  if (!target.hasAttribute('tabindex')) {
+    target.setAttribute('tabindex', '-1');
+    target.classList.add('is-target');
+  }
+  target.focus({ preventScroll: true });
+}
+
+window.arrive = arrive;
+
+// Without the motion layer (reduced motion, or before it loads) the browser does the jump;
+// the arrival cue plays once the page has settled.
+$$('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', () => {
+    if (document.documentElement.classList.contains('lenis')) {
+      return;
+    }
+    const target = link.hash === '#top' ? $('.hero') : document.querySelector(link.hash);
+    if (!target) {
+      return;
+    }
+    let done = false;
+    const land = () => {
+      if (!done) {
+        done = true;
+        arrive(target);
+      }
+    };
+    window.addEventListener('scrollend', land, { once: true });
+    setTimeout(land, reducedMotion.matches ? 80 : 900);
+  });
+});
+
 /* Slider: arrow buttons move one view at a time; they switch off at the ends */
 
 const sliderButtons = $$('.slider-btn');

@@ -73,22 +73,72 @@
       gsap.ticker.add(raf);
       gsap.ticker.lagSmoothing(0);
 
+      // In-page links: the page travels there (a thin bar fills across the top as it goes),
+      // then the arrival cue plays (see arrive in script.js). Longer trips take a little longer.
+      const travel = document.createElement('div');
+      travel.className = 'travel';
+      travel.setAttribute('aria-hidden', 'true');
+      document.body.append(travel);
+      let trip = null;
+
+      lenis.on('scroll', ({ scroll }) => {
+        if (!trip) {
+          return;
+        }
+        const progress = Math.min(1, Math.abs(scroll - trip.from) / Math.max(1, Math.abs(trip.to - trip.from)));
+        travel.style.transform = `scaleX(${progress})`;
+      });
+
+      const endTrip = () => {
+        trip = null;
+        travel.classList.remove('is-on');
+      };
+
       q('a[href^="#"]').forEach(link => {
         link.addEventListener('click', event => {
           const id = link.getAttribute('href');
-          const element = id === '#top' ? null : document.querySelector(id);
-          if (id !== '#top' && element === null) {
+          const element = id === '#top' ? document.querySelector('.hero') : document.querySelector(id);
+          if (element === null) {
             return;
           }
           event.preventDefault();
           // A stacked featured card scrolls to where it arrives on top (see deckScrollY in script.js).
-          const cardY = element && window.deckScrollY ? window.deckScrollY(element) : null;
-          if (id === '#top' || cardY !== null) {
-            lenis.scrollTo(id === '#top' ? 0 : cardY, { duration: 1.4 });
+          const cardY = id !== '#top' && window.deckScrollY ? window.deckScrollY(element) : null;
+          let to;
+          if (id === '#top') {
+            to = 0;
+          } else if (cardY !== null) {
+            to = cardY;
           } else {
             // Cards start with their picture, so they land below the menu bar; sections have room above their heading.
-            lenis.scrollTo(element, { offset: element.closest('.deck') ? -88 : -24, duration: 1.4 });
+            to = element.getBoundingClientRect().top + window.scrollY + (element.closest('.deck') ? -88 : -24);
           }
+          to = Math.max(0, Math.min(to, document.documentElement.scrollHeight - window.innerHeight));
+          const from = window.scrollY;
+          const distance = Math.abs(to - from);
+          const duration = Math.min(1.5, Math.max(0.7, 0.5 + distance / 4000));
+
+          if (distance < 2) {
+            window.arrive?.(element);
+            return;
+          }
+          trip = { from, to };
+          travel.style.transform = 'scaleX(0)';
+          travel.classList.toggle('is-on', distance > 40);
+          const tripId = trip;
+          lenis.scrollTo(to, {
+            duration,
+            onComplete: () => {
+              endTrip();
+              window.arrive?.(element);
+            }
+          });
+          // If the visitor takes over mid-trip, the bar still clears.
+          setTimeout(() => {
+            if (trip === tripId) {
+              endTrip();
+            }
+          }, duration * 1000 + 400);
         });
       });
 
