@@ -225,12 +225,14 @@
     rise(document.querySelector('.method .cards'), '.card-box', { stagger: 0.08 });
     open(document.querySelector('.method'), document.querySelector('.method-photo'));
 
-    /* Work: each featured card's picture eases in as it arrives. */
+    /* Work: each featured picture opens from its outer edge, the way the other photos open, then the words rise. */
 
     rise(document.querySelector('.work'), '.work > .wrap > .label, .work > .wrap > .title, .work > .wrap > .intro');
 
     // Each card's picture eases in as the card arrives; its words follow once.
-    q('.deck .card').forEach(card => {
+    q('.deck .card').forEach((card, index) => {
+      // Odd rows have the picture on the left, so it opens rightwards; even rows the reverse.
+      open(card, card.querySelector('.project-media'), index % 2 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)');
       const picture = card.querySelector('.project-media img, .project-media video, .project-media svg');
       if (picture) {
         gsap.fromTo(picture, { scale: 1.08 }, {
