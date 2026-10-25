@@ -44,6 +44,15 @@
         "value": "instrument serif",
         "createdAt": "2026-10-23T14:38:05.683Z",
         "reason": "Owner asked to match the reference design (valiotti.com): serif headlines with an italic copper word, spaced mono labels"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-24T23:59:16.937Z",
+        "reason": "user confirmed: picked Purple violet from a rendered six-colour comparison on 2026-10-25; flat single accent, no violet gradient, no cyan second hue"
       }
     ]
   }
