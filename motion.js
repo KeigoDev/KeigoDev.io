@@ -14,8 +14,6 @@
 
   const q = (selector, root = document) => [...root.querySelectorAll(selector)];
   const ease = 'expo.out';
-  // On small screens content only slides in; it is never invisible while it waits.
-  const wide = window.matchMedia('(min-width: 960px)').matches;
 
   // One entrance: the parts rise in turn when their block arrives, once.
   function rise(trigger, targets, vars = {}) {
@@ -23,13 +21,15 @@
     if (!trigger || !list.length) {
       return;
     }
-    // Apple-style entrance on wide screens: rise out of a soft blur. Phones only slide, so text is never hidden there.
+    // Apple-style entrance on every screen: rise out of a soft blur.
     gsap.from(list, {
       y: 40,
       duration: 1.2,
       ease: 'power3.out',
       stagger: 0.08,
-      ...(wide && { opacity: 0, filter: 'blur(10px)', clearProps: 'filter' }),
+      opacity: 0,
+      filter: 'blur(10px)',
+      clearProps: 'filter',
       ...vars,
       scrollTrigger: { trigger, start: 'top 86%', once: true }
     });
@@ -40,7 +40,7 @@
       return;
     }
     gsap.from(target, {
-      clipPath: wide ? from : 'inset(6% 6% 6% 6%)',
+      clipPath: from,
       duration: 1.3,
       ease: 'expo.inOut',
       clearProps: 'clipPath',
@@ -162,7 +162,7 @@
 
     // If the motion layer arrives late (a slow connection) or the visitor has already moved,
     // the first screen stays as it is instead of replaying its entrance.
-    const intro = performance.now() < 1500 && window.scrollY < 80;
+    const intro = performance.now() < 3000 && window.scrollY < 80;
 
     const net = document.querySelector('.hero-net');
     if (net && intro) {
