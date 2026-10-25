@@ -23,12 +23,13 @@
     if (!trigger || !list.length) {
       return;
     }
-    // Entrances slide only: content is at full contrast from the start, even if the animation never runs.
+    // Apple-style entrance on wide screens: rise out of a soft blur. Phones only slide, so text is never hidden there.
     gsap.from(list, {
-      y: 28,
-      duration: 1,
-      ease,
+      y: 40,
+      duration: 1.2,
+      ease: 'power3.out',
       stagger: 0.08,
+      ...(wide && { opacity: 0, filter: 'blur(10px)', clearProps: 'filter' }),
       ...vars,
       scrollTrigger: { trigger, start: 'top 86%', once: true }
     });
@@ -44,6 +45,18 @@
       ease: 'expo.inOut',
       clearProps: 'clipPath',
       scrollTrigger: { trigger, start: 'top 86%', once: true }
+    });
+  }
+
+  // Apple-style zoom: large media grows to full size as it scrolls into view.
+  function grow(target) {
+    if (!target) {
+      return;
+    }
+    gsap.fromTo(target, { scale: 0.9 }, {
+      scale: 1,
+      ease: 'none',
+      scrollTrigger: { trigger: target, start: 'top bottom', end: 'top 40%', scrub: 0.6 }
     });
   }
 
@@ -189,6 +202,18 @@
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
       });
     }
+
+    // The words and portrait settle back and soften as the first screen leaves, like an Apple product page.
+    gsap.to('.hero-copy, .hero-portrait', {
+      scale: 0.94,
+      opacity: 0.35,
+      y: -40,
+      ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 }
+    });
+
+    ['.method-photo', '.clients-plate', '.exp-frame'].forEach(selector => grow(document.querySelector(selector)));
+    q('.deck .project-media').forEach(grow);
 
     /* First screen: the numbers count up once the intro has landed */
 
