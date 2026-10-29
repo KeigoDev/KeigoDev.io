@@ -463,7 +463,7 @@ mailForm.addEventListener('submit', async event => {
   const send = mailForm.querySelector('.mail-send');
   const data = new FormData(mailForm);
   data.append('access_key', WEB3FORMS_KEY);
-  data.append('subject', `Portfolio message from ${data.get('name')}`);
+  data.set('subject', `${data.get('subject')} (portfolio message from ${data.get('name')})`);
   data.append('from_name', 'Portfolio contact form');
 
   send.disabled = true;
