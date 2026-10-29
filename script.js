@@ -417,7 +417,10 @@ lightbox.addEventListener('click', event => {
   }
 });
 
-/* Contact: a pop-up form that sends straight to the inbox through FormSubmit (no email app needed) */
+/* Contact: a pop-up form that sends straight to the inbox through Web3Forms (no email app needed) */
+
+// Public by design: Web3Forms keys only allow sending to the owner's inbox.
+const WEB3FORMS_KEY = '63737e4c-ef08-4698-8331-9288dce1eff8';
 
 const mailDialog = $('#mailDialog');
 const mailForm = $('#mailForm');
@@ -458,10 +461,10 @@ mailDialog.addEventListener('click', event => {
 mailForm.addEventListener('submit', async event => {
   event.preventDefault();
   const send = mailForm.querySelector('.mail-send');
-  const data = Object.fromEntries(new FormData(mailForm));
-  data._subject = `Portfolio message from ${data.name}`;
-  data._template = 'table';
-  data._captcha = 'false';
+  const data = new FormData(mailForm);
+  data.append('access_key', WEB3FORMS_KEY);
+  data.append('subject', `Portfolio message from ${data.get('name')}`);
+  data.append('from_name', 'Portfolio contact form');
 
   send.disabled = true;
   send.classList.add('is-sending');
@@ -469,13 +472,14 @@ mailForm.addEventListener('submit', async event => {
   mailStatus.textContent = '';
 
   try {
-    const response = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+    const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(data)
+      // Plain form data skips the browser's CORS preflight, which Web3Forms' firewall can block.
+      headers: { Accept: 'application/json' },
+      body: data
     });
     const result = await response.json();
-    if (!response.ok || String(result.success) !== 'true') {
+    if (!response.ok || !result.success) {
       throw new Error(result.message || 'Send failed');
     }
     mailForm.reset();
