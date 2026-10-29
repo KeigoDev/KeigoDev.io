@@ -1967,6 +1967,150 @@ a, button, summary, input {
   font-weight: 700;
 }
 
+/* Message pop-up */
+
+.mail-dialog {
+  width: min(32rem, calc(100vw - 32px));
+  max-height: 94dvh;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.mail-dialog::backdrop {
+  background: rgba(0, 0, 0, .8);
+}
+
+.mail-form {
+  display: grid;
+  gap: 8px;
+  padding: 56px 24px 24px;
+}
+
+.mail-title {
+  margin-bottom: 12px;
+  font-size: var(--step-lead);
+}
+
+.mail-form .field-label {
+  margin: 8px 0 0;
+}
+
+.mail-form input,
+.mail-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--step-body);
+}
+
+.mail-form textarea {
+  resize: vertical;
+}
+
+.mail-form input:focus,
+.mail-form textarea:focus {
+  outline: 2px solid var(--accent-text);
+  outline-offset: -2px;
+}
+
+.mail-send {
+  margin-top: 12px;
+}
+
+.mail-send:disabled {
+  opacity: .6;
+}
+
+.mail-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: mail-spin .7s linear infinite;
+}
+
+.mail-send.is-sending .mail-spinner {
+  display: inline-block;
+}
+
+@keyframes mail-spin {
+  to { rotate: 360deg; }
+}
+
+.mail-done {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 48px 24px 32px;
+  text-align: center;
+}
+
+.mail-form[hidden],
+.mail-done[hidden] {
+  display: none;
+}
+
+.mail-done p {
+  color: var(--muted);
+}
+
+.mail-done .btn {
+  margin-top: 12px;
+}
+
+.mail-check {
+  width: 64px;
+  height: 64px;
+  fill: none;
+  stroke: var(--accent-text);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mail-check circle {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: mail-draw .6s var(--ease) forwards;
+}
+
+.mail-check path {
+  stroke-dasharray: 36;
+  stroke-dashoffset: 36;
+  animation: mail-draw .35s var(--ease) .5s forwards;
+}
+
+@keyframes mail-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mail-check circle,
+  .mail-check path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+.mail-status {
+  min-height: 1.5em;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.mail-honey {
+  position: absolute;
+  left: -9999px;
+}
+
 body:has(dialog[open]) {
   overflow: hidden;
 }

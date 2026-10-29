@@ -417,15 +417,80 @@ lightbox.addEventListener('click', event => {
   }
 });
 
-/* Contact: the one field writes the email for the visitor */
+/* Contact: a pop-up form that sends straight to the inbox through FormSubmit (no email app needed) */
+
+const mailDialog = $('#mailDialog');
+const mailForm = $('#mailForm');
+const mailStatus = $('#mailStatus');
+
+function openMail(message = '') {
+  if (message) {
+    $('#mailMessage').value = message;
+  }
+  mailStatus.textContent = '';
+  mailForm.hidden = false;
+  $('#mailDone').hidden = true;
+  mailDialog.showModal();
+  $('#mailName').focus();
+}
+
+$$('.mail-open').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    openMail();
+  });
+});
 
 $('#contactForm').addEventListener('submit', event => {
   event.preventDefault();
-  const message = $('#contactMessage').value.trim();
-  const subject = encodeURIComponent('Hello from your portfolio');
-  const body = encodeURIComponent(message ? `${message}\n\n` : '');
-  window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-  $('#copyStatus').textContent = 'Opening your email app. If nothing opens, use the address below.';
+  openMail($('#contactMessage').value.trim());
+});
+
+$('#mailClose').addEventListener('click', () => mailDialog.close());
+$('#mailDoneClose').addEventListener('click', () => mailDialog.close());
+
+mailDialog.addEventListener('click', event => {
+  if (event.target === mailDialog) {
+    mailDialog.close();
+  }
+});
+
+mailForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  const send = mailForm.querySelector('.mail-send');
+  const data = Object.fromEntries(new FormData(mailForm));
+  data._subject = `Portfolio message from ${data.name}`;
+  data._template = 'table';
+  data._captcha = 'false';
+
+  send.disabled = true;
+  send.classList.add('is-sending');
+  send.querySelector('.mail-send-label').textContent = 'Sending…';
+  mailStatus.textContent = '';
+
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (!response.ok || String(result.success) !== 'true') {
+      throw new Error(result.message || 'Send failed');
+    }
+    mailForm.reset();
+    $('#contactMessage').value = '';
+    mailForm.hidden = true;
+    $('#mailDone').hidden = false;
+    $('#mailDoneTitle').focus();
+  } catch {
+    // Keep what they typed so nothing is lost.
+    mailStatus.textContent = `That did not send. Please try again, or email ${EMAIL} directly.`;
+  } finally {
+    send.disabled = false;
+    send.classList.remove('is-sending');
+    send.querySelector('.mail-send-label').textContent = 'Send message';
+  }
 });
 
 $('#copyEmail').addEventListener('click', async () => {
