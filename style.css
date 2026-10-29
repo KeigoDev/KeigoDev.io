@@ -348,11 +348,6 @@ a, button, summary, input {
   border-radius: var(--radius);
 }
 
-/* Sits 10px inside the rounded field, so a smaller corner keeps the curves parallel. */
-.field-send {
-  border-radius: 6px;
-}
-
 /* Navigation */
 
 .site-nav {
@@ -1751,65 +1746,24 @@ a, button, summary, input {
   max-width: 44rem;
 }
 
-.contact-field {
-  position: relative;
-  margin-top: 40px;
+.contact-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
 }
 
-.field-label {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--dim);
-  font-family: var(--mono);
-  font-size: var(--step-small);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.contact-field input {
-  width: 100%;
-  height: 64px;
-  padding: 0 72px 0 20px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: var(--surface);
+.contact-cta .btn {
+  min-height: 56px;
+  padding-inline: 32px;
   font-size: var(--step-body);
 }
 
-.contact-field input::placeholder {
-  color: var(--dim);
+.contact-cta .btn span {
+  transition: translate .25s var(--ease);
 }
 
-.contact-field input:focus {
-  outline: 2px solid var(--accent-text);
-  outline-offset: -2px;
-}
-
-.field-send {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: var(--step-lead);
-  line-height: 1;
-  transition: background-color .25s var(--ease);
-}
-
-.field-send span {
-  display: inline-block;
-  transition: transform .25s var(--ease);
-}
-
-.field-send:hover {
-  background: var(--accent-hover);
-}
-
-.field-send:hover span {
-  transform: translateX(3px);
+.contact-cta .btn:hover span {
+  translate: 4px 0;
 }
 
 .promise {
