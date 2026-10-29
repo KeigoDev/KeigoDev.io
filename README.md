@@ -32,7 +32,8 @@ folder and run:
 
 Then visit http://localhost:8000. Press Ctrl+C to stop the server.
 Clipboard permissions vary by browser; the email-copy button provides a manual
-copy fallback. Say hello uses the visitor's configured email application.
+copy fallback. The message pop-up sends through FormSubmit (formsubmit.co) to the inbox;
+the first message ever sent triggers a one-time activation email that must be confirmed.
 
 ## Publish elsewhere
 
