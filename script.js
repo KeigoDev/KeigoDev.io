@@ -426,10 +426,7 @@ const mailDialog = $('#mailDialog');
 const mailForm = $('#mailForm');
 const mailStatus = $('#mailStatus');
 
-function openMail(message = '') {
-  if (message) {
-    $('#mailMessage').value = message;
-  }
+function openMail() {
   mailStatus.textContent = '';
   mailForm.hidden = false;
   $('#mailDone').hidden = true;
@@ -442,11 +439,6 @@ $$('.mail-open').forEach(link => {
     event.preventDefault();
     openMail();
   });
-});
-
-$('#contactForm').addEventListener('submit', event => {
-  event.preventDefault();
-  openMail($('#contactMessage').value.trim());
 });
 
 $('#mailClose').addEventListener('click', () => mailDialog.close());
@@ -483,7 +475,6 @@ mailForm.addEventListener('submit', async event => {
       throw new Error(result.message || 'Send failed');
     }
     mailForm.reset();
-    $('#contactMessage').value = '';
     mailForm.hidden = true;
     $('#mailDone').hidden = false;
     $('#mailDoneTitle').focus();
