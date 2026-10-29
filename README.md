@@ -32,8 +32,8 @@ folder and run:
 
 Then visit http://localhost:8000. Press Ctrl+C to stop the server.
 Clipboard permissions vary by browser; the email-copy button provides a manual
-copy fallback. The message pop-up sends through FormSubmit (formsubmit.co) to the inbox;
-the first message ever sent triggers a one-time activation email that must be confirmed.
+copy fallback. The message pop-up sends through Web3Forms (web3forms.com) to the inbox;
+its access key is WEB3FORMS_KEY at the top of the contact section in script.js.
 
 ## Publish elsewhere
 
