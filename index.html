@@ -82,8 +82,7 @@ document.documentElement.classList.add('js');
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-actions">
-      <a class="btn btn-outline nav-email mail-open" href="mailto:matthew.p.ferrer@gmail.com">Email me</a>
-      <a class="btn btn-accent nav-cta" href="#contact">Say hello</a>
+      <a class="btn btn-accent nav-cta mail-open" href="#contact">Say hello</a>
       <button id="navToggle" class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
     </div>
   </div>
@@ -759,7 +758,7 @@ document.documentElement.classList.add('js');
 <section class="contact" id="contact" aria-labelledby="contactHeading">
   <div class="wrap contact-inner">
     <h2 class="title title-center" id="contactHeading">Have a role or a project <em>in mind?</em></h2>
-    <p class="intro intro-center" id="contactIntro">Write a line below, add your name and email, and it comes straight to my inbox.</p>
+    <p class="intro intro-center" id="contactIntro">Write a line below, add a few details, and it comes straight to my inbox.</p>
       <form class="contact-field" id="contactForm" action="mailto:matthew.p.ferrer@gmail.com" method="get" enctype="text/plain">
         <label class="field-label" for="contactMessage">Your message</label>
         <input id="contactMessage" name="body" type="text" placeholder="A line about the role or project" autocomplete="off" aria-describedby="contactIntro" required>
@@ -822,22 +821,38 @@ document.documentElement.classList.add('js');
   <button class="lightbox-close" type="button" aria-label="Close photo viewer">Close</button>
 </dialog>
 <dialog class="mail-dialog" id="mailDialog" aria-labelledby="mailTitle" data-lenis-prevent>
+  <button class="mail-close" type="button" id="mailClose" aria-label="Close message form"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <form class="mail-form" id="mailForm">
-    <button class="lightbox-close" type="button" id="mailClose" aria-label="Close message form">Close</button>
-    <h2 class="mail-title" id="mailTitle">Send me a message</h2>
-    <label class="field-label" for="mailName">Your name</label>
-    <input id="mailName" name="name" type="text" autocomplete="name" maxlength="100" required>
-    <label class="field-label" for="mailEmail">Your email</label>
-    <input id="mailEmail" name="email" type="email" autocomplete="email" maxlength="200" required>
-    <label class="field-label" for="mailMessage">Message</label>
-    <textarea id="mailMessage" name="message" rows="5" maxlength="5000" required></textarea>
+    <header class="mail-head">
+      <p class="mail-eyebrow">Contact</p>
+      <h2 class="mail-title" id="mailTitle">Let’s <em>talk.</em></h2>
+      <p class="mail-sub">All fields are required. I reply within a day.</p>
+    </header>
+    <div class="mail-row">
+      <div class="mail-field">
+        <label class="mail-label" for="mailName">Your name</label>
+        <input id="mailName" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Juan Dela Cruz" required>
+      </div>
+      <div class="mail-field">
+        <label class="mail-label" for="mailEmail">Your email</label>
+        <input id="mailEmail" name="email" type="email" autocomplete="email" maxlength="200" placeholder="you@company.com" required>
+      </div>
+    </div>
+    <div class="mail-field">
+      <label class="mail-label" for="mailSubject">Subject</label>
+      <input id="mailSubject" name="subject" type="text" maxlength="150" placeholder="Data analyst role, project, question…" required>
+    </div>
+    <div class="mail-field">
+      <label class="mail-label" for="mailMessage">Message</label>
+      <textarea id="mailMessage" name="message" rows="5" maxlength="5000" placeholder="A few lines about what you have in mind" required></textarea>
+    </div>
     <input class="mail-honey" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <button class="btn btn-accent mail-send" type="submit"><span class="mail-spinner" aria-hidden="true"></span><span class="mail-send-label">Send message</span></button>
+    <button class="btn btn-accent mail-send" type="submit"><span class="mail-spinner" aria-hidden="true"></span><span class="mail-send-label">Send message</span><span class="mail-arrow" aria-hidden="true">→</span></button>
     <p class="mail-status" id="mailStatus" aria-live="polite"></p>
   </form>
   <div class="mail-done" id="mailDone" hidden>
     <svg class="mail-check" viewBox="0 0 52 52" aria-hidden="true" focusable="false"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-15"/></svg>
-    <h2 class="mail-title" id="mailDoneTitle" tabindex="-1">Message sent</h2>
+    <h2 class="mail-title" id="mailDoneTitle" tabindex="-1">Message <em>sent.</em></h2>
     <p>Thank you. It is in my inbox, and I will reply within a day.</p>
     <button class="btn btn-outline" type="button" id="mailDoneClose">Close</button>
   </div>

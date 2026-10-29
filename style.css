@@ -96,6 +96,9 @@
 }
 
 :root {
+  /* Shape: softly rounded controls */
+  --radius: 10px;
+
   /* Colour: near-black, warm greys, one violet */
   --bg: #0d0d0c;
   --surface: #151513;
@@ -296,6 +299,7 @@ a, button, summary, input {
 
 .btn {
   display: inline-flex;
+  border-radius: var(--radius);
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -332,6 +336,21 @@ a, button, summary, input {
 
 .btn-outline:hover {
   border-color: var(--ink);
+}
+
+/* Rounded controls: every button and the pop-up share one corner size */
+.nav-toggle,
+.site-tab,
+.slider-btn,
+.video-toggle,
+.copy-btn,
+.lightbox-close {
+  border-radius: var(--radius);
+}
+
+/* Sits 10px inside the rounded field, so a smaller corner keeps the curves parallel. */
+.field-send {
+  border-radius: 6px;
 }
 
 /* Navigation */
@@ -1752,7 +1771,7 @@ a, button, summary, input {
   height: 64px;
   padding: 0 72px 0 20px;
   border: 1px solid var(--line-strong);
-  border-radius: 0;
+  border-radius: var(--radius);
   background: var(--surface);
   font-size: var(--step-body);
 }
@@ -1970,61 +1989,191 @@ a, button, summary, input {
 /* Message pop-up */
 
 .mail-dialog {
-  width: min(32rem, calc(100vw - 32px));
-  max-height: 94dvh;
+  width: min(38rem, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
   padding: 0;
-  border: 1px solid var(--line);
-  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(124, 58, 237, .16), transparent 60%),
+    var(--surface);
   color: var(--ink);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
+  overscroll-behavior: contain;
+}
+
+.mail-dialog[open] {
+  animation: mail-in .45s var(--ease);
 }
 
 .mail-dialog::backdrop {
-  background: rgba(0, 0, 0, .8);
+  background: rgba(8, 8, 7, .72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.mail-dialog[open]::backdrop {
+  animation: mail-fade .45s var(--ease);
+}
+
+@keyframes mail-in {
+  from { opacity: 0; translate: 0 16px; scale: .97; }
+}
+
+@keyframes mail-fade {
+  from { opacity: 0; }
+}
+
+.mail-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: rgba(13, 13, 12, .6);
+  transition: border-color .25s var(--ease), rotate .35s var(--ease);
+}
+
+.mail-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.mail-close:hover {
+  border-color: var(--ink);
+  rotate: 90deg;
 }
 
 .mail-form {
   display: grid;
-  gap: 8px;
-  padding: 56px 24px 24px;
+  gap: 18px;
+  padding: clamp(28px, 5vw, 44px);
+}
+
+.mail-head {
+  padding-right: 40px;
+}
+
+.mail-eyebrow {
+  color: var(--accent-text);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .mail-title {
-  margin-bottom: 12px;
-  font-size: var(--step-lead);
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 1.8rem + 2vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
-.mail-form .field-label {
-  margin: 8px 0 0;
+.mail-title em {
+  color: var(--accent-text);
+  font-style: italic;
+}
+
+.mail-sub {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: var(--step-small);
+}
+
+.mail-row {
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 560px) {
+  .mail-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mail-field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mail-label {
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .mail-form input,
 .mail-form textarea {
   width: 100%;
-  padding: 12px 14px;
+  padding: 13px 15px;
   border: 1px solid var(--line-strong);
-  border-radius: 0;
-  background: var(--surface);
+  border-radius: var(--radius);
+  background: rgba(13, 13, 12, .55);
   color: var(--ink);
   font: inherit;
-  font-size: var(--step-body);
+  font-size: 1rem;
+  transition: border-color .2s var(--ease), background-color .2s var(--ease), box-shadow .2s var(--ease);
 }
 
-.mail-form textarea {
-  resize: vertical;
+.mail-form input::placeholder,
+.mail-form textarea::placeholder {
+  color: var(--dim);
+  opacity: .7;
+}
+
+.mail-form input:hover,
+.mail-form textarea:hover {
+  border-color: #4a4945;
 }
 
 .mail-form input:focus,
 .mail-form textarea:focus {
-  outline: 2px solid var(--accent-text);
-  outline-offset: -2px;
+  border-color: var(--accent-text);
+  background: var(--bg);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(199, 169, 255, .18);
+}
+
+.mail-form textarea {
+  min-height: 132px;
+  resize: vertical;
 }
 
 .mail-send {
-  margin-top: 12px;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 4px;
+}
+
+.mail-arrow {
+  transition: translate .25s var(--ease);
+}
+
+.mail-send:hover .mail-arrow {
+  translate: 4px 0;
+}
+
+.mail-send.is-sending .mail-arrow {
+  display: none;
 }
 
 .mail-send:disabled {
-  opacity: .6;
+  opacity: .7;
+  cursor: progress;
 }
 
 .mail-spinner {
@@ -2049,7 +2198,7 @@ a, button, summary, input {
   display: grid;
   justify-items: center;
   gap: 12px;
-  padding: 48px 24px 32px;
+  padding: clamp(40px, 7vw, 64px) clamp(24px, 5vw, 44px);
   text-align: center;
 }
 
@@ -2098,12 +2247,25 @@ a, button, summary, input {
     animation: none;
     stroke-dashoffset: 0;
   }
+
+  .mail-dialog[open],
+  .mail-dialog[open]::backdrop {
+    animation: none;
+  }
+
+  .mail-close:hover {
+    rotate: none;
+  }
 }
 
 .mail-status {
-  min-height: 1.5em;
   color: var(--muted);
   font-size: var(--step-small);
+  text-align: center;
+}
+
+.mail-status:empty {
+  display: none;
 }
 
 .mail-honey {
@@ -2179,10 +2341,6 @@ html.lenis,
     padding: 14px 0;
     color: var(--ink);
     font-size: var(--step-lead);
-  }
-
-  .nav-email {
-    display: none;
   }
 
   .nav-toggle {
