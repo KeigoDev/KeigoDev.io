@@ -204,6 +204,10 @@ function arrive(target) {
   };
 
   if (target.matches('.card')) {
+    // A card in the sideways slider may sit off to the side: bring it into view.
+    if (target.matches('.mini')) {
+      slider.scrollTo({ left: target.offsetLeft - slider.firstElementChild.offsetLeft, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    }
     restart(target);
   } else {
     const label = target.querySelector('.label');

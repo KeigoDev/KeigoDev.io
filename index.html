@@ -101,7 +101,7 @@ document.documentElement.classList.add('js');
       <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></p>
       <dl class="hero-stats">
         <div><dt>30–40%</dt><dd>Less manual reporting at Citi</dd></div>
-        <div><dt>10</dt><dd>Data projects you can open</dd></div>
+        <div><dt>11</dt><dd>Data projects you can open</dd></div>
         <div><dt>5</dt><dd>Professional certifications</dd></div>
         <div><dt>26</dt><dd>Tools across the stack</dd></div>
       </dl>
@@ -181,8 +181,8 @@ document.documentElement.classList.add('js');
         </li>
         <li class="card-box">
           <h3>Check the data first</h3>
-          <p>I clean and validate before I chart anything: 1,464 Amazon products cleaned in MySQL, and supplier master data checked with SQL at Citi.</p>
-          <a class="card-link" href="#experience">See my Citi work <span aria-hidden="true">→</span></a>
+          <p>I clean and validate before I chart anything: 6.3 million transactions checked in SQL for my AML project, with every removed row logged, and supplier master data checked with SQL at Citi.</p>
+          <a class="card-link" href="#p-aml">See the AML project <span aria-hidden="true">→</span></a>
         </li>
         <li class="card-box">
           <h3>Build the view people use</h3>
@@ -204,12 +204,40 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <p class="label">Selected work</p>
     <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
-    <p class="intro">Six featured projects, then four more. Each card shows the dashboard, the result and how I built it.</p>
+    <p class="intro">Four featured projects, then seven more. Each card shows the dashboard, the result and how I built it.</p>
     <div class="deck">
+        <article class="project card" id="p-aml" data-tags="sql python tableau">
+          <figure class="project-media">
+            <img src="assets/work/aml-monitoring.jpg" srcset="assets/work/aml-monitoring-480w.jpg 480w, assets/work/aml-monitoring-800w.jpg 800w, assets/work/aml-monitoring.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="AML monitoring summary: 8,197 fraud cases worth 12.06 billion, the old flag catches 0.2% of them and the new risk score 99.5%, with recall and precision for each of six rules" width="1440" height="900" loading="lazy">
+            <figcaption class="media-note">Latest project. Summary drawn from the project’s SQL output; the Tableau workbook is in the repository.</figcaption>
+          </figure>
+          <div class="card-body">
+            <h3>AML transaction monitoring in SQL</h3>
+            <p class="project-field">Financial crime · SQL, Tableau</p>
+            <p class="project-result">Fraud caught from 0.2% to 99.5%</p>
+            <p class="project-desc">Six explainable fraud rules in SQL on 6.3 million PaySim mobile-money transactions. The operator’s own flag caught 16 of 8,197 fraud cases; the combined risk score catches 8,154.</p>
+            <p class="project-tools">SQL · SQLite · MySQL · Python · Tableau</p>
+            <p class="project-links">
+              <a href="https://github.com/KeigoDev/SQL-Driven-AML-Transaction-Monitoring" target="_blank" rel="noopener">Repository <span aria-hidden="true">↗</span></a>
+              <a href="https://www.kaggle.com/datasets/ealaxi/paysim1" target="_blank" rel="noopener">Dataset <span aria-hidden="true">↗</span></a>
+            </p>
+            <details class="project-more">
+              <summary>How I did it</summary>
+              <ul>
+                <li>Loaded the 470 MB CSV into SQLite with Python in 500,000-row chunks, keeping each row’s line number so any alert traces back to the file.</li>
+                <li>Cleaned it in SQL: every removed row is logged with its reason, and a check confirms raw = clean + removed. Balance mismatches are kept as a signal, not deleted.</li>
+                <li>Wrote six weighted rules, from account drain and transfer-then-cash-out to mule fan-in. None of them uses the fraud label, and every alert shows which rules it hit.</li>
+                <li>Measured precision and recall for the old flag, each rule and the combined score. Transfer-then-cash-out alone catches 99.5% of fraud at 90% precision.</li>
+                <li>Built a Tableau workbook on the SQL output: KPI tiles, fraud by day and hour, recall by rule, a data quality panel and the alert queue. The same SQL also runs on MySQL 8.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
         <article class="project card" id="p-food" data-tags="powerbi python">
           <figure class="project-media">
             <img src="assets/work/food-affordability.jpg" srcset="assets/work/food-affordability-480w.jpg 480w, assets/work/food-affordability-800w.jpg 800w, assets/work/food-affordability.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="Interactive dashboard, The 2026 rice shock in the Philippines: GDP growth down to 2.3%, ₱62.62 per US dollar, headline inflation at 7.2% against the 2–4% target" width="1440" height="1013" loading="lazy">
-            <figcaption class="media-note">Latest project. The web version of the Power BI report, with the same pages, measures and slicers.</figcaption>
+            <figcaption class="media-note">The web version of the Power BI report, with the same pages, measures and slicers.</figcaption>
           </figure>
           <div class="card-body">
             <h3>Food affordability in the Philippines, 2026</h3>
@@ -290,8 +318,18 @@ document.documentElement.classList.add('js');
             </details>
           </div>
         </article>
+    </div>
 
-        <article class="project card" id="p-cocacola" data-tags="powerbi excel">
+    <div class="more-work" aria-labelledby="moreHeading">
+      <div class="more-head">
+        <h3 class="more-title" id="moreHeading">More work</h3>
+        <div class="slider-controls">
+          <button class="slider-btn" type="button" data-dir="-1" aria-label="Previous projects"><span aria-hidden="true">←</span></button>
+          <button class="slider-btn" type="button" data-dir="1" aria-label="Next projects"><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="slider" tabindex="0" role="region" aria-label="More work: scroll sideways or use the arrow buttons">
+        <article class="project card mini" id="p-cocacola" data-tags="powerbi excel">
           <figure class="project-media">
             <img src="assets/work/pbi-cocacola.jpg" srcset="assets/work/pbi-cocacola-480w.jpg 480w, assets/work/pbi-cocacola-800w.jpg 800w, assets/work/pbi-cocacola.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="Coca-Cola USA retail dashboard: total sales $12M, units sold, average price, operating profit, sales by brand and retailer, and profit margin by quarter" width="1440" height="810" loading="lazy">
             <figcaption class="media-note">Preview rebuilt from the report’s layout and dataset. Download the PBIX to open the original in Power BI.</figcaption>
@@ -316,7 +354,7 @@ document.documentElement.classList.add('js');
           </div>
         </article>
 
-        <article class="project card" id="p-ngram" data-tags="python nlp">
+        <article class="project card mini" id="p-ngram" data-tags="python nlp">
           <figure class="project-media">
             <img src="assets/work/ngram-perplexity.jpg" srcset="assets/work/ngram-perplexity-480w.jpg 480w, assets/work/ngram-perplexity.jpg 705w" sizes="(max-width: 899px) 100vw, 56vw" alt="Bar chart of perplexity by model: unigram 849, bigram 328, trigram with add-k 1,328, interpolated trigram 227" width="705" height="470" loading="lazy">
           </figure>
@@ -340,7 +378,7 @@ document.documentElement.classList.add('js');
           </div>
         </article>
 
-        <article class="project card" id="p-capstone" data-tags="sql">
+        <article class="project card mini" id="p-capstone" data-tags="sql">
           <figure class="project-media">
             <img src="assets/work/be3-testing.jpg" srcset="assets/work/be3-testing-480w.jpg 480w, assets/work/be3-testing-800w.jpg 800w, assets/work/be3-testing.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="BE3 system dashboard: total sales, inventory purchases and receivables, a monthly sales chart, low-stock alerts and pending requests" width="1440" height="813" loading="lazy">
             <div class="project-thumbs">
@@ -365,17 +403,7 @@ document.documentElement.classList.add('js');
             </details>
           </div>
         </article>
-    </div>
 
-    <div class="more-work" aria-labelledby="moreHeading">
-      <div class="more-head">
-        <h3 class="more-title" id="moreHeading">More work</h3>
-        <div class="slider-controls">
-          <button class="slider-btn" type="button" data-dir="-1" aria-label="Previous projects"><span aria-hidden="true">←</span></button>
-          <button class="slider-btn" type="button" data-dir="1" aria-label="Next projects"><span aria-hidden="true">→</span></button>
-        </div>
-      </div>
-      <div class="slider" tabindex="0" role="region" aria-label="More work: scroll sideways or use the arrow buttons">
         <article class="project card mini" id="p-deposits" data-tags="python">
           <figure class="project-media">
             <img src="assets/work/chase-deposits-by-state.jpg" srcset="assets/work/chase-deposits-by-state-480w.jpg 480w, assets/work/chase-deposits-by-state-800w.jpg 800w, assets/work/chase-deposits-by-state.jpg 1190w" sizes="(max-width: 899px) 100vw, 56vw" alt="Bar chart of total deposits by state, led by Ohio, New York and Texas" width="1190" height="590" loading="lazy">
@@ -786,12 +814,10 @@ document.documentElement.classList.add('js');
     </div>
     <nav class="foot-col" aria-label="Featured work">
       <p class="label">Featured work</p>
+      <a href="#p-aml">AML transaction monitoring</a>
       <a href="#p-food">Food affordability PH</a>
       <a href="#p-airways">British Airways reviews</a>
       <a href="#p-amazon">Amazon product insights</a>
-      <a href="#p-cocacola">Coca-Cola retail sales</a>
-      <a href="#p-ngram">Language modelling</a>
-      <a href="#p-capstone">Project monitoring system</a>
     </nav>
     <nav class="foot-col" aria-label="Websites I run">
       <p class="label">Websites I run</p>
