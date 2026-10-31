@@ -804,7 +804,7 @@ a, button, summary, input {
 }
 
 /* The n-gram chart has its axis labels at the edges, so it is shown whole. */
-.deck #p-ngram .project-media > img {
+#p-ngram .project-media > img {
   object-fit: contain;
 }
 
