@@ -1,14 +1,15 @@
 # Matthew Ferrer — Portfolio resources
 
 Complete portable website, exported September 24, 2026.
+Astor Realty Enterprise (AI Operations Lead): September 2026–now.
 Citi experience: October 2025–October 2026.
 
 ## Included
 
 - index.html — complete portfolio content
 - style.css — design tokens, responsive layout and states
-- script.js — navigation, the project card slider, website tabs, the photo that changes
-  beside each section, photo viewer, contact field and email copy
+- script.js — navigation, the project card slider, website tabs, the employer logo that
+  follows the job being read, photo viewer, contact field and email copy
 - motion.js — entrances and scroll motion (GSAP, ScrollTrigger, Lenis)
 - favicon.svg
 - assets/web/ — compressed photos the page uses (originals stay in assets/)
@@ -66,5 +67,5 @@ If those files are missing, or a visitor has reduced motion turned on, the page 
 The logo is assets/brand/logo-mark.svg (also favicon.svg); the link preview image is assets/brand/og-image.jpg.
 
 Power BI files are downloads, not embedded browser dashboards. They require
-compatible Power BI software to inspect. The large WHO CSV downloads only when
-requested; it is not loaded by the page automatically.
+compatible Power BI software to inspect. The WHO CSV stays in assets/ but is not linked from the page;
+the WHO card links to the WHO data source instead.

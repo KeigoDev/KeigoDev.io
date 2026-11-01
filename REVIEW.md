@@ -1,6 +1,22 @@
 # Portfolio review — November 1, 2026
 
-## Opening robot, click motion, employer logos, new mark (latest)
+## Wording pass and agentic AI at Citi (latest)
+
+- Citi: agentic AI automations added as confirmed by the owner (agent-run report refresh, AI data-quality checks,
+  AI-drafted executive commentary reviewed before sending), part of the existing 30–40% cut in manual reporting.
+- Positioning: title, meta and link-preview text, structured data, hero label, portrait caption, footer and FAQ now
+  include the AI Operations Lead role; hero line names Astor as current; Astor summary says AI and digital operations.
+- Proofreading by three parallel reviewers (top to Work, Websites to footer, cross-page consistency) and a final
+  independent pass on the diff: 70+ edits for grammar, run-ons, vague lines, repeated text, a straight apostrophe,
+  alt text, PivotTables/pandas, date format, the capstone tools line, the FAQ claim that every project links out, and
+  a "See the result" link that pointed to the wrong section. README and sitemap date brought up to date.
+- Checks: JSON-LD parses, title 61 and description 146 characters, tags balanced, counts unchanged (11 projects,
+  26 tools); no overflow on 14 screens in Chrome and WebKit; click-through passes in both.
+- Open questions for the owner: where Snowflake was used; the one-month Astor/Citi overlap; whether Astor's own
+  site counts as a "client website"; a verify link for the AWS certificate; British Airways ratings by country or
+  continent.
+
+## Opening robot, click motion, employer logos, new mark
 
 - Opening screen: a small robot (inline SVG, site colours) pops in, waves with a "Hi!" bubble, blinks and sends
   signal rings, over "Hi, I'm Matthew." and a loading line; after about 2 s it lifts like a curtain and the hero
