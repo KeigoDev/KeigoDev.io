@@ -497,13 +497,15 @@ a, button, summary, input {
 
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* min-content: a figure like 30–40% never breaks; its column takes the room it needs. */
+  grid-template-columns: repeat(4, minmax(min-content, 1fr));
   gap: 24px;
   margin-top: 56px;
 }
 
 .hero-stats dt {
   font-size: var(--step-title);
+  white-space: nowrap;
   font-weight: 700;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -1129,7 +1131,7 @@ a, button, summary, input {
   color: var(--ink);
   font-size: var(--step-lead);
   line-height: 1;
-  transition: background-color .25s var(--ease), border-color .25s var(--ease), opacity .25s var(--ease);
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), opacity .25s var(--ease), scale .2s var(--ease);
 }
 
 .slider-btn:hover {
@@ -1267,7 +1269,7 @@ a, button, summary, input {
   color: var(--muted);
   font-size: var(--step-small);
   font-weight: 700;
-  transition: color .25s var(--ease), border-color .25s var(--ease);
+  transition: color .25s var(--ease), border-color .25s var(--ease), scale .2s var(--ease);
 }
 
 .site-tab:hover {
@@ -1324,7 +1326,7 @@ a, button, summary, input {
   font-size: var(--step-small);
   font-weight: 700;
   text-decoration: none;
-  transition: background-color .25s var(--ease), border-color .25s var(--ease);
+  transition: background-color .25s var(--ease), border-color .25s var(--ease), scale .2s var(--ease);
 }
 
 .cell-ink {
@@ -1357,51 +1359,32 @@ a, button, summary, input {
 
 .exp-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1;
   max-height: calc(100svh - 220px);
   margin-inline: auto;
   overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--surface);
 }
 
+/* Each employer's logo, centred at a width that gives them equal weight (set per logo in the page).
+   The next logo sharpens into place as the last one softens away. */
 .exp-shot {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 0 0;
+  width: var(--w, 60%);
+  height: auto;
+  max-height: 72%;
+  margin: auto;
+  object-fit: contain;
   opacity: 0;
-  transition: opacity .6s var(--ease);
-}
-
-.exp-shot[data-job="1"] {
-  object-position: 50% 35%;
+  scale: .92;
+  filter: blur(6px);
+  transition: opacity .6s var(--ease), scale .9s var(--ease), filter .6s var(--ease);
 }
 
 .exp-shot.is-on {
   opacity: 1;
-}
-
-.exp-type {
-  display: grid;
-  place-content: center;
-  gap: 8px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: var(--step-small);
-  letter-spacing: 0.12em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.exp-type span {
-  color: var(--accent-text);
-  font-family: var(--serif);
-  font-size: var(--step-hero);
-  letter-spacing: 0;
-  text-transform: none;
+  scale: 1;
+  filter: none;
 }
 
 .exp-notes {
@@ -1990,7 +1973,7 @@ a, button, summary, input {
   border: 1px solid var(--line-strong);
   border-radius: 50%;
   background: rgba(13, 13, 12, .6);
-  transition: border-color .25s var(--ease), rotate .35s var(--ease);
+  transition: border-color .25s var(--ease), rotate .35s var(--ease), scale .2s var(--ease);
 }
 
 .mail-close svg {
@@ -2497,6 +2480,72 @@ html.lenis,
   100% { opacity: 0; }
 }
 
+/* Press: every control gives a little under the finger and springs back on release.
+   `scale` composes with GSAP's transforms. !important because GSAP leaves an inline
+   `scale: none` on the elements it brought in (tabs, photos). */
+.nav-toggle,
+.copy-btn,
+.video-toggle,
+.lightbox-close,
+.photo-open {
+  transition: scale .2s var(--ease);
+}
+
+:is(.nav-toggle, .copy-btn, .video-toggle, .lightbox-close, .mail-close, .photo-open, .site-tab, .slider-btn, .cell):active:not(:disabled) {
+  scale: .96 !important;
+}
+
+/* Click: a violet ping spreads from the point pressed, like a signal on the hero network.
+   Made by motion.js, so it never appears with reduced motion. */
+.ping {
+  --ping: 44px;
+  position: fixed;
+  z-index: 70;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+dialog .ping {
+  position: absolute;
+}
+
+.ping.is-control {
+  --ping: 76px;
+}
+
+.ping::before,
+.ping::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--ping) / -2);
+  border: 1px solid var(--accent-text);
+  border-radius: 50%;
+  /* A deeper violet halo keeps the ring visible over white screenshots. */
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, .45);
+}
+
+/* A soft flash with a sharp edge, then a fainter echo that travels further. */
+.ping::before {
+  background: radial-gradient(circle, rgba(199, 169, 255, .28), rgba(199, 169, 255, 0) 70%);
+  animation: ping .55s var(--ease) both;
+}
+
+.ping::after {
+  opacity: 0;
+  animation: ping-echo .8s var(--ease) .08s both;
+}
+
+@keyframes ping {
+  from { transform: scale(.15); opacity: 1; }
+  to { transform: scale(1); opacity: 0; }
+}
+
+@keyframes ping-echo {
+  from { transform: scale(.3); opacity: .7; }
+  to { transform: scale(1.45); opacity: 0; }
+}
+
 /* Apple-style hover: cards lift gently. Uses `translate`, so it never fights GSAP's transforms. */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .card-box,
@@ -2532,5 +2581,231 @@ html.lenis,
 
   .title.is-arriving {
     animation: none !important;
+  }
+}
+
+/* Opening screen: a small robot waves hello, then the page lifts into view like a curtain.
+   Shown once per visit by the script in the page head; hidden with reduced motion. */
+
+.opening {
+  display: none;
+}
+
+.is-opening .opening {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  clip-path: inset(0 0 0 0);
+  transition: clip-path .8s cubic-bezier(.76, 0, .24, 1) .1s;
+}
+
+.is-opened .opening {
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+}
+
+.opening-inner {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding-inline: 16px;
+  text-align: center;
+  transition: opacity .35s var(--ease), transform .5s var(--ease), filter .35s var(--ease);
+}
+
+.is-opened .opening-inner {
+  opacity: 0;
+  transform: translateY(-28px);
+  filter: blur(6px);
+}
+
+.opening-line {
+  margin-top: 6px;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
+  line-height: 1.05;
+  animation: opening-rise .8s var(--ease) .25s both;
+}
+
+.opening-line em {
+  color: var(--accent-text);
+}
+
+.opening-status {
+  color: var(--dim);
+  font-family: var(--mono);
+  font-size: .8125rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  animation: opening-rise .8s var(--ease) .4s both;
+}
+
+.opening-bar {
+  position: relative;
+  width: 140px;
+  height: 1px;
+  overflow: hidden;
+  background: var(--line-strong);
+}
+
+.opening-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-text);
+  transform-origin: 0 50%;
+  animation: opening-fill 2s cubic-bezier(.45, 0, .2, 1) .1s both;
+}
+
+/* The robot, drawn in the site's colours */
+.bot {
+  width: clamp(124px, 20vw, 168px);
+  height: auto;
+  overflow: visible;
+  animation: bot-in .8s var(--ease) both;
+}
+
+.bot-shell { fill: var(--ink); }
+.bot-trim { fill: var(--muted); }
+.bot-visor { fill: var(--surface); }
+.bot-eyes,
+.bot-tip { fill: var(--accent-text); }
+.bot-core { fill: var(--accent); }
+.bot-shadow { fill: rgba(124, 58, 237, .25); }
+
+.bot-stem,
+.bot-smile,
+.bot-signal path,
+.bot-ring {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.bot-stem { stroke: var(--ink); stroke-width: 3; }
+.bot-smile { stroke: var(--accent-text); stroke-width: 3; }
+.bot-signal path { stroke: var(--accent-text); stroke-width: 2; }
+.bot-ring { stroke: var(--accent-text); stroke-width: 1.5; }
+
+.bot-bubble rect,
+.bot-bubble path { fill: var(--accent); }
+
+.bot-bubble text {
+  fill: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+/* Gentle hover, with its shadow breathing underneath */
+.bot-float {
+  animation: bot-float 2.4s ease-in-out .8s infinite;
+}
+
+.bot-shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bot-shadow 2.4s ease-in-out .8s infinite;
+}
+
+/* The wave: three swings from the shoulder */
+.bot-arm {
+  transform-box: view-box;
+  transform-origin: 128px 124px;
+  animation: bot-wave .5s ease-in-out .5s 3 both;
+}
+
+.bot-bubble {
+  transform-box: fill-box;
+  transform-origin: 0 100%;
+  animation: bot-bubble .5s var(--ease) .6s both;
+}
+
+.bot-eyes rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bot-blink 1.3s .3s 2;
+}
+
+/* Agent signal: rings rise from the antenna, the core light breathes */
+.bot-signal path {
+  transform-box: view-box;
+  transform-origin: 100px 17px;
+  animation: bot-signal 1.3s var(--ease) infinite both;
+}
+
+.bot-signal path + path {
+  animation-delay: .3s;
+}
+
+.bot-tip {
+  animation: bot-pulse 1.3s ease-in-out infinite;
+}
+
+.bot-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bot-ring 1.6s var(--ease) .4s infinite both;
+}
+
+@keyframes bot-in {
+  from { opacity: 0; transform: translateY(20px) scale(.86); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes bot-float {
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes bot-shadow {
+  50% { transform: scaleX(.8); opacity: .55; }
+}
+
+@keyframes bot-wave {
+  0%, 100% { transform: rotate(26deg); }
+  50% { transform: rotate(50deg); }
+}
+
+@keyframes bot-bubble {
+  from { opacity: 0; transform: scale(.4); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes bot-blink {
+  0%, 52%, 60%, 100% { transform: scaleY(1); }
+  56% { transform: scaleY(.1); }
+}
+
+@keyframes bot-signal {
+  0% { opacity: 0; transform: scale(.6); }
+  40% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.15); }
+}
+
+@keyframes bot-pulse {
+  50% { opacity: .5; }
+}
+
+@keyframes bot-ring {
+  from { opacity: .7; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+@keyframes opening-rise {
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes opening-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .opening {
+    display: none !important;
   }
 }

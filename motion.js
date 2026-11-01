@@ -71,6 +71,11 @@
     if (window.Lenis) {
       lenis = new Lenis({ duration: 1.15, smoothWheel: true });
       lenis.on('scroll', ScrollTrigger.update);
+      // No scrolling under the opening screen; it ends on the visitor's first scroll anyway.
+      if (document.documentElement.classList.contains('is-opening') && !document.documentElement.classList.contains('is-opened')) {
+        lenis.stop();
+        window.addEventListener('opening:end', () => lenis.start(), { once: true });
+      }
 
       // If something else moved the page (find-in-page, a restored position, a script),
       // re-sync Lenis before it handles the next wheel, so it never snaps back.
@@ -158,16 +163,42 @@
       }).observe(lightbox, { attributes: true, attributeFilter: ['open'] });
     }
 
-    /* First screen: the network draws itself, then the words and the portrait arrive */
+    /* Click: a ping spreads from the point pressed (styles in style.css). Larger on links and buttons. */
+
+    const ping = event => {
+      // Keyboard activation has no point to spread from; typing into a field needs no ping.
+      if (event.detail === 0 || event.target.closest('input, textarea, select')) {
+        return;
+      }
+      // An open dialog sits above the page, so its pings go inside it. A click on its backdrop
+      // (the dialog itself) or one that closed it pings the page instead.
+      const dialog = event.target.closest('dialog');
+      const host = dialog?.open && dialog !== event.target ? dialog : document.body;
+      const box = host === document.body ? { left: 0, top: 0 } : host.getBoundingClientRect();
+      const mark = document.createElement('span');
+      mark.className = 'ping';
+      mark.setAttribute('aria-hidden', 'true');
+      mark.classList.toggle('is-control', Boolean(event.target.closest('a, button, summary, [role="tab"], label')));
+      mark.style.left = `${event.clientX - box.left - host.clientLeft + host.scrollLeft}px`;
+      mark.style.top = `${event.clientY - box.top - host.clientTop + host.scrollTop}px`;
+      host.append(mark);
+      setTimeout(() => mark.remove(), 1000);
+    };
+    document.addEventListener('click', ping);
 
     // If the motion layer arrives late (a slow connection) or the visitor has already moved,
     // the first screen stays as it is instead of replaying its entrance.
-    const intro = performance.now() < 3000 && window.scrollY < 80;
+    // While the opening screen (the waving robot) is up, the entrance waits and plays as it lifts.
+    const opening = document.documentElement.classList.contains('is-opening') && !document.documentElement.classList.contains('is-opened');
+    const intro = opening || (performance.now() < 3000 && window.scrollY < 80);
+    const whenOpen = play => (opening ? window.addEventListener('opening:end', play, { once: true }) : play());
 
     const net = document.querySelector('.hero-net');
     if (net && intro) {
-      gsap.from(net.querySelectorAll('line'), { opacity: 0, duration: 1.6, stagger: 0.015, ease: 'power2.out' });
-      gsap.from(net.querySelectorAll('circle'), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, stagger: 0.02, ease: 'back.out(2)' });
+      whenOpen(() => {
+        gsap.from(net.querySelectorAll('line'), { opacity: 0, duration: 1.6, stagger: 0.015, ease: 'power2.out' });
+        gsap.from(net.querySelectorAll('circle'), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, stagger: 0.02, ease: 'back.out(2)' });
+      });
     }
     if (net) {
       // The points drift a little, forever, like live data.
@@ -183,7 +214,7 @@
       });
     }
 
-    if (intro) {
+    if (intro) whenOpen(() => {
       gsap.timeline({ defaults: { ease } })
         // The words slide only: they are on screen from the first paint, which keeps the page fast to load.
         .from('.hero-copy > *', { y: 28, duration: 0.9, stagger: 0.09 }, 0.15)
@@ -191,7 +222,7 @@
         .from('.hero-portrait figcaption > *', { y: 12, opacity: 0, duration: 0.8, stagger: 0.06 }, 0.6)
         // clearProps hands the bar back to the stylesheet; otherwise the phone menu (hidden at load) keeps opacity 0 for good.
         .from('.nav-inner > *', { y: -16, opacity: 0, duration: 0.7, stagger: 0.05, clearProps: 'transform,opacity' }, 0.1);
-    }
+    });
 
     // The network eases back as the first screen leaves.
     if (net) {
@@ -217,7 +248,7 @@
 
     /* First screen: the numbers count up once the intro has landed */
 
-    q('.hero-stats > div').filter(() => intro).forEach((row, index) => {
+    if (intro) whenOpen(() => q('.hero-stats > div').forEach((row, index) => {
       const dt = row.querySelector('dt');
       const finalText = dt.textContent;
       // Screen readers read the final figure; the counting digits are visual only.
@@ -240,7 +271,7 @@
         progress: 1, duration: 1.1, delay: 0.9 + index * 0.08, ease: 'power3.out', onUpdate: render,
         onComplete: () => { figure.textContent = finalText; }
       });
-    });
+    }));
 
     /* Proof band, What I do, How I work */
 
@@ -403,6 +434,7 @@
     return () => {
       lenis?.destroy();
       document.removeEventListener('toggle', onToggle, true);
+      document.removeEventListener('click', ping);
     };
   });
 })();

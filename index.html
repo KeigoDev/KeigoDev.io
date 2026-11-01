@@ -18,8 +18,8 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://keigodev.github.io/KeigoDev.io/assets/brand/og-image.jpg">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=2">
 <link rel="preload" href="assets/fonts/instrumentserif-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
@@ -65,15 +65,66 @@ document.documentElement.classList.add('js');
   // Safety net in case the paint signal never arrives.
   addEventListener('load', () => setTimeout(loadMotion, 2500));
 })();
+// Opening screen: a small robot waves hello once per visit, then the page lifts into view.
+// Skipped with reduced motion, on links to a section, and on any click, key or scroll.
+(() => {
+  const root = document.documentElement;
+  let seen = false;
+  try {
+    seen = sessionStorage.getItem('opened') === '1';
+    sessionStorage.setItem('opened', '1');
+  } catch (error) {}
+  if (seen || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  root.classList.add('is-opening');
+  const skips = ['pointerdown', 'keydown', 'wheel', 'touchmove'];
+  const finish = () => {
+    if (root.classList.contains('is-opened')) return;
+    root.classList.add('is-opened');
+    skips.forEach(type => removeEventListener(type, finish));
+    dispatchEvent(new Event('opening:end'));
+    setTimeout(() => root.classList.remove('is-opening', 'is-opened'), 1000);
+  };
+  skips.forEach(type => addEventListener(type, finish, { passive: true }));
+  setTimeout(finish, 2200);
+})();
 </script>
 <script src="script.js" defer></script>
 </head>
 <body>
+<div class="opening" aria-hidden="true">
+  <div class="opening-inner">
+    <svg class="bot" viewBox="0 0 200 200" focusable="false">
+      <defs><filter id="botGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <ellipse class="bot-shadow" cx="100" cy="190" rx="38" ry="5"/>
+      <g class="bot-float">
+        <g class="bot-signal"><path d="M88 9a15 15 0 0 1 24 0"/><path d="M80 3a25 25 0 0 1 40 0"/></g>
+        <path class="bot-stem" d="M100 33V21"/>
+        <circle class="bot-tip" cx="100" cy="17" r="5" filter="url(#botGlow)"/>
+        <rect class="bot-trim" x="44" y="56" width="10" height="24" rx="5"/>
+        <rect class="bot-trim" x="146" y="56" width="10" height="24" rx="5"/>
+        <rect class="bot-shell" x="52" y="32" width="96" height="72" rx="26"/>
+        <rect class="bot-visor" x="62" y="44" width="76" height="48" rx="18"/>
+        <g class="bot-eyes" filter="url(#botGlow)"><rect x="79" y="58" width="10" height="16" rx="5"/><rect x="111" y="58" width="10" height="16" rx="5"/></g>
+        <path class="bot-smile" d="M93 82q7 5 14 0"/>
+        <rect class="bot-trim" x="91" y="102" width="18" height="10" rx="3"/>
+        <g transform="rotate(30 72 122)"><rect class="bot-shell" x="65" y="118" width="14" height="44" rx="7"/><circle class="bot-shell" cx="72" cy="164" r="8"/></g>
+        <g class="bot-arm"><rect class="bot-shell" x="121" y="76" width="14" height="52" rx="7"/><circle class="bot-shell" cx="128" cy="74" r="9"/></g>
+        <rect class="bot-shell" x="64" y="110" width="72" height="62" rx="22"/>
+        <circle class="bot-ring" cx="100" cy="140" r="13"/>
+        <circle class="bot-core" cx="100" cy="140" r="8" filter="url(#botGlow)"/>
+        <g class="bot-bubble"><rect x="154" y="24" width="40" height="24" rx="12"/><path d="M160 44l-6 10 14-6z"/><text x="174" y="40.5">Hi!</text></g>
+      </g>
+    </svg>
+    <p class="opening-line">Hi, I’m <em>Matthew</em>.</p>
+    <p class="opening-status">Loading portfolio</p>
+    <span class="opening-bar"></span>
+  </div>
+</div>
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-nav">
   <div class="nav-inner">
-    <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#1c1b19"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#ecebe6" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#c7a9ff" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg><span>Matthew <b>Ferrer</b></span></a>
+    <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="14" fill="#151513"/><path fill="#ecebe6" transform="translate(13.35 44.96)" d="M11.34 -0.36Q11.2 -0.36 11.02 -0.47Q10.84 -0.58 10.76 -0.94L5.33 -23Q5.29 -23.26 5.11 -23.24Q4.93 -23.22 4.93 -22.97L4.21 -3.1Q4.18 -2.09 4.54 -1.57Q4.9 -1.04 5.8 -0.9L6.26 -0.83Q6.73 -0.79 6.73 -0.4Q6.73 0 6.19 0H1.04Q0.5 0 0.5 -0.4Q0.5 -0.79 0.97 -0.83L1.44 -0.9Q2.38 -1.04 2.72 -1.57Q3.06 -2.09 3.1 -3.1L3.82 -23.54Q3.85 -24.3 3.6 -24.55Q3.35 -24.8 2.52 -24.95L1.69 -25.09Q1.22 -25.2 1.22 -25.52Q1.22 -25.92 1.76 -25.92H6.08Q7.2 -25.92 7.45 -24.84L11.81 -6.88Q11.88 -6.62 12.04 -6.62Q12.2 -6.62 12.24 -6.88L16.78 -25.02Q16.99 -25.92 17.93 -25.92H22.18Q22.72 -25.92 22.72 -25.52Q22.72 -25.2 22.25 -25.09L21.42 -24.95Q20.66 -24.8 20.41 -24.55Q20.16 -24.3 20.2 -23.54L20.92 -2.38Q20.95 -1.62 21.17 -1.37Q21.38 -1.12 22.14 -0.97L22.97 -0.83Q23.44 -0.72 23.44 -0.4Q23.44 0 22.9 0H16.38Q15.84 0 15.84 -0.4Q15.84 -0.72 16.31 -0.83L17.14 -0.97Q17.89 -1.12 18.14 -1.37Q18.4 -1.62 18.36 -2.38L17.75 -22.97Q17.75 -23.22 17.59 -23.24Q17.42 -23.26 17.35 -23.04L11.88 -0.94Q11.81 -0.58 11.65 -0.47Q11.48 -0.36 11.34 -0.36Z"/><path fill="#c7a9ff" transform="translate(35.85 44.96)" d="M-0.79 0Q-1.3 0 -1.3 -0.36Q-1.3 -0.76 -0.58 -0.86L0.14 -0.97Q0.94 -1.08 1.24 -1.35Q1.55 -1.62 1.69 -2.38L6.59 -23.54Q6.77 -24.3 6.59 -24.55Q6.41 -24.8 5.69 -24.95L4.97 -25.09Q4.5 -25.2 4.5 -25.49Q4.5 -25.92 5.15 -25.92H16.74Q17.64 -25.92 17.46 -25.09L16.38 -19.12Q16.27 -18.5 15.8 -18.5Q15.3 -18.5 15.37 -18.97L15.44 -20.23Q15.62 -22.72 14.65 -23.87Q13.68 -25.02 12.17 -25.02Q10.62 -25.02 9.9 -24.52Q9.18 -24.01 8.93 -22.97L6.98 -14.47Q6.88 -13.97 7.38 -13.97H8.71Q10.26 -13.97 11.02 -15.66L11.84 -17.42Q11.95 -17.64 12.06 -17.77Q12.17 -17.89 12.38 -17.89Q12.56 -17.89 12.71 -17.73Q12.85 -17.57 12.78 -17.28L10.91 -9.25Q10.73 -8.64 10.33 -8.64Q9.9 -8.64 9.9 -9.11V-10.84Q9.9 -12.1 9.58 -12.49Q9.25 -12.89 8.42 -12.89H7.13Q6.59 -12.89 6.48 -12.38L4.18 -2.56Q4 -1.8 4.18 -1.49Q4.36 -1.19 5.08 -1.08L6.98 -0.83Q7.42 -0.79 7.42 -0.43Q7.42 0 6.8 0Z"/></svg><span>Matthew <b>Ferrer</b></span></a>
     <nav class="nav-links" id="navLinks" aria-label="Main navigation">
       <a href="#services">What I do</a>
       <a href="#work">Work</a>
@@ -555,7 +606,7 @@ document.documentElement.classList.add('js');
         <li class="job">
           <p class="job-dates">Sep 2026 – now</p>
           <div class="job-main">
-            <h3 class="job-role">Digital Operations Lead</h3>
+            <h3 class="job-role">AI Operations Lead</h3>
             <p class="job-org">Astor Realty Enterprise LLC · New York, remote</p>
             <p class="job-summary">I lead a remote team and run digital operations for the company, working directly with the CEO on SEO and AI visibility, analytics, CRM, web development, lead generation and reporting.</p>
             <ul class="job-wins">
@@ -634,16 +685,16 @@ document.documentElement.classList.add('js');
     </div>
     <aside class="exp-panel" aria-label="The role you are reading">
       <div class="exp-frame">
-        <img class="exp-shot is-on" data-job="0" src="assets/work/site-astor-800w.jpg" alt="The Astor Realty Enterprise website" width="800" height="500" loading="lazy">
-        <img class="exp-shot" data-job="1" src="assets/web/matthew-at-citi-800w.jpg" alt="Matthew Ferrer outside the Citi building in BGC" width="800" height="1421" loading="lazy">
-        <img class="exp-shot" data-job="2" src="assets/work/be3-testing-800w.jpg" alt="The BE3 project monitoring and inventory dashboard" width="800" height="452" loading="lazy">
-        <div class="exp-shot exp-type" data-job="3"><span>2021</span>First data role</div>
+        <img class="exp-shot is-on" data-job="0" src="assets/logos/astor.svg" alt="Astor Realty Enterprise logo" width="449" height="345" style="--w: 72%" loading="lazy">
+        <img class="exp-shot" data-job="1" src="assets/logos/citi.svg" alt="Citi logo" width="300" height="195" style="--w: 58%" loading="lazy">
+        <img class="exp-shot" data-job="2" src="assets/logos/be3.svg" alt="BE3 Power Solutions Enterprise logo" width="207" height="206" style="--w: 52%" loading="lazy">
+        <img class="exp-shot" data-job="3" src="assets/logos/rizal-seal.svg" alt="Seal of the Province of Rizal" width="732" height="730" style="--w: 62%" loading="lazy">
       </div>
       <div class="exp-notes">
         <p class="exp-note is-on" data-job="0"><span>Astor Realty Enterprise</span>5-person remote team · 3 client websites</p>
-        <p class="exp-note" data-job="1"><span>Outside Citi, BGC</span>APAC reporting · 30–40% less manual work</p>
+        <p class="exp-note" data-job="1"><span>Citi, BGC</span>APAC reporting · 30–40% less manual work</p>
         <p class="exp-note" data-job="2"><span>BE3 Power Solutions</span>Tested by staff in 4 roles</p>
-        <p class="exp-note" data-job="3"><span>Provincial employment office</span>Employment records database</p>
+        <p class="exp-note" data-job="3"><span>Provincial employment office, Rizal</span>Employment records database · first data role, 2021</p>
       </div>
     </aside>
   </div>
@@ -809,7 +860,7 @@ document.documentElement.classList.add('js');
 <footer class="site-footer">
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#1c1b19"/><g transform="translate(32 32) scale(1.12) translate(-32 -32)"><path fill="#ecebe6" d="M8 46V18h8l4.5 15L25 18h8v28h-6.5V31l-4 13h-5l-4-13v15z"/><path fill="#c7a9ff" d="M37 46V18h19v6.5H43.5v5H54V36H43.5v10z"/></g></svg><span>Matthew <b>Ferrer</b></span></a>
+      <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" rx="14" fill="#151513"/><path fill="#ecebe6" transform="translate(13.35 44.96)" d="M11.34 -0.36Q11.2 -0.36 11.02 -0.47Q10.84 -0.58 10.76 -0.94L5.33 -23Q5.29 -23.26 5.11 -23.24Q4.93 -23.22 4.93 -22.97L4.21 -3.1Q4.18 -2.09 4.54 -1.57Q4.9 -1.04 5.8 -0.9L6.26 -0.83Q6.73 -0.79 6.73 -0.4Q6.73 0 6.19 0H1.04Q0.5 0 0.5 -0.4Q0.5 -0.79 0.97 -0.83L1.44 -0.9Q2.38 -1.04 2.72 -1.57Q3.06 -2.09 3.1 -3.1L3.82 -23.54Q3.85 -24.3 3.6 -24.55Q3.35 -24.8 2.52 -24.95L1.69 -25.09Q1.22 -25.2 1.22 -25.52Q1.22 -25.92 1.76 -25.92H6.08Q7.2 -25.92 7.45 -24.84L11.81 -6.88Q11.88 -6.62 12.04 -6.62Q12.2 -6.62 12.24 -6.88L16.78 -25.02Q16.99 -25.92 17.93 -25.92H22.18Q22.72 -25.92 22.72 -25.52Q22.72 -25.2 22.25 -25.09L21.42 -24.95Q20.66 -24.8 20.41 -24.55Q20.16 -24.3 20.2 -23.54L20.92 -2.38Q20.95 -1.62 21.17 -1.37Q21.38 -1.12 22.14 -0.97L22.97 -0.83Q23.44 -0.72 23.44 -0.4Q23.44 0 22.9 0H16.38Q15.84 0 15.84 -0.4Q15.84 -0.72 16.31 -0.83L17.14 -0.97Q17.89 -1.12 18.14 -1.37Q18.4 -1.62 18.36 -2.38L17.75 -22.97Q17.75 -23.22 17.59 -23.24Q17.42 -23.26 17.35 -23.04L11.88 -0.94Q11.81 -0.58 11.65 -0.47Q11.48 -0.36 11.34 -0.36Z"/><path fill="#c7a9ff" transform="translate(35.85 44.96)" d="M-0.79 0Q-1.3 0 -1.3 -0.36Q-1.3 -0.76 -0.58 -0.86L0.14 -0.97Q0.94 -1.08 1.24 -1.35Q1.55 -1.62 1.69 -2.38L6.59 -23.54Q6.77 -24.3 6.59 -24.55Q6.41 -24.8 5.69 -24.95L4.97 -25.09Q4.5 -25.2 4.5 -25.49Q4.5 -25.92 5.15 -25.92H16.74Q17.64 -25.92 17.46 -25.09L16.38 -19.12Q16.27 -18.5 15.8 -18.5Q15.3 -18.5 15.37 -18.97L15.44 -20.23Q15.62 -22.72 14.65 -23.87Q13.68 -25.02 12.17 -25.02Q10.62 -25.02 9.9 -24.52Q9.18 -24.01 8.93 -22.97L6.98 -14.47Q6.88 -13.97 7.38 -13.97H8.71Q10.26 -13.97 11.02 -15.66L11.84 -17.42Q11.95 -17.64 12.06 -17.77Q12.17 -17.89 12.38 -17.89Q12.56 -17.89 12.71 -17.73Q12.85 -17.57 12.78 -17.28L10.91 -9.25Q10.73 -8.64 10.33 -8.64Q9.9 -8.64 9.9 -9.11V-10.84Q9.9 -12.1 9.58 -12.49Q9.25 -12.89 8.42 -12.89H7.13Q6.59 -12.89 6.48 -12.38L4.18 -2.56Q4 -1.8 4.18 -1.49Q4.36 -1.19 5.08 -1.08L6.98 -0.83Q7.42 -0.79 7.42 -0.43Q7.42 0 6.8 0Z"/></svg><span>Matthew <b>Ferrer</b></span></a>
       <p>Full-stack data analyst: data engineering, BI and data science.</p>
       <p class="foot-built">Built with <strong>HTML</strong>, <strong>CSS</strong> and <strong>JavaScript</strong>.</p>
     </div>

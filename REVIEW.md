@@ -1,6 +1,27 @@
-# Portfolio review — October 23, 2026
+# Portfolio review — November 1, 2026
 
-## Experience panel, logos on dark, shorter credit (latest)
+## Opening robot, click motion, employer logos, new mark (latest)
+
+- Opening screen: a small robot (inline SVG, site colours) pops in, waves with a "Hi!" bubble, blinks and sends
+  signal rings, over "Hi, I'm Matthew." and a loading line; after about 2 s it lifts like a curtain and the hero
+  entrance plays. Once per visit (sessionStorage); any click, key or scroll skips it; skipped with reduced motion,
+  on links to a section and without JavaScript.
+- Click motion: every control shrinks to 96% while held; a violet ping spreads from the click point (also inside
+  the pop-ups). Motion only, so none with reduced motion.
+- Experience panel: each employer's logo as SVG instead of photos (Astor crest and lettering, Citi, BE3 redrawn,
+  Province of Rizal seal for the employment office), no frame; sources in assets/logos/SOURCES.md.
+- Logo: "MF" in Instrument Serif, upright M and italic violet F, on a rounded dark tile; nav, footer, favicon
+  (versioned so browsers refetch it) and touch icon. Astor title: AI Operations Lead.
+- Fixed: the hero figure "30–40%" broke onto two lines between about 1000 and 1180 px wide.
+- Checks: impeccable detector, nothing new against the last commit (file scan with allow-list clean); design
+  inspector and lint, no new findings against the last commit when measured without the opening screen
+  (the remaining ones are the accepted house style). Lighthouse 12.2.1 mobile 99 / 100 / 100 / 100, desktop
+  100 / 100 / 100 / 100, same as before. No horizontal overflow and the opening fits on 14 screens from 320x568 to
+  2560x1440 (phone landscape and tablets included), Chrome and WebKit. Click-through passes in both: opening skip,
+  ping, press, tabs, experience logos, photo viewer, message pop-up, nav travel, phone menu, reduced motion and
+  JavaScript off. No console errors. Firefox not run.
+
+## Experience panel, logos on dark, shorter credit
 
 - Experience: the tall sticky Citi photo (it outgrew the screen and drifted) is replaced by a panel sized to fit the
   screen that follows the job being read: Astor website, Citi photo, BE3 dashboard, then "2021, first data role",

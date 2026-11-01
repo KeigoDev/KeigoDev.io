@@ -21,6 +21,16 @@ Employer logos ("Worked at"):
   "Astor Realty / Enterprise" set in the site's own Cormorant Garamond and Inter at the site's sizes and colours.
 - be3.png: cropped from the BE3 system login screen (assets/work/be3-login.jpg), the company's logo.
 
+Experience panel (vector versions; no official SVG is published for any of these):
+- astor.svg: the crest colour-traced from Astor's own icon file (https://astorrealtyenterprise.com/assets/astor-icon-D3QyRWu_.png),
+  stacked over "ASTOR REALTY / ENTERPRISE" converted to outlines from Cormorant Garamond SemiBold and Inter Medium
+  (both SIL Open Font License), sized and coloured to match astor.png.
+- be3.svg: redrawn as vector shapes from measurements of the logo on the BE3 login screen (assets/work/be3-login.jpg);
+  caption converted to outlines from Open Sans SemiBold (SIL Open Font License).
+- rizal-seal.svg: Seal of the Province of Rizal, colour-traced from Wikimedia Commons "File:Ph seal rizal.png"
+  (public domain). Shown for the Provincial Public Employment Service Office, a provincial government office,
+  which has no logo of its own.
+
 Dark-background versions (certification band): aws-dark.svg (letters white, smile unchanged), meta-dark.svg
 (wordmark white, symbol unchanged), ibm-dark.svg (IBM 8-bar logo in IBM Blue 50, #4589FF).
 - google-wordmark.svg: Wikimedia Commons "File:Google_2015_logo.svg" (Google's official wordmark, official colours).
