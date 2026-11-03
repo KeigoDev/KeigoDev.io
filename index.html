@@ -257,6 +257,13 @@ document.documentElement.classList.add('js');
     <p class="label">Selected work</p>
     <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
     <p class="intro">Five featured projects, then seven more. Each card shows the work, the tools and how I built it.</p>
+    <nav class="project-links" aria-label="Jump to a kind of project">
+      <a href="#p-agentflow">AI automation</a>
+      <a href="#p-aml">SQL</a>
+      <a href="#p-food">Power BI</a>
+      <a href="#p-airways">Tableau</a>
+      <a href="#p-ngram">Python &amp; NLP</a>
+    </nav>
     <div class="deck">
         <article class="project card" id="p-agentflow" data-tags="ai automation excel sql">
           <figure class="project-media">
@@ -410,7 +417,7 @@ document.documentElement.classList.add('js');
           <button class="slider-btn" type="button" data-dir="1" aria-label="Next projects"><span aria-hidden="true">→</span></button>
         </div>
       </div>
-      <div class="slider" tabindex="0" role="region" aria-label="More work: scroll sideways or use the arrow buttons">
+      <div class="slider" tabindex="0" role="region" aria-label="More work">
         <article class="project card mini" id="p-cocacola" data-tags="powerbi excel">
           <figure class="project-media">
             <img src="assets/work/pbi-cocacola.jpg" srcset="assets/work/pbi-cocacola-480w.jpg 480w, assets/work/pbi-cocacola-800w.jpg 800w, assets/work/pbi-cocacola.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="Coca-Cola USA retail dashboard: total sales $12M, units sold, average price, operating profit, sales by brand and retailer, and profit margin by quarter" width="1440" height="810" loading="lazy">

@@ -1,6 +1,16 @@
 # Portfolio review — November 1, 2026
 
-## Wording pass and agentic AI at Citi (latest)
+## Projects layout and Astor AI work (latest)
+
+- Astor: AI workflows confirmed by the owner (lead research and outreach, Close CRM automation, AI-drafted CEO
+  reports, AI tool rollout and training; websites built with Claude Code and Lovable).
+- Projects: jump links under the intro (AI automation, SQL, Power BI, Tableau, Python & NLP). "More work" is a
+  four-column grid of all seven cards from 1200 px, and stays a swipe slider with arrows below that. Card pictures
+  and titles line up across each row (subgrid).
+- Checks: 14 screens from 320x568 to 2560x1440 in Chrome and WebKit: no horizontal overflow, titles aligned, no
+  console errors. Jump links land on their project on phone and desktop, with and without motion.
+
+## Wording pass and agentic AI at Citi
 
 - Citi: agentic AI automations added as confirmed by the owner (agent-run report refresh, AI data-quality checks,
   AI-drafted executive commentary reviewed before sending), part of the existing 30–40% cut in manual reporting.

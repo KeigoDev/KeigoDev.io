@@ -1162,14 +1162,38 @@ a, button, summary, input {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-color: var(--line-strong) var(--bg);
+  grid-template-rows: auto 1fr;
 }
 
+/* Each card spans a picture row and a text row shared with its neighbours, so titles line up. */
 .mini {
+  grid-row: span 2;
   grid-template-rows: auto 1fr;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   scroll-snap-align: start;
 }
 
+/* Wide screens have room for all seven cards: a grid, no arrows. */
+@media (min-width: 1200px) {
+  .slider {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: auto 1fr;
+    row-gap: 16px;
+    padding-bottom: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .slider-controls {
+    display: none;
+  }
+}
+
 .mini .project-media {
+  align-self: stretch;
   justify-content: flex-start;
   padding: 0;
 }
