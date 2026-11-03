@@ -1,6 +1,25 @@
-# Portfolio review — November 3, 2026
+# Portfolio review: November 3, 2026
 
-## Image and device check (latest)
+## Fewer AI tells, SEO checklist, folders (latest)
+
+- Folders: css/, js/ (vendor libraries in js/vendor/), projects/<name>/ for each interactive project (clean
+  addresses such as /projects/ap-reporting-agent-flow/), assets/downloads/ for Power BI, Excel and CSV files,
+  assets/originals/ for full-size photos, docs/ for this file and the checksums; the favicon moved to assets/brand/.
+  Old addresses of the builder and the Food Affordability dashboard are kept as redirects. .DS_Store untracked.
+- Colour: violet with white button text kept (owner's choice after trying amber). Removed all purple gradients
+  (pop-up glow, click flash, builder logo tile).
+- Removed: every em dash in visible text, titles and the Food Affordability dashboard (titles use "|"), the source
+  map line in lenis.min.js, and an AI-tool meta tag left in the builder.
+- Added: 404.html (absolute links, noindex), ProfilePage structured data around the Person, breadcrumbs on the
+  builder (visible and BreadcrumbList) with its canonical, title and share tags; canonical, title, description and
+  favicon on the Food Affordability backup page (canonical points to its live copy). New share image with the
+  current counts (12 projects) and a new builder screenshot.
+- Already fine: one h1 per page, alt text on all 57 images, meta descriptions, sitemap, favicon, internal links,
+  static HTML, no lorem ipsum, own JS 36 KB plus 129 KB of libraries loaded after first paint.
+- Not done, owner's call: a custom domain. On a project site robots.txt is not read (it only counts at the domain root).
+- Note: "30–40%" uses an en dash (correct for ranges); Satoshi draws it long, so it can read like an em dash.
+
+## Image and device check
 
 - Fixed: the AP Reporting Agent Flow card went live without its files (the builder page, the n8n JSON and its three
   screenshots were never committed), so its picture and both buttons were broken online. All five are now in the repo.

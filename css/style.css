@@ -1,4 +1,4 @@
-/* Matthew Ferrer — portfolio
+/* Matthew Ferrer: portfolio
    Design: dark, straightforward, information first (inspired by consultancy sites such as valiotti.com).
    What is his alone: the live dashboard recording in the project cards, the browser tour of the
    client websites, his own photographs, and the hero network drawn as 26 tools in three clusters.
@@ -10,7 +10,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('assets/fonts/instrumentserif-400.woff2') format('woff2');
+  src: url('../assets/fonts/instrumentserif-400.woff2') format('woff2');
 }
 
 @font-face {
@@ -18,7 +18,7 @@
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url('assets/fonts/instrumentserif-400-italic.woff2') format('woff2');
+  src: url('../assets/fonts/instrumentserif-400-italic.woff2') format('woff2');
 }
 
 @font-face {
@@ -26,7 +26,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('assets/fonts/satoshi-400.woff2') format('woff2');
+  src: url('../assets/fonts/satoshi-400.woff2') format('woff2');
 }
 
 @font-face {
@@ -34,7 +34,7 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('assets/fonts/satoshi-700.woff2') format('woff2');
+  src: url('../assets/fonts/satoshi-700.woff2') format('woff2');
 }
 
 @font-face {
@@ -42,7 +42,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('assets/fonts/ibmplexmono-400.woff2') format('woff2');
+  src: url('../assets/fonts/ibmplexmono-400.woff2') format('woff2');
 }
 
 @font-face {
@@ -50,7 +50,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('assets/fonts/ibmplexmono-500.woff2') format('woff2');
+  src: url('../assets/fonts/ibmplexmono-500.woff2') format('woff2');
 }
 
 /* Stand-ins sized to match the web fonts, so text does not jump when the real fonts arrive.
@@ -1955,9 +1955,7 @@ a, button, summary, input {
   padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: 18px;
-  background:
-    radial-gradient(120% 60% at 50% 0%, rgba(124, 58, 237, .16), transparent 60%),
-    var(--surface);
+  background: var(--surface);
   color: var(--ink);
   box-shadow: 0 30px 80px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
   overscroll-behavior: contain;
@@ -2519,7 +2517,7 @@ html.lenis,
   scale: .96 !important;
 }
 
-/* Click: a violet ping spreads from the point pressed, like a signal on the hero network.
+/* Click: a violet ring spreads from the point pressed, like a signal on the hero network.
    Made by motion.js, so it never appears with reduced motion. */
 .ping {
   --ping: 44px;
@@ -2545,13 +2543,12 @@ dialog .ping {
   inset: calc(var(--ping) / -2);
   border: 1px solid var(--accent-text);
   border-radius: 50%;
-  /* A deeper violet halo keeps the ring visible over white screenshots. */
+  /* A darker halo keeps the ring visible over white screenshots. */
   box-shadow: 0 0 0 1px rgba(124, 58, 237, .45);
 }
 
-/* A soft flash with a sharp edge, then a fainter echo that travels further. */
+/* A sharp ring, then a fainter echo that travels further. */
 .ping::before {
-  background: radial-gradient(circle, rgba(199, 169, 255, .28), rgba(199, 169, 255, 0) 70%);
   animation: ping .55s var(--ease) both;
 }
 
