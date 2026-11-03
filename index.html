@@ -153,7 +153,7 @@ document.documentElement.classList.add('js');
       <p class="hero-actions"><a class="btn btn-accent" href="#work">See my work <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="https://www.linkedin.com/in/matthew-ferrer-profile/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></p>
       <dl class="hero-stats">
         <div><dt>30–40%</dt><dd>Less manual reporting at Citi</dd></div>
-        <div><dt>11</dt><dd>Projects you can explore</dd></div>
+        <div><dt>12</dt><dd>Projects you can explore</dd></div>
         <div><dt>5</dt><dd>Professional certifications</dd></div>
         <div><dt>26</dt><dd>Tools across the stack</dd></div>
       </dl>
@@ -256,12 +256,41 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <p class="label">Selected work</p>
     <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
-    <p class="intro">Four featured projects, then seven more. Each card shows the work, the tools and how I built it.</p>
+    <p class="intro">Five featured projects, then seven more. Each card shows the work, the tools and how I built it.</p>
     <div class="deck">
+        <article class="project card" id="p-agentflow" data-tags="ai automation excel sql">
+          <figure class="project-media">
+            <img src="assets/work/ap-agent-flow.jpg" srcset="assets/work/ap-agent-flow-480w.jpg 480w, assets/work/ap-agent-flow-800w.jpg 800w, assets/work/ap-agent-flow.jpg 1600w" sizes="(max-width: 899px) 100vw, 56vw" alt="AP Reporting Agent Flow builder after a successful run: a request form with a 10/25/2021 to 11/03/2026 date range, a workflow canvas of AI agent nodes in department swimlanes from SQL extract to Excel builder and manager approval, and the Insights Agent response with open value, past-due share and suppliers at risk" width="1600" height="1000" loading="lazy">
+            <figcaption class="media-note">Latest project. Click any node to see its agent response, input and output; the Excel report builds in the browser.</figcaption>
+          </figure>
+          <div class="card-body">
+            <h3>AP Reporting Agent Flow</h3>
+            <p class="project-field">AI automation · AI agents, Excel</p>
+            <p class="project-result">Stakeholder request to Excel report across 7 departments</p>
+            <p class="project-desc">An n8n-style workflow builder where AI agents for each department take a report request from intake to a formatted Excel workbook. It is modeled on the payables reporting I ran at Citi, with a 3-business-day SLA and a manager sign-off.</p>
+            <p class="project-tools">n8n · JavaScript · SQL · ExcelJS · Claude · Prompt design</p>
+            <p class="project-links">
+              <a href="assets/ap-reporting-agent-flow.html" target="_blank" rel="noopener">Open the builder <span aria-hidden="true">↗</span></a>
+              <a href="assets/ap-reporting-agent-flow.n8n.json" download>n8n workflow <span aria-hidden="true">↓</span></a>
+            </p>
+            <details class="project-more">
+              <summary>How I did it</summary>
+              <ul>
+                <li>Mapped my Citi reporting process into seven department lanes: stakeholders, intake, data engineering, data quality, analytics, reporting and management review.</li>
+                <li>Gave every AI agent an editable role and task. Nodes can be added, removed, reordered, deactivated or moved between departments, and missing steps are flagged before a run.</li>
+                <li>Kept the numbers deterministic on a 900-invoice sample ledger: a read-only SQL extract by date range, FX to USD, duplicate and null checks with control-total reconciliation, aging buckets and supplier health scores.</li>
+                <li>Added a human approval step that can send the run back to Analytics with feedback, which produces a new revision of the report.</li>
+                <li>Generated a styled .xlsx in the browser with ExcelJS: summary, aging by region, supplier health, open invoices, data quality, agent notes and the run log.</li>
+                <li>Rebuilt the same flow as an importable n8n workflow: a request form trigger, Claude agent nodes, a priority switch, Postgres extract, validation gate, Gmail approval with a send-back loop, Excel file and a Google Sheets tracker, with each department as a swimlane.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
         <article class="project card" id="p-aml" data-tags="sql python tableau">
           <figure class="project-media">
             <img src="assets/work/aml-monitoring.jpg" srcset="assets/work/aml-monitoring-480w.jpg 480w, assets/work/aml-monitoring-800w.jpg 800w, assets/work/aml-monitoring.jpg 1600w" sizes="(max-width: 899px) 100vw, 56vw" alt="Tableau dashboard, AML Transaction Monitoring, with filters for simulation day, hour of day, transaction type and rule group: $12,056M fraud value, 8,197 fraud cases, old flag recall 0.2% against 99.5% for the risk score, fraud by day, hour and type, share of fraud caught by rule, a data cleaning summary and the top 100 alerts" width="1600" height="1000" loading="lazy">
-            <figcaption class="media-note">Latest project. Screenshot of the live Tableau Public dashboard; the workbook is in the repository.</figcaption>
+            <figcaption class="media-note">Screenshot of the live Tableau Public dashboard; the workbook is in the repository.</figcaption>
           </figure>
           <div class="card-body">
             <h3>AML transaction monitoring in SQL</h3>
@@ -609,18 +638,21 @@ document.documentElement.classList.add('js');
           <div class="job-main">
             <h3 class="job-role">AI Operations Lead</h3>
             <p class="job-org">Astor Realty Enterprise LLC · New York, remote</p>
-            <p class="job-summary">I lead a remote team and run AI and digital operations for the company, working directly with the CEO on SEO and AI visibility, analytics, CRM, web development, lead generation and reporting.</p>
+            <p class="job-summary">I lead a remote team and run AI and digital operations for the company, working directly with the CEO on AI workflows, SEO and AI visibility, analytics, CRM, web development, lead generation and reporting.</p>
             <ul class="job-wins">
+              <li>Built AI workflows for lead research and outreach, CRM automation and CEO reporting, and trained the team to use them.</li>
               <li>Set up Close CRM and its dialer for the team, including users, subscriptions and billing.</li>
-              <li>Build and update three client websites: listings, images, copy and technical SEO.</li>
+              <li>Build and update three client websites with Claude Code and Lovable: listings, images, copy and technical SEO.</li>
             </ul>
             <details class="job-more">
               <summary>What I do</summary>
               <ul>
                 <li><strong>Team leadership.</strong> Lead a five-person team across website content, outreach and lead generation. Onboard people to tools, accounts and dialer numbers, and set priorities and deadlines across sites and campaigns.</li>
                 <li><strong>SEO and AI visibility.</strong> Monitor website KPIs in SE Ranking, run site audits and analyse competitors’ keywords. Researched 300+ keywords for one site and 480+ for another, favouring lower difficulty and higher search volume. Track AI prompts (now at 100% AI visibility) and recommend paid ads, referrals, reviews and before-and-after content.</li>
-                <li><strong>Lead generation and social.</strong> Source leads with LinkedIn Sales Navigator. Write hashtags and help with Instagram posts and reels.</li>
-                <li><strong>Executive support.</strong> Prepare analytics and finance reports and stakeholder presentations. Keep day-to-day operations moving.</li>
+                <li><strong>AI lead workflows.</strong> Source leads with LinkedIn Sales Navigator, use AI to research and qualify them, and draft personalised outreach. Write hashtags and help with Instagram posts and reels.</li>
+                <li><strong>CRM automation.</strong> Automate Close CRM workflows: email and SMS sequences, call logging and lead status updates.</li>
+                <li><strong>AI reporting for the CEO.</strong> Use AI to draft the weekly and monthly SEO, analytics and finance summaries from SE Ranking and other data. Prepare stakeholder presentations and keep day-to-day operations moving.</li>
+                <li><strong>AI tool rollout and training.</strong> Choose AI tools for the team, write prompts and playbooks, and train the team to use them.</li>
                 <li><strong>Vendors and tools.</strong> Evaluate tools and plans, explain pricing to the team, and negotiate trial extensions, upgrades and discounts with vendors.</li>
                 <li><strong>This portfolio.</strong> Designed and built in VS Code, versioned with Git and deployed on GitHub Pages.</li>
               </ul>
