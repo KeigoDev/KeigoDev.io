@@ -1,6 +1,20 @@
-# Portfolio review — November 1, 2026
+# Portfolio review — November 3, 2026
 
-## Projects layout and Astor AI work (latest)
+## Image and device check (latest)
+
+- Fixed: the AP Reporting Agent Flow card went live without its files (the builder page, the n8n JSON and its three
+  screenshots were never committed), so its picture and both buttons were broken online. All five are now in the repo.
+  The demo uses generated sample data only.
+- Sharper website screenshots: Astor, Salon Privé and Marque Vault recaptured from the live sites at a 1280 px window,
+  as 720 px and new 1440 px copies (srcset), so MacBooks, iPads and phones get the sharp one. Salon kept to the same
+  6000 px crop as before. The old 720 px files were soft on every Retina screen.
+- Sitemap: the AP builder page added.
+- Checks, served over HTTP like GitHub Pages: 14 screens (320x568 to 2560x1440) in Chrome and WebKit, plus Retina
+  1280, 1440, 1512 and 1728; every image scrolled into view: none broken, stretched, off screen or hidden, no failed
+  requests or script errors. Each website tab checked on 12 screens. Every referenced file exists in git with exact
+  letter case. Phones held sideways at 3x still want a larger site screenshot than 1440 px; left as is.
+
+## Projects layout and Astor AI work
 
 - Astor: AI workflows confirmed by the owner (lead research and outreach, Close CRM automation, AI-drafted CEO
   reports, AI tool rollout and training; websites built with Claude Code and Lovable).

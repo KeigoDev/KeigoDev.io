@@ -1,0 +1,1102 @@
+{
+  "name": "AP Reporting Agent Flow",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Stakeholders\nBanking Services · Senior Management · CEO office. Request form in, finished report out.",
+        "height": 320,
+        "width": 5280,
+        "color": 7
+      },
+      "id": "5cd96058-7321-4640-b4ba-ac5421570553",
+      "name": "Lane · Stakeholders",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Intake & PMO\nRequest triage, SLA routing, delivery email and the report tracker.",
+        "height": 320,
+        "width": 5280,
+        "color": 6
+      },
+      "id": "0e4aa80b-0eb2-499c-83f8-f26134cdfee1",
+      "name": "Lane · Intake & PMO",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Data Engineering\nRead-only extract from the AP ledger and supplier master, FX to USD.",
+        "height": 320,
+        "width": 5280,
+        "color": 5
+      },
+      "id": "44b022af-06ff-4a58-9ca6-e4fb7edd8d76",
+      "name": "Lane · Data Engineering",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Data Quality\nDuplicates, missing values, negative amounts and control-total reconciliation.",
+        "height": 320,
+        "width": 5280,
+        "color": 4
+      },
+      "id": "db3eaa08-bc09-4085-a7b0-3c4484c14f04",
+      "name": "Lane · Data Quality",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1020
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Analytics\nAging buckets, supplier health scores and the executive summary.",
+        "height": 320,
+        "width": 5280,
+        "color": 3
+      },
+      "id": "0c20642e-42d6-409a-b767-2eff52026661",
+      "name": "Lane · Analytics",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Reporting & BI\nExcel workbook build.",
+        "height": 320,
+        "width": 5280,
+        "color": 2
+      },
+      "id": "ac39a03d-16e4-48ba-b8e2-eb7448c48bf1",
+      "name": "Lane · Reporting & BI",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1700
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Management Review\nHuman-in-the-loop sign-off before anything reaches the stakeholder.",
+        "height": 320,
+        "width": 5280,
+        "color": 1
+      },
+      "id": "530c7480-89f9-4929-be89-9b28d604d359",
+      "name": "Lane · Management Review",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        2040
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# AP Reporting Agent Flow\nStakeholder request → AI agents per department → approved Excel report.\n\n**Setup**\n1. Add an **Anthropic** credential to the four Claude model nodes.\n2. Add **Gmail** for the approval, alert and delivery steps; change the example.com addresses.\n3. Pick a **Google Sheet** for the Report Tracker.\n4. Optional: add a read-only **Postgres** credential and activate *SQL Extract*. Until then the sample ledger is used.\n\nOpen the form URL from *Report Request Form* to start a run.\n\nBuilt by Matthew Ferrer · sample data only.",
+        "height": 420,
+        "width": 520,
+        "color": 6
+      },
+      "id": "e01009ed-ad02-45dd-89ed-eeb6a46288f7",
+      "name": "Read me",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -460
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "Report request · Business Planning & Analytics",
+        "formDescription": "Request a payables report. Standard SLA is 3 business days; urgent requests are due the same day.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Requested by",
+              "placeholder": "Head of Vendor Operations",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Requester email",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Department",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Banking Services"
+                  },
+                  {
+                    "option": "Senior Management"
+                  },
+                  {
+                    "option": "Office of the CEO"
+                  },
+                  {
+                    "option": "Treasury"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Report type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Unpaid Invoice Aging"
+                  },
+                  {
+                    "option": "Supplier Payment Health"
+                  },
+                  {
+                    "option": "Spend by Business Unit"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Region",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Global"
+                  },
+                  {
+                    "option": "APAC"
+                  },
+                  {
+                    "option": "EMEA"
+                  },
+                  {
+                    "option": "NAM"
+                  },
+                  {
+                    "option": "LATAM"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Date from",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Date to",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Priority",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Standard"
+                  },
+                  {
+                    "option": "Urgent"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Aging threshold (days)",
+              "fieldType": "number",
+              "placeholder": "90"
+            },
+            {
+              "fieldLabel": "Request message",
+              "fieldType": "textarea",
+              "placeholder": "e.g. APAC suppliers with unpaid invoices over 60 days, needed before Thursday's leadership review."
+            }
+          ]
+        },
+        "responseMode": "onReceived",
+        "options": {
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Thanks. Your request is in the reporting queue; the report will arrive by email."
+            }
+          }
+        }
+      },
+      "id": "e7ea5a07-1f16-4440-bda7-49628c866e15",
+      "name": "Report Request Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        240,
+        150
+      ],
+      "webhookId": "f50da041-14e8-4784-afdd-da165d95e186"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Read this report request and return a JSON object with keys report_type, region, date_from (YYYY-MM-DD), date_to (YYYY-MM-DD), aging_threshold_days (number), priority (Standard or Urgent) and notes (array of short strings explaining anything you changed). Start from the form values; override them only when the message clearly says otherwise (for example a region, a 'more than N days' threshold, a date range like 10/25/2021 to 11/3/2026, or words like urgent/ASAP).\n\nForm values:\n{{ JSON.stringify($json, null, 2) }}",
+        "options": {
+          "systemMessage": "You are the PMO intake analyst for Business Planning & Analytics. You classify incoming report requests and extract the scope. Reply with JSON only."
+        }
+      },
+      "id": "a7974143-4eb3-4341-92c4-a33dda700b18",
+      "name": "Intake Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        490,
+        490
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-5-5",
+          "mode": "id"
+        },
+        "options": {
+          "maxTokensToSample": 1200,
+          "temperature": 0.2
+        }
+      },
+      "id": "f43d0a43-5b4b-4ab6-ba88-0d725f481d11",
+      "name": "Claude · Intake Agent",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        490,
+        660
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const f = $('Report Request Form').first().json;\nlet ai = {};\ntry { const m = String($json.output || '').match(/\\{[\\s\\S]*\\}/); ai = m ? JSON.parse(m[0]) : {}; } catch (e) { ai = {}; }\nconst pick = (k, v) => (ai[k] !== undefined && ai[k] !== null && ai[k] !== '') ? ai[k] : v;\nconst spec = {\n  request_id: 'BPA-' + new Date().getFullYear() + '-' + String(Math.floor(1000 + Math.random() * 9000)),\n  requested_by: f['Requested by'],\n  requester_email: f['Requester email'],\n  department: f['Department'],\n  report_type: pick('report_type', f['Report type']),\n  region: pick('region', f['Region']),\n  date_from: pick('date_from', f['Date from']),\n  date_to: pick('date_to', f['Date to']),\n  aging_threshold_days: Number(pick('aging_threshold_days', f['Aging threshold (days)'] || 90)),\n  priority: pick('priority', f['Priority']) === 'Urgent' ? 'Urgent' : 'Standard',\n  intake_notes: Array.isArray(ai.notes) ? ai.notes : [],\n  message: f['Request message'] || ''\n};\nif (spec.date_from > spec.date_to) [spec.date_from, spec.date_to] = [spec.date_to, spec.date_from];\nreturn [{ json: spec }];"
+      },
+      "id": "160c4a84-b49f-4492-9f8f-f37b16f30039",
+      "name": "Parse Spec",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        490
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4d664f78-4858-451b-984d-9c3def9080d3",
+                    "leftValue": "={{ $json.priority }}",
+                    "rightValue": "Urgent",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Urgent"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ab380e34-7086-499c-a257-9f57ad9fedd5",
+                    "leftValue": "={{ $json.priority }}",
+                    "rightValue": "Standard",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Standard"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "35a23c65-4989-44c0-9b6f-094bf1e42955",
+      "name": "SLA Router",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        990,
+        490
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s = $input.first().json;\nreturn [{ json: { ...s, sla_business_days: 0, sla_due: new Date().toISOString().slice(0, 10) } }];"
+      },
+      "id": "000976c4-5d8d-4e58-bc36-262434247086",
+      "name": "Urgent SLA (same day)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        410
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const s = $input.first().json;\nconst d = new Date(); let n = 0;\nwhile (n < 3) { d.setDate(d.getDate() + 1); if (d.getDay() % 6 !== 0) n++; }\nreturn [{ json: { ...s, sla_business_days: 3, sla_due: d.toISOString().slice(0, 10) } }];"
+      },
+      "id": "9ac1f59b-a908-45c2-844e-27351305a791",
+      "name": "Standard SLA (3 BD)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1240,
+        570
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT i.invoice_id, s.supplier_id, s.supplier_name AS supplier, s.region, s.country,\n       i.business_unit, i.invoice_date::text, i.due_date::text, i.amount_local,\n       i.currency, i.status, i.paid_date::text\nFROM   ap.invoices i\nJOIN   ap.suppliers s ON s.supplier_id = i.supplier_id\nWHERE  i.invoice_date BETWEEN $1::date AND $2::date\n  AND  ($3 = 'Global' OR s.region = $3)\nORDER  BY i.due_date;",
+        "options": {
+          "queryReplacement": "={{ $json.date_from }},{{ $json.date_to }},{{ $json.region }}"
+        }
+      },
+      "id": "a06b5f37-ee83-4dae-94a4-ddb8d302fa35",
+      "name": "SQL Extract (AP ledger)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1490,
+        830
+      ],
+      "disabled": true,
+      "credentials": {
+        "postgres": {
+          "id": "",
+          "name": "AP reporting replica (read-only)"
+        }
+      },
+      "notes": "Enable this node once a read-only Postgres credential for the AP ledger is set up. While it is deactivated, n8n passes the request through and the next node generates sample data.",
+      "notesInFlow": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// If the SQL node ran, pass its rows through. Otherwise build a seeded sample ledger (2021 onward).\nif ($input.first().json.invoice_id) return $input.all();\nconst spec = ($('Standard SLA (3 BD)').isExecuted ? $('Standard SLA (3 BD)').first().json : $('Urgent SLA (same day)').first().json);\nlet seed = 20261102;\nconst r = () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };\nconst DAY = 864e5, today = new Date(); today.setHours(0, 0, 0, 0);\nconst iso = d => new Date(d).toISOString().slice(0, 10);\nconst FXL = { PHP: .0172, SGD: .75, INR: .0119, JPY: .0066, AUD: .66, GBP: 1.27, EUR: 1.08, PLN: .25, USD: 1, CAD: .73, MXN: .055, BRL: .19 };\nconst C = { APAC: [['Philippines','PHP'],['Singapore','SGD'],['India','INR'],['Japan','JPY'],['Australia','AUD']], EMEA: [['United Kingdom','GBP'],['Ireland','EUR'],['Poland','PLN']], NAM: [['United States','USD'],['Canada','CAD']], LATAM: [['Mexico','MXN'],['Brazil','BRL']] };\nconst SUP = [['Northwind Facilities','APAC'],['Kaito Logistics','APAC'],['Meridian Security Services','APAC'],['Pacific Rim Couriers','APAC'],['Crescent IT Staffing','APAC'],['Bayfront Catering','APAC'],['Halden Data Centers','EMEA'],['Arbor Print & Mail','EMEA'],['Sterling Legal Partners','EMEA'],['Lumen Telecom','EMEA'],['Orion Cloud Hosting','NAM'],['Vantage Consulting Group','NAM'],['Atlas Building Maintenance','NAM'],['Cobalt Software Licensing','NAM'],['Tidewell Energy','LATAM'],['Juniper Office Supply','LATAM'],['Redstone Analytics','LATAM'],['Silverline Travel','APAC']];\nconst BUS = ['Banking Services','Markets Operations','Technology','Corporate Real Estate','Treasury'];\nconst sup = SUP.map(([name, region], i) => { const cs = C[region]; const [country, cur] = cs[Math.floor(r() * cs.length)]; return { id: 'SUP-' + (1040 + i * 7), name, region, country, cur, risk: r() }; });\nconst rows = [];\nfor (let i = 0; i < 900; i++) {\n  const s = sup[Math.floor(r() * sup.length)];\n  const old = r() < .38, age = old ? 200 + Math.floor(r() * 1760) : Math.floor(r() * 200);\n  const inv = new Date(today - age * DAY), term = [30, 45, 60][Math.floor(r() * 3)], due = new Date(+inv + term * DAY);\n  const usd = Math.exp(7.6 + r() * 4.1) * (1 + s.risk * .6);\n  let status, paid = null;\n  if (due > today) { if (r() < .28) { status = 'Paid'; paid = new Date(+inv + Math.floor(r() * term) * DAY); } else status = 'Unpaid'; }\n  else { const x = old ? r() * .68 : r() - s.risk * .18; if (x < .66) { status = 'Paid'; paid = new Date(Math.min(+today, +inv + Math.floor(term * (.6 + r() * .8)) * DAY)); } else if (x < .92) status = 'Unpaid'; else status = 'Disputed'; }\n  rows.push({ invoice_id: 'INV-26' + String(400000 + i * 13), supplier_id: s.id, supplier: s.name, region: s.region, country: s.country, business_unit: BUS[Math.floor(r() * BUS.length)], invoice_date: iso(inv), due_date: iso(due), amount_local: Math.round(usd / FXL[s.cur] * 100) / 100, currency: s.cur, status, paid_date: paid ? iso(paid) : null });\n}\n// a few planted data defects for the Validation step\nObject.keys(C).forEach((rg, k) => { const recent = rows.filter(x => x.region === rg && (today - new Date(x.invoice_date)) / DAY < 25);\n  if (recent[0]) rows.push({ ...recent[0] }); if (recent[1]) recent[1].due_date = null; if (recent[2] && k === 0) recent[2].amount_local = -Math.abs(recent[2].amount_local); });\nreturn rows.filter(x => x.invoice_date >= spec.date_from && x.invoice_date <= spec.date_to && (spec.region === 'Global' || x.region === spec.region)).map(json => ({ json }));"
+      },
+      "id": "3e028e60-beea-4ab5-b10a-cb5066e7954f",
+      "name": "AP Ledger (sample data)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1740,
+        830
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const FX = { PHP: .0172, SGD: .75, INR: .0119, JPY: .0066, AUD: .66, GBP: 1.27, EUR: 1.08, PLN: .25, USD: 1, CAD: .73, MXN: .055, BRL: .19 };\nreturn $input.all().map(i => {\n  const rate = FX[i.json.currency] ?? 1;\n  return { json: { ...i.json, fx_rate_usd: rate, amount_usd: Math.round(Number(i.json.amount_local) * rate * 100) / 100 } };\n});"
+      },
+      "id": "dc2fcc8d-48ab-48d4-aa59-fbf71ab6c69c",
+      "name": "FX Normalize (USD)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1990,
+        830
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(i => i.json);\nconst before = rows.reduce((a, r) => a + r.amount_usd, 0);\nconst seen = new Set(), clean = [], exceptions = [];\nlet dup = 0, missing = 0, negative = 0;\nfor (const r of rows) {\n  if (seen.has(r.invoice_id)) { dup++; exceptions.push({ rule: 'Duplicate invoice_id', invoice_id: r.invoice_id, action: 'Removed', amount_usd: r.amount_usd }); continue; }\n  seen.add(r.invoice_id);\n  const x = { ...r };\n  if (!x.due_date) { missing++; x.due_date = new Date(new Date(x.invoice_date).getTime() + 30 * 864e5).toISOString().slice(0, 10); exceptions.push({ rule: 'Missing due_date', invoice_id: x.invoice_id, action: 'Imputed invoice_date + 30 days', amount_usd: x.amount_usd }); }\n  if (x.amount_usd < 0) { negative++; exceptions.push({ rule: 'Negative amount', invoice_id: x.invoice_id, action: 'Excluded, sent to credit-memo review', amount_usd: x.amount_usd }); continue; }\n  clean.push(x);\n}\nconst removed = exceptions.filter(e => e.action !== 'Imputed invoice_date + 30 days').reduce((a, e) => a + e.amount_usd, 0);\nconst after = clean.reduce((a, r) => a + r.amount_usd, 0);\nconst variance = Math.round((before - removed - after) * 100) / 100;\nreturn [{ json: {\n  passed: clean.length > 0 && variance === 0,\n  rows_in: rows.length, rows_out: clean.length,\n  checks: { duplicate_ids: dup, missing_due_dates: missing, negative_amounts: negative, control_total_variance: variance },\n  exceptions, rows: clean\n} }];"
+      },
+      "id": "4fc1129b-56cb-4b63-9e87-e6ee726b7cc4",
+      "name": "Validation Checks",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        1170
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c84b96b3-8b1d-48ee-8732-2032cb455e04",
+              "leftValue": "={{ $json.passed }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "3b439753-8356-4cae-ae31-006c1562a8f7",
+      "name": "Reconciled?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2490,
+        1170
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "data-quality@example.com",
+        "subject": "=Data check failed for {{ $('Parse Spec').first().json.request_id }}",
+        "emailType": "text",
+        "message": "=The AP extract did not reconcile, so the report was stopped before analysis.\n\nChecks: {{ JSON.stringify($json.checks) }}\nRows in: {{ $json.rows_in }} · rows out: {{ $json.rows_out }}",
+        "options": {}
+      },
+      "id": "1595d9a5-18eb-43f0-8a2a-58be4ef78103",
+      "name": "Data Issue Alert",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2740,
+        1230
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const spec = ($('Standard SLA (3 BD)').isExecuted ? $('Standard SLA (3 BD)').first().json : $('Urgent SLA (same day)').first().json);\nconst rows = $json.rows;\nconst today = new Date(); today.setHours(0, 0, 0, 0);\nconst dpd = r => Math.max(0, Math.floor((today - new Date(r.due_date)) / 864e5));\nconst B = ['Current', '1-30', '31-60', '61-90', '90+'];\nconst bk = d => d <= 0 ? 0 : d <= 30 ? 1 : d <= 60 ? 2 : d <= 90 ? 3 : 4;\nconst open = rows.filter(r => r.status !== 'Paid').map(r => ({ ...r, days_past_due: dpd(r), aging_bucket: B[bk(dpd(r))] }));\nconst sum = (a, f) => a.reduce((t, x) => t + f(x), 0);\nconst regions = [...new Set(open.map(r => r.region))].sort();\nconst aging = regions.map(rg => { const v = [0, 0, 0, 0, 0]; open.filter(r => r.region === rg).forEach(r => v[bk(r.days_past_due)] += r.amount_usd);\n  return { region: rg, ...Object.fromEntries(B.map((b, i) => [b, Math.round(v[i])])), total: Math.round(v.reduce((a, b) => a + b, 0)) }; });\nconst overdue = open.filter(r => r.days_past_due > 0);\nconst flagged = open.filter(r => r.days_past_due > spec.aging_threshold_days).sort((a, b) => b.days_past_due - a.days_past_due);\nconst paid = rows.filter(r => r.status === 'Paid');\nconst by = {};\nopen.forEach(r => { const o = by[r.supplier] || (by[r.supplier] = { supplier: r.supplier, region: r.region, open_invoices: 0, open_usd: 0, overdue_usd: 0, max_days_past_due: 0, disputed: 0 });\n  o.open_invoices++; o.open_usd += r.amount_usd; if (r.days_past_due > 0) o.overdue_usd += r.amount_usd; o.max_days_past_due = Math.max(o.max_days_past_due, r.days_past_due); if (r.status === 'Disputed') o.disputed++; });\nconst suppliers = Object.values(by).map(o => { const score = Math.max(0, Math.round(100 - (o.overdue_usd / Math.max(o.open_usd, 1)) * 55 - Math.min(o.max_days_past_due, 180) / 180 * 30 - (o.disputed ? 15 : 0)));\n  return { ...o, open_usd: Math.round(o.open_usd), overdue_usd: Math.round(o.overdue_usd), health_score: score, band: score >= 70 ? 'Healthy' : score >= 45 ? 'Watch' : 'At Risk' }; })\n  .sort((a, b) => b.open_usd - a.open_usd).slice(0, 10);\nconst by_business_unit = [...new Set(open.map(r => r.business_unit))].map(b => ({ business_unit: b, open_usd: Math.round(sum(open.filter(r => r.business_unit === b), r => r.amount_usd)) })).sort((a, b) => b.open_usd - a.open_usd);\nconst openUsd = sum(open, r => r.amount_usd), overUsd = sum(overdue, r => r.amount_usd);\nconst kpis = {\n  open_invoices: open.length, open_usd: Math.round(openUsd), overdue_usd: Math.round(overUsd),\n  overdue_share: openUsd ? +(overUsd / openUsd).toFixed(3) : 0,\n  avg_days_past_due: overdue.length ? Math.round(sum(overdue, r => r.days_past_due) / overdue.length) : 0,\n  flagged_invoices: flagged.length, flagged_usd: Math.round(sum(flagged, r => r.amount_usd)),\n  disputed_invoices: open.filter(r => r.status === 'Disputed').length,\n  on_time_payment_rate: paid.length ? +(paid.filter(r => r.paid_date <= r.due_date).length / paid.length).toFixed(3) : null,\n  suppliers_at_risk: suppliers.filter(s => s.band === 'At Risk').length\n};\nreturn [{ json: { spec, data_quality: $json.checks, kpis, aging_by_region: aging, supplier_health: suppliers, by_business_unit, flagged } }];"
+      },
+      "id": "d53477f2-f051-418b-88bd-a04da9b4884c",
+      "name": "Compute KPIs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2740,
+        1510
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write the executive summary for this payables report as 4 to 6 bullet points, then one line of recommended next steps.\n{{ $runIndex > 0 ? 'REVISION ' + ($runIndex + 1) + ': the manager rejected the previous version. Make it tighter and add the open value by business unit.' : '' }}\n\nData:\n{{ JSON.stringify((({ spec, data_quality, kpis, aging_by_region, supplier_health, by_business_unit }) => ({ spec, data_quality, kpis, aging_by_region, supplier_health, by_business_unit }))($('Compute KPIs').first().json), null, 2) }}",
+        "options": {
+          "systemMessage": "You are a senior business analyst reporting to senior management and the CEO. You turn KPIs into a short, plain executive summary. Lead with the biggest risk and name the suppliers to watch. Use only figures from the data; never invent numbers."
+        }
+      },
+      "id": "dbd1c1a5-4f70-4eab-9e73-f891ac26f83e",
+      "name": "Insights Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        2990,
+        1510
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-5-5",
+          "mode": "id"
+        },
+        "options": {
+          "maxTokensToSample": 1200,
+          "temperature": 0.2
+        }
+      },
+      "id": "7eae4948-9436-4e8d-b6c9-6157f81528bc",
+      "name": "Claude · Insights Agent",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        2990,
+        1680
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "reporting.manager@example.com",
+        "subject": "=Approve report {{ $('Compute KPIs').first().json.spec.request_id }} · {{ $('Compute KPIs').first().json.spec.report_type }} ({{ $('Compute KPIs').first().json.spec.region }})",
+        "message": "=Requested by {{ $('Compute KPIs').first().json.spec.requested_by }} ({{ $('Compute KPIs').first().json.spec.department }}) · invoices {{ $('Compute KPIs').first().json.spec.date_from }} to {{ $('Compute KPIs').first().json.spec.date_to }} · SLA due {{ $('Compute KPIs').first().json.spec.sla_due }}\n\n{{ $json.output }}\n\nApprove to send the Excel report to the stakeholder, or decline to send it back to Analytics.",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double"
+          }
+        },
+        "options": {}
+      },
+      "id": "6b09f2df-e4b6-4ec4-ab7e-15a07ba3d371",
+      "name": "Manager Approval",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        3240,
+        2190
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "21a1da0f-ab37-446e-93ae-7686d5bc6a2d",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "121484a9-7357-42d8-9951-b9f684a75b36",
+      "name": "Approved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3490,
+        2190
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write the delivery email body (plain text, no subject line) to {{ $('Compute KPIs').first().json.spec.requested_by }} for request {{ $('Compute KPIs').first().json.spec.request_id }}. Say the Excel report is attached, give the three most important points from the summary below, mention the date range {{ $('Compute KPIs').first().json.spec.date_from }} to {{ $('Compute KPIs').first().json.spec.date_to }}, and sign off as Business Planning & Analytics.\n\nSummary:\n{{ $('Insights Agent').last().json.output }}",
+        "options": {
+          "systemMessage": "You are the reporting coordinator. You write short, clear delivery emails to stakeholders."
+        }
+      },
+      "id": "d048a821-ebad-4201-8f5b-1dae2830e73f",
+      "name": "Distribution Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        3740,
+        490
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-5-5",
+          "mode": "id"
+        },
+        "options": {
+          "maxTokensToSample": 1200,
+          "temperature": 0.2
+        }
+      },
+      "id": "fb6f043c-9e6f-40bf-94b1-087d5d6b4b20",
+      "name": "Claude · Distribution Agent",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        3740,
+        660
+      ],
+      "credentials": {
+        "anthropicApi": {
+          "id": "",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const k = $('Compute KPIs').first().json;\nconst rows = k.flagged.map(r => ({ json: {\n  'Invoice': r.invoice_id, 'Supplier': r.supplier, 'Region': r.region, 'Country': r.country,\n  'Business unit': r.business_unit, 'Invoice date': r.invoice_date, 'Due date': r.due_date,\n  'Currency': r.currency, 'Amount (local)': r.amount_local, 'Amount (USD)': r.amount_usd,\n  'Status': r.status, 'Days past due': r.days_past_due, 'Aging bucket': r.aging_bucket\n} }));\nreturn rows.length ? rows : [{ json: { 'Note': `No open invoices over ${k.spec.aging_threshold_days} days in this date range.` } }];"
+      },
+      "id": "22900ba2-828d-4dc6-b083-5c1306498b32",
+      "name": "Shape Excel Rows",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3990,
+        1850
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "data",
+        "options": {
+          "fileName": "={{ $('Compute KPIs').first().json.spec.request_id }}_{{ $('Compute KPIs').first().json.spec.report_type.replace(/ /g, '_') }}_{{ $('Compute KPIs').first().json.spec.region }}.xlsx",
+          "sheetName": "Open Invoices",
+          "headerRow": true
+        }
+      },
+      "id": "317da97d-3abe-468b-a10e-87fcf5d58dcb",
+      "name": "Excel Builder",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        4240,
+        1850
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Compute KPIs').first().json.spec.requester_email }}",
+        "subject": "=[{{ $('Compute KPIs').first().json.spec.request_id }}] {{ $('Compute KPIs').first().json.spec.report_type }} · {{ $('Compute KPIs').first().json.spec.region }} · ready",
+        "emailType": "text",
+        "message": "={{ $('Distribution Agent').last().json.output }}",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "data"
+              }
+            ]
+          }
+        }
+      },
+      "id": "3497ef00-2cf7-4959-a1e6-fb5317bab636",
+      "name": "Send Report to Stakeholder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        4490,
+        150
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const k = $('Compute KPIs').first().json, s = k.spec;\nreturn [{ json: {\n  request_id: s.request_id, requested_by: s.requested_by, department: s.department, report_type: s.report_type,\n  region: s.region, date_from: s.date_from, date_to: s.date_to, priority: s.priority, sla_due: s.sla_due,\n  delivered_at: new Date().toISOString(), met_sla: new Date().toISOString().slice(0, 10) <= s.sla_due,\n  open_usd: k.kpis.open_usd, flagged_invoices: k.kpis.flagged_invoices, revisions: $('Insights Agent').runIndex + 1, status: 'Closed'\n} }];"
+      },
+      "id": "78c24143-12db-48bd-9e82-3d59a6396ca6",
+      "name": "Tracker Row",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4740,
+        490
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": "Report Tracker"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Requests"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "84b820a4-4242-4219-b13f-3b5bc6cf7f99",
+      "name": "Report Tracker",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        4990,
+        490
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Claude · Intake Agent": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Intake Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · Insights Agent": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Insights Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Claude · Distribution Agent": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Distribution Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Report Request Form": {
+      "main": [
+        [
+          {
+            "node": "Intake Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Intake Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse Spec",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Spec": {
+      "main": [
+        [
+          {
+            "node": "SLA Router",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SLA Router": {
+      "main": [
+        [
+          {
+            "node": "Urgent SLA (same day)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Standard SLA (3 BD)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Urgent SLA (same day)": {
+      "main": [
+        [
+          {
+            "node": "SQL Extract (AP ledger)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Standard SLA (3 BD)": {
+      "main": [
+        [
+          {
+            "node": "SQL Extract (AP ledger)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SQL Extract (AP ledger)": {
+      "main": [
+        [
+          {
+            "node": "AP Ledger (sample data)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AP Ledger (sample data)": {
+      "main": [
+        [
+          {
+            "node": "FX Normalize (USD)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "FX Normalize (USD)": {
+      "main": [
+        [
+          {
+            "node": "Validation Checks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validation Checks": {
+      "main": [
+        [
+          {
+            "node": "Reconciled?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reconciled?": {
+      "main": [
+        [
+          {
+            "node": "Compute KPIs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Data Issue Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compute KPIs": {
+      "main": [
+        [
+          {
+            "node": "Insights Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insights Agent": {
+      "main": [
+        [
+          {
+            "node": "Manager Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manager Approval": {
+      "main": [
+        [
+          {
+            "node": "Approved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved?": {
+      "main": [
+        [
+          {
+            "node": "Distribution Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Insights Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Distribution Agent": {
+      "main": [
+        [
+          {
+            "node": "Shape Excel Rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shape Excel Rows": {
+      "main": [
+        [
+          {
+            "node": "Excel Builder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Excel Builder": {
+      "main": [
+        [
+          {
+            "node": "Send Report to Stakeholder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Report to Stakeholder": {
+      "main": [
+        [
+          {
+            "node": "Tracker Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tracker Row": {
+      "main": [
+        [
+          {
+            "node": "Report Tracker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ca17745c-aa14-49b3-8a19-e591c62996f1",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
