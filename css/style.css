@@ -1953,22 +1953,40 @@ a, button, summary, input {
   width: min(38rem, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
   padding: 0;
-  border: 1px solid var(--line-strong);
-  border-radius: 18px;
-  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 28px;
+  /* Liquid Glass: clear tinted pane, heavy blur + saturation, lit top-left rim */
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, .05)),
+    rgba(21, 21, 19, .14);
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
   color: var(--ink);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .04);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .5),
+    inset 1px 1px 0 rgba(255, 255, 255, .28),
+    inset -1px -1px 0 rgba(255, 255, 255, .08),
+    inset 0 0 32px rgba(255, 255, 255, .05);
   overscroll-behavior: contain;
 }
 
+/* Too see-through to read without blur, or when the user asks for less transparency */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .mail-dialog { background: var(--surface); }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .mail-dialog { background: var(--surface); }
+}
+
 .mail-dialog[open] {
-  animation: mail-in .45s var(--ease);
+  animation: mail-in .55s cubic-bezier(.34, 1.4, .64, 1);
 }
 
 .mail-dialog::backdrop {
-  background: rgba(8, 8, 7, .72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* Light dim only, so the page stays visible through the glass */
+  background: rgba(8, 8, 7, .18);
 }
 
 .mail-dialog[open]::backdrop {
@@ -1976,7 +1994,7 @@ a, button, summary, input {
 }
 
 @keyframes mail-in {
-  from { opacity: 0; translate: 0 16px; scale: .97; }
+  from { opacity: 0; translate: 0 20px; scale: .92; }
 }
 
 @keyframes mail-fade {
@@ -1992,9 +2010,12 @@ a, button, summary, input {
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(255, 255, 255, .16);
   border-radius: 50%;
-  background: rgba(13, 13, 12, .6);
+  background: rgba(255, 255, 255, .08);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: border-color .25s var(--ease), rotate .35s var(--ease), scale .2s var(--ease);
 }
 
@@ -2008,7 +2029,7 @@ a, button, summary, input {
 }
 
 .mail-close:hover {
-  border-color: var(--ink);
+  border-color: rgba(255, 255, 255, .45);
   rotate: 90deg;
 }
 
@@ -2079,9 +2100,10 @@ a, button, summary, input {
 .mail-form textarea {
   width: 100%;
   padding: 13px 15px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: rgba(13, 13, 12, .55);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
   color: var(--ink);
   font: inherit;
   font-size: 1rem;
@@ -2096,15 +2118,16 @@ a, button, summary, input {
 
 .mail-form input:hover,
 .mail-form textarea:hover {
-  border-color: #4a4945;
+  border-color: rgba(255, 255, 255, .22);
 }
 
 .mail-form input:focus,
 .mail-form textarea:focus {
   border-color: var(--accent-text);
-  background: var(--bg);
+  background: rgba(255, 255, 255, .09);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(199, 169, 255, .18);
+  /* Keeps the resting inset highlight first so the ring fades in instead of snapping */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 0 3px rgba(199, 169, 255, .18);
 }
 
 .mail-form textarea {
@@ -2116,6 +2139,8 @@ a, button, summary, input {
   width: 100%;
   min-height: 52px;
   margin-top: 4px;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 10px 30px rgba(124, 58, 237, .35);
 }
 
 .mail-arrow {
