@@ -1196,6 +1196,12 @@ a, button, summary, input {
   align-self: stretch;
   justify-content: flex-start;
   padding: 0;
+  /* The row sets the height; a fixed ratio here would push the cover wider than its card. */
+  aspect-ratio: auto;
+}
+
+.mini .project-cover {
+  justify-content: center;
 }
 
 .mini .project-media img,
