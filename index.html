@@ -555,9 +555,25 @@ document.documentElement.classList.add('js');
         </article>
 
         <article class="project card mini" id="p-converter" data-tags="python">
-          <figure class="project-media project-cover">
-            <svg class="cover-illustration" viewBox="14 8 115 64" aria-hidden="true" focusable="false"><path class="draw-line" d="M18 12h45l14 14v42H18zM63 12v16h14M28 38h30M28 47h30M28 56h22M86 40h39M115 30l10 10-10 10M106 22h18v13"/></svg>
-            <figcaption>Command-line tool</figcaption>
+          <figure class="project-media term-media">
+            <svg class="cover-term" viewBox="0 0 320 200" role="img" aria-label="Terminal run of the converter: 1 PDF found, 14 pages parsed and converted, then a summary of 1 converted, 0 skipped and 0 failed in 0.44 seconds, a 100% success rate" focusable="false">
+              <rect class="t-bg" width="320" height="200"/>
+              <rect class="t-bar-bg" width="320" height="20"/>
+              <text class="t-dim" x="14" y="13.5">~/File_Converter $ python3 main.py</text>
+              <text class="t-line t-head" style="--i:0" x="14" y="38">PDF TO WORD CONVERTER</text>
+              <text class="t-line" style="--i:1" x="14" y="52">Found 1 PDF file(s).</text>
+              <text class="t-line t-dim" style="--i:2" x="14" y="66"><tspan class="t-head">[3/4]</tspan> Parsing pages… (14/14)</text>
+              <text class="t-line t-ok" style="--i:3" x="14" y="80">✓ Converted: example.pdf</text>
+              <text class="t-line" style="--i:4" x="14" y="94">Converting: 100%</text>
+              <rect class="t-line t-track" style="--i:4" x="108" y="87.5" width="198" height="7"/>
+              <rect class="t-fill" x="108" y="87.5" width="198" height="7"/>
+              <path class="t-line t-rule" style="--i:5" d="M14 108.5h292M14 128.5h292"/>
+              <text class="t-line t-head" style="--i:5" x="14" y="122">SUMMARY</text>
+              <text class="t-line t-ok" style="--i:6" x="14" y="144">Converted<tspan x="104">: 1</tspan></text>
+              <text class="t-line t-warn" style="--i:7" x="14" y="157">Skipped<tspan x="104">: 0</tspan></text>
+              <text class="t-line t-bad" style="--i:8" x="14" y="170">Failed<tspan x="104">: 0</tspan></text>
+              <text class="t-line t-dim" style="--i:9" x="14" y="183">Time<tspan x="104">: 0.44 s</tspan><tspan x="176" class="t-head">Success rate : 100.0%</tspan></text>
+            </svg>
           </figure>
           <div class="card-body">
             <h3>PDF to Word converter</h3>

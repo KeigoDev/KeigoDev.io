@@ -1037,25 +1037,50 @@ a, button, summary, input {
   line-height: 1.45;
 }
 
-.project-cover {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 16 / 10;
-  padding: 32px;
+/* PDF converter cover: the tool's terminal run, replayed line by line once the card is on screen.
+   Colours follow the script's own (colorama), with its cyan headings in the site violet. */
+.cover-term {
+  display: block;
+  width: 100%;
+  background: #121211;
+  font-family: var(--mono);
+  font-size: 9.5px;
 }
 
-.project-cover figcaption {
-  margin-top: 12px;
-  color: #4a4944;
-  font-size: var(--step-small);
+.cover-term text { fill: var(--ink); }
+.cover-term .t-bg { fill: #121211; }
+.cover-term .t-bar-bg { fill: #1e1d1b; }
+.cover-term .t-dim { fill: var(--dim); }
+.cover-term .t-head { fill: var(--accent-text); }
+.cover-term .t-ok { fill: #7fd49a; }
+.cover-term .t-warn { fill: #e6cf72; }
+.cover-term .t-bad { fill: #f0897c; }
+.cover-term .t-track { fill: var(--line); }
+.cover-term .t-fill { fill: var(--accent); }
+.cover-term .t-rule { fill: none; stroke: var(--line-strong); stroke-dasharray: 3 3; }
+
+.cover-term .t-fill {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
 }
 
-.cover-illustration {
-  width: 70%;
-  fill: none;
-  stroke: #1c1b19;
-  stroke-width: 2;
-  stroke-linecap: square;
+.cover-term.is-waiting .t-line { opacity: 0; }
+.cover-term.is-waiting .t-fill { transform: scaleX(0); }
+
+.cover-term.is-playing .t-line {
+  animation: term-line .3s var(--ease) calc(var(--i) * 160ms) both;
+}
+
+.cover-term.is-playing .t-fill {
+  animation: term-fill .9s cubic-bezier(.45, 0, .2, 1) .5s both;
+}
+
+@keyframes term-line {
+  from { opacity: 0; }
+}
+
+@keyframes term-fill {
+  from { transform: scaleX(0); }
 }
 
 .project-thumbs {
@@ -1196,20 +1221,19 @@ a, button, summary, input {
   align-self: stretch;
   justify-content: flex-start;
   padding: 0;
-  /* The row sets the height; a fixed ratio here would push the cover wider than its card. */
-  aspect-ratio: auto;
-}
-
-.mini .project-cover {
-  justify-content: center;
 }
 
 .mini .project-media img,
-.mini .project-cover svg {
+.mini .project-media svg {
   aspect-ratio: 16 / 10;
   height: auto;
   object-fit: cover;
   object-position: 0 0;
+}
+
+/* No caption under the terminal, so it fills the rest of the picture row. */
+.mini .term-media {
+  background: #121211;
 }
 
 .mini .card-body {

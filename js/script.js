@@ -156,37 +156,21 @@ if (expPanel && 'IntersectionObserver' in window) {
   jobs.forEach(job => jobObserver.observe(job));
 }
 
-/* Project drawing (the PDF converter cover) */
-
-function drawCover(svg) {
-  const paths = [...svg.querySelectorAll('.draw-line')];
-  if (reducedMotion.matches || !svg.animate) {
-    return;
-  }
-  paths.forEach((path, index) => {
-    const length = path.getTotalLength();
-    path.animate(
-      [{ strokeDasharray: length, strokeDashoffset: length }, { strokeDasharray: length, strokeDashoffset: 0 }],
-      { duration: 1600, delay: index * 110, easing: ease }
-    );
-  });
-}
-
 /* Work: a deck of featured cards and a slider of smaller ones */
 
 const slider = $('.slider');
 
-// The PDF converter's drawing plays once its card is on screen.
-if ('IntersectionObserver' in window) {
-  const drawObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        drawCover(entry.target);
-        drawObserver.unobserve(entry.target);
-      }
-    });
+// The PDF converter's terminal replays its run once its card is on screen.
+const term = $('.cover-term');
+if (term && 'IntersectionObserver' in window && !reducedMotion.matches) {
+  term.classList.add('is-waiting');
+  const termObserver = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      term.classList.replace('is-waiting', 'is-playing');
+      termObserver.disconnect();
+    }
   }, { threshold: 0.4 });
-  $$('.cover-illustration').forEach(svg => drawObserver.observe(svg));
+  termObserver.observe(term);
 }
 
 /* Arrival: when an in-page link lands, the section's label is underlined and its heading settles
