@@ -331,7 +331,7 @@ $$('.has-video').forEach(figure => {
   }
 });
 
-/* Websites: three tabs, one plate */
+/* Websites: one tab per site, one plate */
 
 const siteTabs = $$('.site-tab');
 
