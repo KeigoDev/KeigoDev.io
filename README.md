@@ -24,7 +24,6 @@ Citi experience: October 2025–October 2026.
     assets/work/          project and website screenshots, and the British Airways dashboard recording
     assets/downloads/     Power BI files, Excel and CSV datasets offered as downloads
     assets/originals/     full-size photos the compressed ones were made from (not loaded by the page)
-    docs/                 REVIEW.md (checks and open questions) and SHA256SUMS.txt (file checksums)
 
 assets/ap-reporting-agent-flow.html and assets/food-affordability-dashboard.html are only redirects, so
 links to the old addresses keep working.
@@ -51,8 +50,8 @@ folders to your static host's public directory. Preserve filename capitalization
 and relative paths. Do not upload only index.html.
 
 This export does not contain hosting credentials or account-specific configuration.
-docs/ and this README are handoff documentation and do not
-need to be published.
+This README is handoff documentation and does not
+need to be published. Working notes (docs/, .impeccable/) stay local and are not committed.
 
 ## Editing
 

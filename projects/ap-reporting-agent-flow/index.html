@@ -456,7 +456,7 @@ table.mini td.num{text-align:right}
 </div>
 <div class="toast" id="toast" hidden></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js" integrity="sha512-dlPw+ytv/6JyepmelABrgeYgHI0O+frEwgfnPdXDTOIZz+eDgfW07QXG02/O8COfivBdGNINy+Vex+lYmJ5rxw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 (function(){
 const $=s=>document.querySelector(s);
@@ -593,7 +593,9 @@ function template(){const lanes=TEMPLATE_LANES.map(([name,sub],i)=>({id:'L'+(i+1
   return{name:'Stakeholder Report Automation',lanes,nodes:TEMPLATE_KINDS.map(k=>makeNode(k,lanes.find(l=>l.name===KINDS[k].lane).id))}}
 const KEY='ap-agent-flow.v2';
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(valid(s))return s}catch(e){}return template()}
-function valid(w){return w&&Array.isArray(w.lanes)&&w.lanes.length&&Array.isArray(w.nodes)&&w.nodes.length&&w.nodes[0].kind==='trigger_form'&&w.nodes.every(n=>KINDS[n.kind]&&n.uid)}
+// IDs go into HTML attributes, so an imported file may only use plain IDs.
+const okId=v=>typeof v==='string'&&/^[\w-]{1,40}$/.test(v);
+function valid(w){return w&&Array.isArray(w.lanes)&&w.lanes.length&&w.lanes.every(l=>l&&okId(l.id))&&Array.isArray(w.nodes)&&w.nodes.length&&w.nodes[0].kind==='trigger_form'&&w.nodes.every(n=>KINDS[n.kind]&&okId(n.uid))}
 let saveT;function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(WF))}catch(e){}},250)}
 let WF=load();
 const laneIdx=id=>Math.max(0,WF.lanes.findIndex(l=>l.id===id));
