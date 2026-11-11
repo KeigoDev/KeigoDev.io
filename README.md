@@ -8,6 +8,7 @@ Citi experience: October 2025–October 2026.
 
     index.html            the portfolio (home page)
     404.html              shown by GitHub Pages for a missing address (absolute links)
+    tests/                security and page checks (see Checks below)
     robots.txt            search engine files; they stay at the top level
     sitemap.xml
     css/style.css         design tokens, responsive layout and states
@@ -75,3 +76,19 @@ The logo is assets/brand/logo-mark.svg (also assets/brand/favicon.svg); the link
 Power BI files are downloads, not embedded browser dashboards. They require
 compatible Power BI software to inspect. The WHO CSV stays in assets/downloads/ but is not linked from the page;
 the WHO card links to the WHO data source instead.
+
+## Checks
+
+Every page carries a Content Security Policy (the meta tag after charset). It lists the only places
+scripts may come from, plus a fingerprint of each inline <script>. Edit an inline script and the
+browser blocks it until the fingerprint is refreshed, so run these before each push:
+
+    python3 tests/check_site.py           # CSP fingerprints, CDN integrity, leaked keys, debug code
+    python3 tests/check_site.py --fix     # refresh fingerprints after editing an inline script
+    python3 tests/check_site.py --history # also scan every past commit for keys
+
+    python3 -m http.server 8765 &
+    node tests/browser.mjs                # every page loads with nothing blocked; form sends;
+                                          # the AP builder runs a booby-trapped workflow safely
+
+browser.mjs needs Playwright (npm i -g playwright, then set PLAYWRIGHT to its index.mjs path).
