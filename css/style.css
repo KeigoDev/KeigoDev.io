@@ -1,7 +1,8 @@
 /* Matthew Ferrer: portfolio
-   Design: dark, straightforward, information first (inspired by consultancy sites such as valiotti.com).
+   Design: light, straightforward, information first; colours, tiles and motion after n8n.io.
    What is his alone: the live dashboard recording in the project cards, the browser tour of the
-   client websites, his own photographs, and the hero network drawn as 26 tools in three clusters.
+   client websites, his own photographs, and the hero canvas: his Citi reporting run drawn as an
+   n8n-style workflow of the tools he uses.
    Type: Instrument Serif (headlines), Satoshi (reading), IBM Plex Mono (labels).
    Instrument Serif and IBM Plex Mono: SIL Open Font License. Satoshi: ITF Free Font License. All self-hosted. */
 
@@ -96,23 +97,29 @@
 }
 
 :root {
-  /* Shape: softly rounded controls */
-  --radius: 10px;
+  /* Shape, after n8n.io: pill buttons, 8px controls, 16px tiles */
+  --radius: 8px;
+  --radius-card: 16px;
 
-  /* Colour: near-black, warm greys, one violet */
-  --bg: #0d0d0c;
-  --surface: #151513;
-  --surface-2: #1c1b19;
-  --line: #2a2926;
-  --line-strong: #3a3936;
-  --ink: #ecebe6;
-  --muted: #a3a19a;
-  --dim: #85837c;
-  --accent: #7c3aed;
-  --accent-hover: #6d28d9;
-  --accent-text: #c7a9ff;
-  --accent-ink: #ffffff;
-  --paper: #f4f4f2;
+  /* Colour, after n8n.io's default (light) theme: near-white ground, neutral greys, one soft pink.
+     Pink as text is the deeper #cb1861 so it passes contrast on white; the pale pink fills buttons. */
+  --bg: #fafafa;
+  --surface: #f0f0f0;
+  --surface-2: #e6e6e6;
+  --line: #d9d9d9;
+  --line-strong: #c2c2c2;
+  --ink: #161616;
+  --muted: #303030;
+  --dim: #616161;
+  --accent: #ffbcca;
+  --accent-hover: #ff91ac;
+  --accent-text: #cb1861;
+  --accent-ink: #161616;
+  --paper: #ffffff;
+  --pink: #ff91ac;
+  /* n8n's embossed surface: a soft inner shadow top-left, a highlight bottom-right */
+  --emboss: inset 1px 1px 2px rgba(0, 0, 0, .08), inset -1px -1px 2px rgba(255, 255, 255, .9);
+  --ring: 0 0 0 2px var(--pink);
 
   /* Type */
   --serif: 'Instrument Serif', 'Instrument Serif Fallback', Georgia, 'Times New Roman', serif;
@@ -129,7 +136,7 @@
   --margin: clamp(16px, 4vw, 80px);
   --max: 1280px;
   --section: clamp(88px, 10vw, 152px);
-  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease: cubic-bezier(0, 0, .2, 1);
 }
 
 /* Reset */
@@ -299,7 +306,7 @@ a, button, summary, input {
 
 .btn {
   display: inline-flex;
-  border-radius: var(--radius);
+  border-radius: 999px;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -354,8 +361,7 @@ a, button, summary, input {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  border-bottom: 1px solid var(--line);
-  background: rgba(13, 13, 12, .94);
+  background: var(--bg);
   transition: transform .45s var(--ease);
 }
 
@@ -375,25 +381,44 @@ a, button, summary, input {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   margin-right: auto;
-  font-family: var(--mono);
-  font-size: var(--step-small);
-  font-weight: 500;
-  letter-spacing: 0.16em;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
-.brand b {
-  color: var(--accent-text);
-  font-weight: 500;
+/* My face (my Notion avatar) is the mark, as n8n.io's +++ is theirs; it is also the tab icon. */
+.brand-face {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  transition: rotate .4s cubic-bezier(.34, 1.56, .64, 1), margin-right .45s var(--ease);
 }
 
-.brand-mark {
-  width: 32px;
-  height: 32px;
+.brand:hover .brand-face {
+  rotate: -10deg;
+}
+
+/* As on n8n.io, the name folds away once the page moves and the mark stays (the bar gets in-hero or
+   scrolled from script.js). It folds to nothing, gap included, so the mark sits alone. */
+.brand-name {
+  display: inline-block;
+  max-width: 10em;
+  overflow: hidden;
+  transition: max-width .45s var(--ease), opacity .3s var(--ease);
+}
+
+.site-nav:is(.in-hero, .scrolled) .brand-name {
+  max-width: 0;
+  opacity: 0;
+}
+
+.site-nav:is(.in-hero, .scrolled) .brand-face {
+  margin-right: 0;
 }
 
 .nav-links {
@@ -440,27 +465,266 @@ a, button, summary, input {
 .hero {
   position: relative;
   padding: calc(72px + clamp(56px, 8vw, 112px)) 0 clamp(64px, 8vw, 104px);
-  border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 
-.hero-net {
+/* The canvas: n8n's dotted editor grid behind the whole first screen */
+.hero {
+  background: url('../assets/brand/canvas-dot.svg') 0 0 / 24px 24px;
+}
+
+/* The canvas below the first screen, after n8n.io's hero (built by script.js, animated by motion.js).
+   A real interface fragment (data-ui): it keeps n8n's own small labels and grey cards. */
+.hero-flow {
+  position: relative;
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+.flow-view {
+  --k: 1;
+  --w: 1200px;
+  --h: 470px;
+  position: relative;
+  height: calc(var(--h) * var(--k));
+  overflow: hidden;
+}
+
+/* The camera: motion.js pans this layer; the stage inside keeps its CSS scale untouched. */
+.flow-pan {
+  position: absolute;
+  top: 0;
+  left: max(0px, (100% - var(--w) * var(--k)) / 2);
+  width: calc(var(--w) * var(--k));
+  height: 100%;
+}
+
+.flow-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w);
+  height: var(--h);
+  scale: var(--k);
+  transform-origin: 0 0;
+}
+
+.flow-wires {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  overflow: visible;
 }
 
-.hero-net line {
-  stroke: var(--accent-text);
-  stroke-opacity: .16;
-  stroke-width: 1;
+.flow-wire,
+.flow-run,
+.flow-tool-wire {
+  fill: none;
+  stroke-linecap: round;
 }
 
-.hero-net circle {
-  fill: var(--accent-text);
-  fill-opacity: .55;
+.flow-wire {
+  stroke: #cfcfcf;
+  stroke-width: 2;
+}
+
+.flow-tool-wire {
+  stroke: #d6d6d6;
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+
+/* The pink run: hidden until motion.js draws it along the wire. */
+.flow-run {
+  stroke: var(--pink);
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.flow-port {
+  fill: #6b6b6b;
+}
+
+.flow-socket {
+  fill: #6b6b6b;
+}
+
+.flow-node {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  /* x, y in the data are the centre of the card. */
+  translate: -50% -32px;
+}
+
+.flow-card {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: #ececec;
+  box-shadow: 0 0 0 calc(var(--hl, 0) * 2.5px) var(--pink);
+}
+
+.flow-card img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.is-trigger .flow-card {
+  border-radius: 32px 12px 12px 32px;
+}
+
+.is-tool .flow-card {
+  border-radius: 50%;
+}
+
+.is-agent .flow-card {
+  grid-auto-flow: column;
+  gap: 12px;
+  justify-content: start;
+  width: 220px;
+  padding-inline: 20px;
+}
+
+.flow-glyph,
+.flow-agent-icon {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flow-agent-name {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.is-end {
+  translate: -50% -12px;
+}
+
+.is-end .flow-card {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.flow-glyph {
+  width: 28px;
+  height: 28px;
+}
+
+.is-agent .flow-glyph {
+  width: 30px;
+  height: 30px;
+  flex: none;
+}
+
+.flow-label {
+  width: 150px;
+  margin-top: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* The prompt, as on n8n.io: a grey tray holding the request, its controls and three suggestions. */
+.flow-prompt {
+  position: absolute;
+  top: 70px;
+  left: 350px;
+  width: 500px;
+  padding: 12px;
+  border-radius: 20px;
+  background: #ececec;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.flow-box {
+  padding: 18px 18px 14px;
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+.flow-text {
+  min-height: 3.9em;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.flow-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--accent-text);
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% { opacity: 0; }
+}
+
+.flow-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.flow-tools svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.flow-send {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--pink);
+}
+
+.flow-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.flow-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e0e0e0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 .hero-grid {
@@ -530,7 +794,6 @@ a, button, summary, input {
   height: auto;
   aspect-ratio: 1;
   margin-inline: auto;
-  border: 1px solid var(--line-strong);
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 12%;
@@ -576,7 +839,6 @@ a, button, summary, input {
 
 .trust {
   padding: 48px 0;
-  border-bottom: 1px solid var(--line);
 }
 
 .trust-logos {
@@ -660,7 +922,6 @@ a, button, summary, input {
 .credentials,
 .faq {
   padding: var(--section) 0;
-  border-bottom: 1px solid var(--line);
 }
 
 /* Cards: thin outlines on a dark panel */
@@ -748,21 +1009,9 @@ a, button, summary, input {
 
 .method-grid {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(32px, 5vw, 80px);
   align-items: start;
-}
-
-.method-photo {
-  position: sticky;
-  top: 104px;
-}
-
-.method-photo img {
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--line);
-  background: var(--paper);
 }
 
 /* Work: featured projects in a grid of cards; more work in a card slider */
@@ -1038,8 +1287,15 @@ a, button, summary, input {
 }
 
 /* PDF converter cover: the tool's terminal run, replayed line by line once the card is on screen.
-   Colours follow the script's own (colorama), with its cyan headings in the site violet. */
+   Colours follow the script's own (colorama), with its cyan headings in the site pink. */
 .cover-term {
+  /* A real terminal stays dark on the light page, so it keeps its own light-on-dark colours. */
+  --ink: #ecebe6;
+  --dim: #a3a19a;
+  --line: #2a2926;
+  --line-strong: #3a3936;
+  --accent: #ff91ac;
+  --accent-text: #ff91ac;
   display: block;
   width: 100%;
   background: #121211;
@@ -1261,7 +1517,6 @@ a, button, summary, input {
   width: min(100% - 2 * var(--margin), var(--max));
   margin-inline: auto;
   padding: var(--section) 0;
-  border-bottom: 1px solid var(--line);
 }
 
 .clients-plate {
@@ -1581,13 +1836,13 @@ a, button, summary, input {
 }
 
 .logo-light {
-  filter: brightness(0) invert(1);
-  opacity: .9;
+  filter: brightness(0);
+  opacity: .85;
 }
 
-/* Notion draws its letter on a white shape: flip it so the letter shows on dark */
+/* Notion draws its letter on a white shape, which already reads on the light page */
 .logo-invert {
-  filter: invert(1);
+  filter: none;
 }
 
 .skill-logo img {
@@ -1612,11 +1867,11 @@ a, button, summary, input {
 }
 
 .gep-mark {
-  color: #5cc28a;
+  color: #23804d;
 }
 
 .zephyr-mark {
-  color: #9aa6e0;
+  color: #4152a8;
 }
 
 .tile-name {
@@ -1776,7 +2031,6 @@ a, button, summary, input {
 
 .contact {
   padding: var(--section) 0;
-  border-bottom: 1px solid var(--line);
 }
 
 .contact-inner {
@@ -1983,31 +2237,13 @@ a, button, summary, input {
   width: min(38rem, calc(100vw - 32px));
   max-height: calc(100dvh - 32px);
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 28px;
-  /* Liquid Glass: clear tinted pane, heavy blur + saturation, lit top-left rim */
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, .05)),
-    rgba(21, 21, 19, .14);
-  backdrop-filter: blur(16px) saturate(170%);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+  border: 0;
+  border-radius: 24px;
+  /* A solid sheet: it floats, so it is the one thing with a shadow */
+  background: var(--bg);
   color: var(--ink);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, .5),
-    inset 1px 1px 0 rgba(255, 255, 255, .28),
-    inset -1px -1px 0 rgba(255, 255, 255, .08),
-    inset 0 0 32px rgba(255, 255, 255, .05);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .22);
   overscroll-behavior: contain;
-}
-
-/* Too see-through to read without blur, or when the user asks for less transparency */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .mail-dialog { background: var(--surface); }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .mail-dialog { background: var(--surface); }
 }
 
 .mail-dialog[open] {
@@ -2015,8 +2251,7 @@ a, button, summary, input {
 }
 
 .mail-dialog::backdrop {
-  /* Light dim only, so the page stays visible through the glass */
-  background: rgba(8, 8, 7, .18);
+  background: rgba(22, 22, 22, .45);
 }
 
 .mail-dialog[open]::backdrop {
@@ -2040,12 +2275,9 @@ a, button, summary, input {
   place-items: center;
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(255, 255, 255, .16);
+  border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, .08);
-  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--surface);
   transition: border-color .25s var(--ease), rotate .35s var(--ease), scale .2s var(--ease);
 }
 
@@ -2059,7 +2291,7 @@ a, button, summary, input {
 }
 
 .mail-close:hover {
-  border-color: rgba(255, 255, 255, .45);
+  background: var(--surface-2);
   rotate: 90deg;
 }
 
@@ -2130,10 +2362,9 @@ a, button, summary, input {
 .mail-form textarea {
   width: 100%;
   padding: 13px 15px;
-  border: 1px solid rgba(255, 255, 255, .1);
+  border: 1px solid var(--line-strong);
   border-radius: 14px;
-  background: rgba(255, 255, 255, .04);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+  background: #fff;
   color: var(--ink);
   font: inherit;
   font-size: 1rem;
@@ -2148,16 +2379,14 @@ a, button, summary, input {
 
 .mail-form input:hover,
 .mail-form textarea:hover {
-  border-color: rgba(255, 255, 255, .22);
+  border-color: var(--dim);
 }
 
 .mail-form input:focus,
 .mail-form textarea:focus {
   border-color: var(--accent-text);
-  background: rgba(255, 255, 255, .09);
   outline: none;
-  /* Keeps the resting inset highlight first so the ring fades in instead of snapping */
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 0 3px rgba(199, 169, 255, .18);
+  box-shadow: 0 0 0 3px rgba(255, 145, 172, .35);
 }
 
 .mail-form textarea {
@@ -2170,7 +2399,7 @@ a, button, summary, input {
   min-height: 52px;
   margin-top: 4px;
   border-radius: 999px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), 0 10px 30px rgba(124, 58, 237, .35);
+  
 }
 
 .mail-arrow {
@@ -2408,11 +2637,6 @@ html.lenis,
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .method-photo {
-    position: static;
-    max-width: 22rem;
-  }
-
   .exp-panel {
     display: none;
   }
@@ -2463,7 +2687,7 @@ html.lenis,
 }
 
 /* In-page links: press, travel, arrive.
-   1. A violet line draws under the link (and stays under the section being read). */
+   1. A pink line draws under the link (and stays under the section being read). */
 
 .nav-links a,
 .foot-col a {
@@ -2504,7 +2728,7 @@ html.lenis,
   transition-duration: 0s;
 }
 
-/* 3. On arrival the section's label is underlined in violet, then lets go; its heading settles. */
+/* 3. On arrival the section's label is underlined in pink, then lets go; its heading settles. */
 
 .label.is-arriving {
   position: relative;
@@ -2526,7 +2750,7 @@ html.lenis,
   animation: arrive-settle .9s var(--ease) both;
 }
 
-/* A featured card gets a violet edge that fades. */
+/* A featured card gets a pink edge that fades. */
 .card.is-arriving {
   animation: arrive-edge 1.8s var(--ease) both;
 }
@@ -2572,7 +2796,7 @@ html.lenis,
   scale: .96 !important;
 }
 
-/* Click: a violet ring spreads from the point pressed, like a signal on the hero network.
+/* Click: a pink ring spreads from the point pressed, like a signal on the hero network.
    Made by motion.js, so it never appears with reduced motion. */
 .ping {
   --ping: 44px;
@@ -2599,7 +2823,7 @@ dialog .ping {
   border: 1px solid var(--accent-text);
   border-radius: 50%;
   /* A darker halo keeps the ring visible over white screenshots. */
-  box-shadow: 0 0 0 1px rgba(124, 58, 237, .45);
+  box-shadow: 0 0 0 1px rgba(193, 26, 94, .45);
 }
 
 /* A sharp ring, then a fainter echo that travels further. */
@@ -2622,20 +2846,82 @@ dialog .ping {
   to { transform: scale(1.45); opacity: 0; }
 }
 
-/* Apple-style hover: cards lift gently. Uses `translate`, so it never fights GSAP's transforms. */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .card-box,
-  .cert,
-  .tile {
-    transition: border-color .3s var(--ease), background-color .3s var(--ease), translate .5s var(--ease), box-shadow .5s var(--ease);
-  }
+/* Fields, after n8n.io: sections are told apart by a step in tone, not a line.
+   Inside a grey field the cards step back up to the page white. */
+.services,
+.skills,
+.faq {
+  --surface: #fafafa;
+  --surface-2: #ffffff;
+  background: #f0f0f0;
+}
 
-  .card-box:hover,
-  .cert:hover,
-  .tile:hover {
-    translate: 0 -4px;
-    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .6);
-  }
+/* n8n's dark panel: the logo band and the closing contact sit on rounded charcoal.
+   The logos there were drawn white for a dark page (Citi, AWS, Meta, Astor's gold). */
+.trust,
+.contact {
+  --bg: #161616;
+  --surface: #212121;
+  --surface-2: #262626;
+  --line: #303030;
+  --line-strong: #3d3d3d;
+  --ink: #fafafa;
+  --muted: #d9d9d9;
+  --dim: #a8a8a8;
+  --accent-text: #ff91ac;
+  margin-inline: clamp(8px, 1.5vw, 24px);
+  border-radius: 24px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.contact {
+  margin-block: clamp(8px, 1.5vw, 24px);
+}
+
+/* Tiles, after n8n.io: rounded, embossed, and lit by a pink ring on hover instead of lifting. */
+.card-box,
+.card,
+.tile,
+.clients-plate,
+.exp-frame {
+  border-radius: var(--radius-card);
+}
+
+.card,
+.clients-plate {
+  overflow: hidden;
+}
+
+.tile {
+  border-radius: 12px;
+}
+
+.card-box,
+.card,
+.tile {
+  border-color: transparent;
+  /* The emboss and the pink ring are n8n.io's tile, asked for by name. taste-skill-ignore */
+  box-shadow: var(--emboss); /* taste-skill-ignore */
+  transition: border-color .15s var(--ease), background-color .15s var(--ease), box-shadow .3s var(--ease);
+}
+
+.card-box:hover,
+.card:hover,
+.tile:hover {
+  border-color: transparent;
+  box-shadow: var(--emboss), var(--ring); /* taste-skill-ignore */
+}
+
+.project-links a,
+.cell,
+.site-tab,
+.nav-toggle {
+  border-radius: 999px;
+}
+
+.slider-btn {
+  border-radius: 50%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2658,4 +2944,347 @@ dialog .ping {
   .title.is-arriving {
     animation: none !important;
   }
+}
+
+/* Expand buttons, after n8n.io: a quiet pill with a plus that turns as the region below opens.
+   The region slides open on a grid row; without JavaScript it is simply open. */
+.expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--step-small);
+  font-weight: 700;
+  transition: background-color .15s var(--ease), scale .2s var(--ease);
+}
+
+.expand:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.expand:active {
+  scale: .96;
+}
+
+.expand-mark {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  transition: rotate .3s var(--ease);
+}
+
+.expand-mark::before,
+.expand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 5px 0;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.expand-mark::after {
+  rotate: 90deg;
+}
+
+.expand[aria-expanded="true"] .expand-mark {
+  rotate: 135deg;
+}
+
+.expand-body {
+  display: grid;
+  grid-template-rows: 1fr;
+}
+
+.js .expand-body {
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .45s var(--ease);
+}
+
+.js .expand-body.is-open {
+  grid-template-rows: 1fr;
+}
+
+.expand-body > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Hero: what each step of the canvas does */
+.flow-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 24px;
+  list-style: none;
+  counter-reset: none;
+}
+
+.flow-steps li {
+  padding: 18px;
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: var(--step-small);
+  line-height: 1.5;
+}
+
+.flow-steps strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.flow-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: var(--step-small);
+  text-align: center;
+}
+
+.flow-note a {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+/* Dark canvas (How I work): n8n's charcoal editor with its dotted grid */
+.flow-dark {
+  --pink: #ff91ac;
+}
+
+/* How I work runs in n8n's green: the checked, successful run. */
+.flow-view[data-flow="method"] {
+  --pink: #3ecf8e;
+}
+
+.flow-dark .flow-card {
+  background: #2e2e2e;
+}
+
+/* Narrower than the hero's, so labels wrap instead of running into the next branch. */
+.flow-dark .flow-label {
+  width: 116px;
+  color: #d9d9d9;
+  font-size: 13px;
+}
+
+.flow-dark .flow-wire {
+  stroke: #4d4d4d;
+}
+
+.flow-dark .flow-tool-wire {
+  stroke: #555;
+}
+
+.flow-dark .flow-port,
+.flow-dark .flow-socket {
+  fill: #8f8f8f;
+}
+
+.flow-dark .flow-glyph,
+.flow-dark .flow-agent-icon {
+  stroke: #fafafa;
+}
+
+.flow-dark .flow-agent-name {
+  color: #fafafa;
+  font-size: 14px;
+}
+
+.flow-dark .is-end .flow-card {
+  background: #fafafa;
+  color: #161616;
+}
+
+.method-canvas {
+  border-radius: var(--radius-card);
+  background: #1c1c1c url('../assets/brand/canvas-dot-dark.svg') 0 0 / 22px 22px;
+}
+
+/* How I work reveals the canvas a step at a time; CSS carries the change, so it is smooth with or without GSAP. */
+.flow-view[data-flow="method"] .flow-node,
+.flow-view[data-flow="method"] .flow-link {
+  transition: opacity .5s var(--ease), scale .5s var(--ease);
+}
+
+.flow-view[data-flow="method"] .flow-wire {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset .7s var(--ease);
+}
+
+.flow-view[data-flow="method"] .is-later {
+  opacity: 0;
+  scale: .85;
+}
+
+.flow-view[data-flow="method"] .flow-link.is-later .flow-wire {
+  stroke-dashoffset: 1;
+}
+
+/* How I work: the steps open one at a time beside their canvas */
+.steps {
+  display: grid;
+  gap: 8px;
+  margin-top: 40px;
+  list-style: none;
+}
+
+.step {
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  transition: background-color .2s var(--ease);
+}
+
+.step:has([aria-expanded="true"]) {
+  background: var(--surface-2);
+}
+
+.step h3 {
+  font-size: var(--step-body);
+}
+
+.step-toggle {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 20px;
+  border-radius: var(--radius-card);
+  background: transparent;
+  text-align: left;
+}
+
+.step-toggle:hover {
+  background: transparent;
+  color: var(--accent-text);
+}
+
+.step .expand-body p {
+  padding: 0 20px;
+  color: var(--muted);
+  font-size: var(--step-small);
+  line-height: 1.6;
+}
+
+.step .card-link {
+  display: inline-block;
+  margin: 10px 20px 18px;
+}
+
+.method-canvas {
+  position: sticky;
+  top: 104px;
+  padding: 12px;
+}
+
+/* Tools, after n8n.io's integrations: the logos drift in and out around the list */
+.tool-cloud {
+  position: relative;
+  height: clamp(200px, 24vw, 300px);
+  margin-top: 24px;
+}
+
+.tool-cloud span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--emboss);
+  opacity: 0;
+}
+
+.tool-cloud img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* Without the motion layer the cloud rests as a still row of logos. */
+.tool-cloud.is-still {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  height: auto;
+}
+
+.tool-cloud.is-still span {
+  position: static;
+  opacity: 1;
+}
+
+.tool-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+#toolGroups > div {
+  padding-top: 8px;
+}
+
+@media (max-width: 959px) {
+  .flow-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .method-canvas {
+    position: static;
+  }
+}
+
+/* The hero's + is a real button (script.js): it reveals the next chapter of the workflow, as on n8n.io. */
+.flow-more {
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  transition: scale .2s var(--ease), background-color .15s var(--ease);
+}
+
+.flow-more:hover {
+  background: var(--accent-text);
+  scale: 1.15;
+}
+
+.flow-more:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.flow-node[hidden] {
+  display: none;
+}
+
+/* n8n.io's pink "Click here" tag above the hero's +. It shows while the workflow rests (motion.js
+   fades it in and out); with reduced motion it simply stays. */
+.flow-hint {
+  position: absolute;
+  right: -4px;
+  bottom: calc(100% + 10px);
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #910840;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
 }

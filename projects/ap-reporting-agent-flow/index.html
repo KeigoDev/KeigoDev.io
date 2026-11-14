@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="AP Reporting Agent Flow by Matthew Ferrer: an n8n-style AI agent workflow builder that takes a stakeholder report request through seven departments to a formatted Excel workbook.">
 <meta name="author" content="Matthew Ferrer">
-<link rel="icon" href="../../assets/brand/favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="../../assets/brand/favicon.png?v=7" type="image/png" sizes="64x64">
 <link rel="canonical" href="https://keigodev.github.io/KeigoDev.io/projects/ap-reporting-agent-flow/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Matthew Ferrer">
@@ -17,7 +17,7 @@
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1000">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png?v=3">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,12 +34,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: n8n-style canvas with department swimlanes in the centre, request trigger form on the left, node inspector on the right, execution log beneath. Dark navy first. */
+/* Layout: n8n-style canvas with department swimlanes in the centre, request trigger form on the left, node inspector on the right, execution log beneath. Charcoal and pink, after n8n.io. */
 :root{
-  --bg:#0a0f1f; --canvas:#0d1430; --dot:#232c55; --panel:#111936; --panel-2:#16204a;
-  --line:#243061; --fg:#e7eaf7; --muted:#8e97bf; --faint:#5d6798;
-  --node:#151e45; --node-line:#2f3b74; --edge:#3e4a85;
-  --accent:#8b5cf6; --accent-fg:#ffffff; --accent-soft:rgba(139,92,246,.16);
+  --bg:#161616; --canvas:#1a1a1a; --dot:#303030; --panel:#212121; --panel-2:#262626;
+  --line:#303030; --fg:#fafafa; --muted:#a8a8a8; --faint:#707070;
+  --node:#262626; --node-line:#3d3d3d; --edge:#616161;
+  --accent:#ff91ac; --accent-fg:#161616; --accent-soft:rgba(255,145,172,.16);
   --red:#e0485b; --ok:#3ccf91; --warn:#f2b44a;
   --l1:#e0485b; --l2:#8b5cf6; --l3:#4f7cf0; --l4:#3ccf91; --l5:#f2b44a; --l6:#2fb6d4; --l7:#c36ff0;
   --band:rgba(255,255,255,.018);
@@ -49,22 +49,22 @@
   color-scheme:dark;
 }
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
-  --bg:#eef0f8; --canvas:#f6f7fc; --dot:#cdd2e8; --panel:#ffffff; --panel-2:#f1f2fa;
-  --line:#d8dcee; --fg:#141a35; --muted:#58618a; --faint:#8a92b6;
-  --node:#ffffff; --node-line:#c6cbe4; --edge:#a3abd0;
-  --accent:#6a3de0; --accent-fg:#ffffff; --accent-soft:rgba(106,61,224,.10);
+  --bg:#fafafa; --canvas:#f0f0f0; --dot:#cfcfcf; --panel:#ffffff; --panel-2:#f0f0f0;
+  --line:#d9d9d9; --fg:#161616; --muted:#474747; --faint:#707070;
+  --node:#ffffff; --node-line:#c2c2c2; --edge:#999999;
+  --accent:#cb1861; --accent-fg:#ffffff; --accent-soft:rgba(203,24,97,.10);
   --red:#c42a40; --ok:#13875a; --warn:#b97800;
   --l1:#c42a40; --l2:#6a3de0; --l3:#2f5fd6; --l4:#13875a; --l5:#b97800; --l6:#0f8aa6; --l7:#9a44c9;
-  --band:rgba(20,26,53,.025); color-scheme:light;
+  --band:rgba(0,0,0,.025); color-scheme:light;
 }}
 :root[data-theme="light"]{
-  --bg:#eef0f8; --canvas:#f6f7fc; --dot:#cdd2e8; --panel:#ffffff; --panel-2:#f1f2fa;
-  --line:#d8dcee; --fg:#141a35; --muted:#58618a; --faint:#8a92b6;
-  --node:#ffffff; --node-line:#c6cbe4; --edge:#a3abd0;
-  --accent:#6a3de0; --accent-fg:#ffffff; --accent-soft:rgba(106,61,224,.10);
+  --bg:#fafafa; --canvas:#f0f0f0; --dot:#cfcfcf; --panel:#ffffff; --panel-2:#f0f0f0;
+  --line:#d9d9d9; --fg:#161616; --muted:#474747; --faint:#707070;
+  --node:#ffffff; --node-line:#c2c2c2; --edge:#999999;
+  --accent:#cb1861; --accent-fg:#ffffff; --accent-soft:rgba(203,24,97,.10);
   --red:#c42a40; --ok:#13875a; --warn:#b97800;
   --l1:#c42a40; --l2:#6a3de0; --l3:#2f5fd6; --l4:#13875a; --l5:#b97800; --l6:#0f8aa6; --l7:#9a44c9;
-  --band:rgba(20,26,53,.025); color-scheme:light;
+  --band:rgba(0,0,0,.025); color-scheme:light;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:14px;line-height:1.5}
@@ -215,8 +215,8 @@ svg.edges{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .chip.st-running{color:var(--accent);border-color:var(--accent)}
 .chip.st-waiting{color:var(--warn);border-color:var(--warn)}
 .chip.st-error{color:var(--red);border-color:var(--red)}
-.tabs{display:flex;gap:2px;padding:0 10px;border-bottom:1px solid var(--line)}
-.tabs button{border:0;background:none;padding:10px 10px 9px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs{display:flex;gap:2px;padding:0 10px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs button{border:0;background:none;padding:10px 10px 9px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;flex:none;border-bottom:2px solid transparent;margin-bottom:-1px}
 .tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
 .ibody{padding:14px;max-height:620px;overflow:auto;display:flex;flex-direction:column;gap:12px}
 .bubble{display:flex;gap:10px;align-items:flex-start}

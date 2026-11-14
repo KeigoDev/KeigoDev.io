@@ -21,6 +21,41 @@ async function open(path) {
 {
   const { page, check } = await open('/');
   if (!(await page.evaluate(() => !!window.gsap))) fails.push('home: motion scripts did not load');
+  // The hero canvas draws every node (2 triggers, 5 steps, 4 agent tools, the end), a wire between each step,
+  // the prompt with its request, and every tool logo resolves.
+  const flow = await page.evaluate(() => {
+    const hero = '.flow-view[data-flow="hero"]';
+    return {
+      nodes: document.querySelectorAll(hero + ' .flow-node').length,
+      wires: document.querySelectorAll(hero + ' .flow-wire').length,
+      tools: document.querySelectorAll(hero + ' .flow-tool-wire').length,
+      prompt: !!document.querySelector(hero + ' .flow-prompt .flow-typed'),
+      logos: [...document.querySelectorAll(hero + ' .flow-node img')].filter(img => !img.complete || !img.naturalWidth).map(img => img.getAttribute('src'))
+    };
+  });
+  if (flow.nodes !== 12 || flow.wires !== 7 || flow.tools !== 4 || !flow.prompt) fails.push(`home: hero canvas drew ${JSON.stringify(flow)}`);
+  if (flow.logos.length) fails.push(`home: hero canvas logos missing: ${flow.logos.join(', ')}`);
+  // Every canvas draws (hero, How I work), and each expand button opens its region.
+  const canvases = await page.$$eval('.flow-view', views => views.map(v => `${v.dataset.flow}:${v.querySelectorAll('.flow-node').length}`));
+  if (canvases.join() !== 'hero:12,method:7') fails.push(`home: canvases drew ${canvases.join()}`);
+  const expands = await page.$$eval('.expand:not(.step-toggle)', buttons => buttons.map(b => {
+    b.click();
+    const open = b.getAttribute('aria-expanded') === 'true' && document.getElementById(b.getAttribute('aria-controls')).classList.contains('is-open');
+    b.click();
+    return open;
+  }));
+  if (!expands.length || expands.includes(false)) fails.push('home: an expand button did not open its region');
+  // The hero's + reveals two more chapters (12 + 5 + 5 nodes, the + included), then leaves.
+  const reveal = await page.evaluate(() => {
+    const more = () => document.querySelector('.flow-more');
+    more().click();
+    more().click();
+    const end = document.querySelector('.flow-view[data-flow="hero"] .is-end');
+    return { nodes: document.querySelectorAll('.flow-view[data-flow="hero"] .flow-node').length, gone: end.hidden, note: document.querySelector('.flow-live').textContent };
+  });
+  if (reveal.nodes !== 22 || !reveal.gone || !reveal.note.includes('Supplier risk view')) fails.push(`home: hero + did not reveal its chapters ${JSON.stringify(reveal)}`);
+  await page.click('.step-toggle[aria-controls="step-3"]');
+  if (await page.$eval('#step-3', r => !r.classList.contains('is-open'))) fails.push('home: How I work step did not open');
   await page.route('https://api.web3forms.com/**', r => r.fulfill({ json: { success: true } }));
   await page.evaluate(() => Object.entries({ mailName: 'Test', mailEmail: 'test@example.com', mailSubject: 'Test',
     mailMessage: 'Test message' }).forEach(([id, v]) => { document.getElementById(id).value = v; }));
