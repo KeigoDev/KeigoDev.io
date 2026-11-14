@@ -473,10 +473,10 @@
       });
     });
 
-    /* Proof band, What I do, How I work */
+    /* What I do, How I work */
 
-    // n8n's dark panels arrive: each grows from an inset card to its full size as it scrolls in.
-    q('.trust, .contact').forEach(panel => {
+    // n8n's dark panel arrives: it grows from an inset card to its full size as it scrolls in.
+    q('.contact').forEach(panel => {
       gsap.fromTo(panel, { scale: 0.94 }, {
         scale: 1,
         ease: 'none',
@@ -484,7 +484,7 @@
       });
     });
 
-    rise(document.querySelector('.trust'), '.label, .trust-logos li, .worked-logos li', { stagger: 0.05 });
+    rise(document.querySelector('.certified'), '.certified-line, .certified-logos li', { stagger: 0.06 });
     rise(document.querySelector('.services'), '.services .label, .services .title');
     rise(document.querySelector('.services .cards'), '.card-box', { stagger: 0.1 });
     rise(document.querySelector('.method'), '.method .label, .method .title');

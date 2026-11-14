@@ -60,10 +60,10 @@ Edit career dates, project descriptions, and destination links in index.html.
 Edit colors, typography, responsive layouts, and motion in css/style.css.
 Colors and type sizes are tokens at the top of css/style.css (--bg, --ink, --accent, --step-*).
 Design: dark and information-first, inspired by valiotti.com: serif headlines with one italic pink word,
-small mono labels, outlined cards, a numbers row, a trust band, an FAQ and a centred close.
+small mono labels, outlined cards, a numbers row, a "Certified by" logo row, an FAQ and a centred close.
 Unique to this site: the live dashboard recording in the project cards, the browser tour of the client
 websites, his own photographs, and the hero network drawn as 26 points, one per tool, clustered by tool group.
-Palette, after n8n.io (light theme): #fafafa ground, grey #f0f0f0 fields, charcoal #161616 panels for the logo band and contact, one pink (#ffbcca pill buttons with dark text, #cb1861 pink text), 16px embossed tiles with a pink hover ring.
+Palette, after n8n.io (light theme): #fafafa ground, grey #f0f0f0 fields, a charcoal #161616 panel for the contact, one pink (#ffbcca pill buttons with dark text, #cb1861 pink text), 16px embossed tiles with a pink hover ring.
 Typefaces: Instrument Serif (headlines) and IBM Plex Mono (labels), SIL Open Font License; Satoshi (reading),
 ITF Free Font License. All stored in assets/fonts/, so they work offline too. The Satoshi files are trimmed
 to Latin letters, punctuation and arrows to load faster; the stylesheet also sets size-matched stand-ins

@@ -8,6 +8,8 @@ Brand logos belong to their owners and are shown only to name tools and certific
   https://github.com/gilbarbara/logos — fetched through https://api.iconify.design and raw.githubusercontent.com
 - SVGL: excel (microsoft-excel), outlook (microsoft-outlook). https://svgl.app
 - Simple Icons (CC0): microstrategy, coloured #D9232E; semrush, coloured #FF642D (Semrush brand orange). https://simpleicons.org
+- Simple Icons (CC0), one-colour marks for the "Certified by" row, filled in the site's ink #161616:
+  aws-mono (amazonwebservices), ibm-mono, sap-mono, google-mono, meta-mono. Fetched through https://api.iconify.design
 - SE Ranking: seranking, the icon part of the official logo on https://seranking.com
   (se-ranking-logo-new.svg), cropped to a square without the wordmark.
 - VS Code Icons (MIT): sql (file-type-sql). https://github.com/vscode-icons/vscode-icons

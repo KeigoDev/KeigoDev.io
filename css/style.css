@@ -785,6 +785,29 @@ a, button, summary, input {
   text-transform: uppercase;
 }
 
+/* The certifications figure links to the credentials; the whole figure takes the tap. */
+.stat-link {
+  position: relative;
+}
+
+.stat-link a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+}
+
+.stat-link a::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.stat-link:hover a {
+  color: var(--accent-text);
+  text-decoration-color: currentColor;
+}
+
 .hero-portrait {
   text-align: center;
 }
@@ -835,81 +858,57 @@ a, button, summary, input {
   background: var(--accent-text);
 }
 
-/* Trust band */
+/* Certified by: after n8n.io's "trusted by" row, one plain sentence over the issuers' marks, all in
+   one ink at one size, spread evenly. The whole row links to the credentials. */
 
-.trust {
-  padding: 48px 0;
+.certified {
+  padding: 56px 0 64px;
 }
 
-.trust-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 24px 56px;
-  margin-top: 24px;
-  list-style: none;
-}
-
-.trust-logos li {
+.certified-row {
   display: grid;
-  place-items: center;
+  justify-items: center;
+  gap: 28px;
+  color: var(--ink);
+  text-decoration: none;
 }
 
-/* Brand colours, no frames: the same treatment as the employer logos below */
-.trust-logos img {
-  width: auto;
-  height: 30px;
-}
-
-.trust-logos img[src$="meta-dark.svg"] {
-  height: 24px;
-}
-
-/* The g's tail makes the file taller below the line, so centring lifts the word. Drop it back onto the shared baseline. */
-.trust-logos img[src$="google-wordmark.svg"] {
-  position: relative;
-  top: 4px;
-}
-
-.trust-sub {
-  margin-top: 36px;
-}
-
-/* Former employers, each in its own logo and lettering */
-.worked-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 20px 56px;
-  margin-top: 20px;
-  list-style: none;
-}
-
-.worked-logos img {
-  width: auto;
-  height: 40px;
-}
-
-.worked-logos img[src$="citi.svg"] {
-  height: 36px;
-}
-
-.worked-logos img[src$="be3.png"] {
-  height: 44px;
-}
-
-.trust-worked {
-  margin-top: 24px;
-  color: var(--dim);
+.certified-line {
   font-size: var(--step-small);
   text-align: center;
+  font-weight: 500;
+  transition: color .15s var(--ease);
 }
 
-.trust-worked span {
-  color: var(--ink);
-  font-weight: 700;
+.certified-row:hover .certified-line {
+  color: var(--accent-text);
+}
+
+.certified-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, 760px);
+  list-style: none;
+}
+
+/* Each file is cropped to its mark; the width and height in the HTML give every mark about the same
+   visual weight, so the stylesheet leaves them alone. */
+.certified-logos li {
+  display: flex;
+}
+
+@media (max-width: 520px) {
+  .certified-logos {
+    justify-content: center;
+    gap: 20px 32px;
+  }
+
+  .certified-logos img {
+    zoom: .85;
+  }
 }
 
 /* Sections */
@@ -2856,9 +2855,7 @@ dialog .ping {
   background: #f0f0f0;
 }
 
-/* n8n's dark panel: the logo band and the closing contact sit on rounded charcoal.
-   The logos there were drawn white for a dark page (Citi, AWS, Meta, Astor's gold). */
-.trust,
+/* n8n's dark panel: the closing contact sits on rounded charcoal. */
 .contact {
   --bg: #161616;
   --surface: #212121;

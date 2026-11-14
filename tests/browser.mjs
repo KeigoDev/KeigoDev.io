@@ -54,6 +54,16 @@ async function open(path) {
     return { nodes: document.querySelectorAll('.flow-view[data-flow="hero"] .flow-node').length, gone: end.hidden, note: document.querySelector('.flow-live').textContent };
   });
   if (reveal.nodes !== 22 || !reveal.gone || !reveal.note.includes('Supplier risk view')) fails.push(`home: hero + did not reveal its chapters ${JSON.stringify(reveal)}`);
+  // The certifications figure links to the credentials section.
+  if (!(await page.$eval('.stat-link a', a => !!document.querySelector(a.getAttribute('href'))))) fails.push('home: certifications figure does not link to its section');
+  // The certified row: five issuer marks that load, and a link that lands on the credentials.
+  await page.$eval('.certified', el => el.scrollIntoView());
+  await page.waitForTimeout(800); // the marks load lazily
+  const certified = await page.evaluate(() => ({
+    marks: [...document.querySelectorAll('.certified img')].filter(img => img.complete && img.naturalWidth).length,
+    target: !!document.querySelector(document.querySelector('.certified-row').getAttribute('href'))
+  }));
+  if (certified.marks !== 5 || !certified.target) fails.push(`home: certified row ${JSON.stringify(certified)}`);
   await page.click('.step-toggle[aria-controls="step-3"]');
   if (await page.$eval('#step-3', r => !r.classList.contains('is-open'))) fails.push('home: How I work step did not open');
   await page.route('https://api.web3forms.com/**', r => r.fulfill({ json: { success: true } }));
