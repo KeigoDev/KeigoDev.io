@@ -388,7 +388,8 @@ a, button, summary, input {
   gap: 28px;
 }
 
-.nav-links a {
+.nav-links > a,
+.nav-work-toggle {
   padding: 10px 0;
   color: var(--muted);
   font-size: var(--step-small);
@@ -396,9 +397,116 @@ a, button, summary, input {
   transition: color .25s var(--ease);
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links > a:hover,
+.nav-links > a.active,
+.nav-work-toggle:hover,
+.nav-work-toggle.active,
+.nav-work-toggle[aria-expanded="true"] {
   color: var(--ink);
+}
+
+/* Work: after n8n.io's product menu, a row of project tiles under the bar. Each tile is the project's
+   main tool, its name and its result, and jumps to its card. It opens on click (mouse, touch and
+   keyboard alike) and closes on Esc, outside clicks, a tile, or scrolling down. */
+.nav-work-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  font: inherit;
+  font-size: var(--step-small);
+  cursor: pointer;
+}
+
+.nav-caret {
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .25s var(--ease);
+}
+
+.nav-work-toggle[aria-expanded="true"] .nav-caret {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+.work-panel {
+  position: absolute;
+  inset: 100% 0 auto;
+  padding: 4px var(--margin) 20px;
+  background: var(--bg);
+  box-shadow: 0 18px 30px -24px rgba(0, 0, 0, .35);
+}
+
+.js .work-panel {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+}
+
+.js .work-panel.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+.work-tiles {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  max-width: var(--max);
+  margin: 0 auto;
+  list-style: none;
+}
+
+.work-tile {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  height: 100%;
+  padding: 22px 14px 20px;
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  box-shadow: var(--emboss); /* taste-skill-ignore */
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .3s var(--ease);
+}
+
+.work-tile:hover,
+.work-tile:focus-visible {
+  box-shadow: var(--emboss), var(--ring); /* taste-skill-ignore */
+  outline: none;
+}
+
+.work-tile img,
+.work-all {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 6px;
+}
+
+.work-all {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  font-weight: 700;
+}
+
+.work-tile strong {
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.work-tile span:last-child {
+  color: var(--dim);
+  font-size: 13px;
+  line-height: 1.35;
 }
 
 .nav-actions {
@@ -2527,7 +2635,8 @@ html.lenis,
     visibility: visible;
   }
 
-  .nav-links a {
+  .nav-links > a,
+  .nav-work-toggle {
     padding: 14px 0;
     color: var(--ink);
     font-size: var(--step-lead);
@@ -2536,6 +2645,47 @@ html.lenis,
   .nav-toggle {
     display: inline-flex;
     align-items: center;
+  }
+
+  /* Phone: inside the open menu the tiles become a list under Work. */
+  .nav-work-toggle {
+    width: 100%;
+  }
+
+  .work-panel {
+    position: static;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .js .work-panel {
+    display: none;
+  }
+
+  .js .work-panel.is-open {
+    display: block;
+  }
+
+  .work-tiles {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding-bottom: 8px;
+  }
+
+  .work-tile {
+    grid-template-columns: 28px 1fr;
+    justify-items: start;
+    column-gap: 14px;
+    row-gap: 2px;
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  .work-tile img,
+  .work-all {
+    grid-row: span 2;
+    align-self: center;
+    margin: 0;
   }
 
   .hero-grid,
@@ -2636,7 +2786,8 @@ html.lenis,
 /* In-page links: press, travel, arrive.
    1. A pink line draws under the link (and stays under the section being read). */
 
-.nav-links a,
+.nav-links > a,
+.nav-work-toggle,
 .foot-col a {
   background: linear-gradient(var(--accent-text), var(--accent-text)) no-repeat 0 calc(100% - 6px) / 0 1px;
   transition: color .25s var(--ease), background-size .45s var(--ease);
@@ -2646,9 +2797,12 @@ html.lenis,
   background-position: 0 calc(100% - 2px);
 }
 
-.nav-links a:hover,
-.nav-links a:focus-visible,
-.nav-links a.active,
+.nav-links > a:hover,
+.nav-links > a:focus-visible,
+.nav-links > a.active,
+.nav-work-toggle:hover,
+.nav-work-toggle:focus-visible,
+.nav-work-toggle.active,
 .foot-col a:hover,
 .foot-col a:focus-visible {
   background-size: 100% 1px;

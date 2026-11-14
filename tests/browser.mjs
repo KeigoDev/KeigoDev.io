@@ -76,6 +76,26 @@ async function open(path) {
     };
   });
   if (type.mono.length || type.other.length || type.pink.length) fails.push(`home: type ${JSON.stringify(type)}`);
+  // The Work panel: the button opens it, every tile points at a real project card, a tile closes it,
+  // and Esc closes it with focus back on the button.
+  // Opened from the keyboard: focusing the bar brings it back even when it has slid away on scroll.
+  await page.focus('#workToggle');
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(300);
+  const work = await page.evaluate(() => ({
+    open: document.querySelector('#workPanel').classList.contains('is-open') && document.querySelector('#workToggle').getAttribute('aria-expanded') === 'true',
+    tiles: document.querySelectorAll('.work-tile').length,
+    missing: [...document.querySelectorAll('.work-tile')].map(a => a.getAttribute('href')).filter(h => !document.querySelector(h))
+  }));
+  await page.click('.work-tile[href="#p-aml"]');
+  const closedByTile = await page.$eval('#workPanel', p => !p.classList.contains('is-open'));
+  await page.focus('#workToggle');
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(300);
+  await page.focus('.work-tile');
+  await page.keyboard.press('Escape');
+  const closedByEsc = await page.evaluate(() => !document.querySelector('#workPanel').classList.contains('is-open') && document.activeElement.id === 'workToggle');
+  if (!work.open || work.tiles !== 6 || work.missing.length || !closedByTile || !closedByEsc) fails.push(`home: work panel ${JSON.stringify({ ...work, closedByTile, closedByEsc })}`);
   await page.click('.step-toggle[aria-controls="step-3"]');
   if (await page.$eval('#step-3', r => !r.classList.contains('is-open'))) fails.push('home: How I work step did not open');
   await page.route('https://api.web3forms.com/**', r => r.fulfill({ json: { success: true } }));

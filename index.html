@@ -115,7 +115,19 @@ document.documentElement.classList.add('js');
     <a class="brand" href="#top" aria-label="Matthew Ferrer, back to top"><img class="brand-face" src="assets/brand/face.png?v=2" alt="" width="40" height="40"><span class="brand-name">Matthew Ferrer</span></a>
     <nav class="nav-links" id="navLinks" aria-label="Main navigation">
       <a href="#services">What I do</a>
-      <a href="#work">Work</a>
+      <div class="nav-work">
+        <button class="nav-work-toggle" id="workToggle" type="button" aria-expanded="false" aria-controls="workPanel">Work <span class="nav-caret" aria-hidden="true"></span></button>
+        <div class="work-panel" id="workPanel">
+          <ul class="work-tiles" aria-label="Featured projects">
+            <li><a class="work-tile" href="#p-agentflow"><img src="assets/logos/n8n.svg" alt="" width="28" height="28" loading="lazy"><strong>AP Reporting Agent Flow</strong><span>Request to Excel report across 7 departments</span></a></li>
+            <li><a class="work-tile" href="#p-aml"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"><strong>AML monitoring in SQL</strong><span>Fraud caught: 0.2% before, 99.5% after</span></a></li>
+            <li><a class="work-tile" href="#p-food"><img src="assets/logos/powerbi.svg" alt="" width="28" height="28" loading="lazy"><strong>Food affordability, PH</strong><span>Rice inflation from −17% to +20% in a year</span></a></li>
+            <li><a class="work-tile" href="#p-airways"><img src="assets/logos/tableau.svg" alt="" width="28" height="28" loading="lazy"><strong>British Airways reviews</strong><span>7 service ratings, 5 filters, one view</span></a></li>
+            <li><a class="work-tile" href="#p-amazon"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"><strong>Amazon product insights</strong><span>1,464 products cleaned in MySQL</span></a></li>
+            <li><a class="work-tile" href="#work"><span class="work-all" aria-hidden="true">→</span><strong>All 12 projects</strong><span>Every project with its tools and results</span></a></li>
+          </ul>
+        </div>
+      </div>
       <a href="#experience">Experience</a>
       <a href="#skills">Tools</a>
       <a href="#faq">FAQ</a>

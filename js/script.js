@@ -46,7 +46,18 @@ const header = $('.site-nav');
 const menu = $('#navLinks');
 const toggle = $('#navToggle');
 
+const workToggle = $('#workToggle');
+const workPanel = $('#workPanel');
+
+function setWork(open) {
+  workToggle.setAttribute('aria-expanded', String(open));
+  workPanel.classList.toggle('is-open', open);
+}
+
+workToggle.addEventListener('click', () => setWork(workToggle.getAttribute('aria-expanded') !== 'true'));
+
 function closeMenu() {
+  setWork(false);
   menu.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
   toggle.textContent = 'Menu';
@@ -63,6 +74,10 @@ $$('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
+    // Closing the Work panel hands focus back to its button.
+    if (workPanel.contains(document.activeElement)) {
+      workToggle.focus();
+    }
     closeMenu();
   }
 });
@@ -95,6 +110,7 @@ function onScroll() {
     const goingUp = y < lastY - 4;
     if (goingDown && y > heroEnd + 200) {
       header.classList.add('nav-hidden');
+      setWork(false);
     } else if (goingUp || y <= heroEnd) {
       header.classList.remove('nav-hidden');
     }
@@ -373,9 +389,10 @@ if ('IntersectionObserver' in window) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.id === 'clients' ? 'work' : entry.target.id;
-        $$('.nav-links a').forEach(link => {
+        $$('.nav-links > a').forEach(link => {
           link.classList.toggle('active', link.hash === `#${id}`);
         });
+        workToggle.classList.toggle('active', id === 'work');
       }
     });
   }, { rootMargin: '-35% 0px -60% 0px' });
