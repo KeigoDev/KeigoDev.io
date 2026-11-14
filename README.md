@@ -59,15 +59,15 @@ need to be published. Working notes (docs/, .impeccable/) stay local and are not
 Edit career dates, project descriptions, and destination links in index.html.
 Edit colors, typography, responsive layouts, and motion in css/style.css.
 Colors and type sizes are tokens at the top of css/style.css (--bg, --ink, --accent, --step-*).
-Design: dark and information-first, inspired by valiotti.com: serif headlines with one italic pink word,
-small mono labels, outlined cards, a numbers row, a "Certified by" logo row, an FAQ and a centred close.
+Design: light and information-first, after n8n.io: bold sans headlines, plain sentence-case labels,
+embossed cards, a numbers row, a "Certified by" logo row, an FAQ and a centred close.
 Unique to this site: the live dashboard recording in the project cards, the browser tour of the client
 websites, his own photographs, and the hero network drawn as 26 points, one per tool, clustered by tool group.
-Palette, after n8n.io (light theme): #fafafa ground, grey #f0f0f0 fields, a charcoal #161616 panel for the contact, one pink (#ffbcca pill buttons with dark text, #cb1861 pink text), 16px embossed tiles with a pink hover ring.
-Typefaces: Instrument Serif (headlines) and IBM Plex Mono (labels), SIL Open Font License; Satoshi (reading),
-ITF Free Font License. All stored in assets/fonts/, so they work offline too. The Satoshi files are trimmed
+Palette, after n8n.io (light theme): #fafafa ground, grey #f0f0f0 fields, a charcoal #161616 panel for the contact, one pink for what can be acted on (#ffbcca pill buttons with dark text, #cb1861 for links on hover, the workflow run), 16px embossed tiles with a pink hover ring. Labels, dates and headlines stay grey or ink.
+Typefaces: Satoshi for everything (ITF Free Font License); IBM Plex Mono (SIL Open Font License) only for real code
+and URLs: the terminal replay and the browser bar. All stored in assets/fonts/, so they work offline too. The Satoshi files are trimmed
 to Latin letters, punctuation and arrows to load faster; the stylesheet also sets size-matched stand-ins
-(Georgia, Arial) so text does not move when the web fonts arrive.
+(Arial) so text does not move when the web fonts arrive.
 Edit interface behavior in js/script.js.
 Animations live in js/motion.js (GSAP, ScrollTrigger and Lenis, stored in js/vendor/).
 If those files are missing, or a visitor has reduced motion turned on, the page still works without animation.

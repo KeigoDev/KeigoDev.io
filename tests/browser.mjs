@@ -64,6 +64,18 @@ async function open(path) {
     target: !!document.querySelector(document.querySelector('.certified-row').getAttribute('href'))
   }));
   if (certified.marks !== 5 || !certified.target) fails.push(`home: certified row ${JSON.stringify(certified)}`);
+  // One typeface: Satoshi everywhere, the code font only in the terminal replay and the browser bar,
+  // and no section label or headline word in pink (pink is for what can be acted on).
+  const type = await page.evaluate(() => {
+    const els = [...document.querySelectorAll('body *')].filter(el => [...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()));
+    const family = el => getComputedStyle(el).fontFamily.split(',')[0].replace(/["']/g, '').trim();
+    return {
+      mono: els.filter(el => family(el) === 'IBM Plex Mono' && !el.closest('.cover-term, .browser-bar')).slice(0, 3).map(el => el.textContent.trim().slice(0, 30)),
+      other: [...new Set(els.map(family))].filter(f => !['Satoshi', 'IBM Plex Mono'].includes(f)),
+      pink: [...document.querySelectorAll('.label, .title em, .hero-title em')].filter(el => getComputedStyle(el).color === 'rgb(203, 24, 97)').map(el => el.textContent.trim().slice(0, 30))
+    };
+  });
+  if (type.mono.length || type.other.length || type.pink.length) fails.push(`home: type ${JSON.stringify(type)}`);
   await page.click('.step-toggle[aria-controls="step-3"]');
   if (await page.$eval('#step-3', r => !r.classList.contains('is-open'))) fails.push('home: How I work step did not open');
   await page.route('https://api.web3forms.com/**', r => r.fulfill({ json: { success: true } }));
