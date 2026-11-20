@@ -118,9 +118,9 @@ document.documentElement.classList.add('js');
         <button class="nav-work-toggle" id="workToggle" type="button" aria-expanded="false" aria-controls="workPanel">Work <span class="nav-caret" aria-hidden="true"></span></button>
         <div class="work-panel" id="workPanel">
           <ul class="work-tiles" aria-label="Featured projects">
-            <li><a class="work-tile" href="#p-agentflow"><img src="assets/logos/n8n.svg" alt="" width="28" height="28" loading="lazy"><strong>AP Reporting Agent Flow</strong><span>Request to Excel report across 7 departments</span></a></li>
             <li><a class="work-tile" href="#p-aml"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"><strong>AML monitoring in SQL</strong><span>Fraud caught: 0.2% before, 99.5% after</span></a></li>
             <li><a class="work-tile" href="#p-food"><img src="assets/logos/powerbi.svg" alt="" width="28" height="28" loading="lazy"><strong>Food affordability, PH</strong><span>Rice inflation from −17% to +20% in a year</span></a></li>
+            <li><a class="work-tile" href="#p-agentflow"><img src="assets/logos/n8n.svg" alt="" width="28" height="28" loading="lazy"><strong>AP Reporting Agent Flow</strong><span>Request to Excel report across 7 departments</span></a></li>
             <li><a class="work-tile" href="#p-airways"><img src="assets/logos/tableau.svg" alt="" width="28" height="28" loading="lazy"><strong>British Airways reviews</strong><span>7 service ratings, 5 filters, one view</span></a></li>
             <li><a class="work-tile" href="#p-amazon"><img src="assets/logos/sql.svg" alt="" width="28" height="28" loading="lazy"><strong>Amazon product insights</strong><span>1,464 products cleaned in MySQL</span></a></li>
             <li><a class="work-tile" href="#work"><span class="work-all" aria-hidden="true">→</span><strong>All 12 projects</strong><span>Every project with its tools and results</span></a></li>
@@ -259,44 +259,15 @@ document.documentElement.classList.add('js');
   <div class="wrap">
     <p class="label">Selected work</p>
     <h2 class="title" id="workHeading">Projects with the <em>receipts</em></h2>
-    <p class="intro">Five featured projects, then seven more. Each card shows the work, the tools and how I built it.</p>
+    <p class="intro">Three featured projects, then nine more. Each card shows the work, the tools and how I built it.</p>
     <nav class="project-links" aria-label="Jump to a kind of project">
-      <a href="#p-agentflow">AI automation</a>
       <a href="#p-aml">SQL</a>
       <a href="#p-food">Power BI</a>
+      <a href="#p-agentflow">AI automation</a>
       <a href="#p-airways">Tableau</a>
       <a href="#p-ngram">Python &amp; NLP</a>
     </nav>
     <div class="deck">
-        <article class="project card" id="p-agentflow" data-tags="ai automation excel sql">
-          <figure class="project-media">
-            <img src="assets/work/ap-agent-flow.jpg" srcset="assets/work/ap-agent-flow-480w.jpg 480w, assets/work/ap-agent-flow-800w.jpg 800w, assets/work/ap-agent-flow.jpg 1600w" sizes="(max-width: 899px) 100vw, 56vw" alt="AP Reporting Agent Flow builder after a successful run: a request form with a 10/25/2021 to 11/03/2026 date range, a workflow canvas of AI agent nodes in department swimlanes from SQL extract to Excel builder and manager approval, and the Insights Agent response with open value, past-due share and suppliers at risk" width="1600" height="1000" loading="lazy">
-            <figcaption class="media-note">Latest project. Click any node to see its agent response, input and output; the Excel report builds in the browser.</figcaption>
-          </figure>
-          <div class="card-body">
-            <h3>AP Reporting Agent Flow</h3>
-            <p class="project-field">AI automation · AI agents, Excel</p>
-            <p class="project-result">Stakeholder request to Excel report across 7 departments</p>
-            <p class="project-desc">An n8n-style workflow builder where AI agents for each department take a report request from intake to a formatted Excel workbook. It is modeled on the payables reporting I ran at Citi, with a 3-business-day SLA and a manager sign-off.</p>
-            <p class="project-tools">n8n · JavaScript · SQL · ExcelJS · Claude · Prompt design</p>
-            <p class="project-links">
-              <a href="projects/ap-reporting-agent-flow/" target="_blank" rel="noopener">Open the builder <span aria-hidden="true">↗</span></a>
-              <a href="projects/ap-reporting-agent-flow/ap-reporting-agent-flow.n8n.json" download>n8n workflow <span aria-hidden="true">↓</span></a>
-            </p>
-            <details class="project-more">
-              <summary>How I did it</summary>
-              <ul>
-                <li>Mapped my Citi reporting process into seven department lanes: stakeholders, intake, data engineering, data quality, analytics, reporting and management review.</li>
-                <li>Gave every AI agent an editable role and task. Nodes can be added, removed, reordered, deactivated or moved between departments, and missing steps are flagged before a run.</li>
-                <li>Kept the numbers deterministic on a 900-invoice sample ledger: a read-only SQL extract by date range, FX to USD, duplicate and null checks with control-total reconciliation, aging buckets and supplier health scores.</li>
-                <li>Added a human approval step that can send the run back to Analytics with feedback, which produces a new revision of the report.</li>
-                <li>Generated a styled .xlsx in the browser with ExcelJS: summary, aging by region, supplier health, open invoices, data quality, agent notes and the run log.</li>
-                <li>Rebuilt the same flow as an importable n8n workflow: a request form trigger, Claude agent nodes, a priority switch, Postgres extract, validation gate, Gmail approval with a send-back loop, Excel file and a Google Sheets tracker, with each department as a swimlane.</li>
-              </ul>
-            </details>
-          </div>
-        </article>
-
         <article class="project card" id="p-aml" data-tags="sql python tableau">
           <figure class="project-media">
             <img src="assets/work/aml-monitoring.jpg" srcset="assets/work/aml-monitoring-480w.jpg 480w, assets/work/aml-monitoring-800w.jpg 800w, assets/work/aml-monitoring.jpg 1600w" sizes="(max-width: 899px) 100vw, 56vw" alt="Tableau dashboard, AML Transaction Monitoring, with filters for simulation day, hour of day, transaction type and rule group: $12,056M fraud value, 8,197 fraud cases, old flag recall 0.2% against 99.5% for the risk score, fraud by day, hour and type, share of fraud caught by rule, a data cleaning summary and the top 100 alerts" width="1600" height="1000" loading="lazy">
@@ -355,7 +326,47 @@ document.documentElement.classList.add('js');
           </div>
         </article>
 
-        <article class="project card" id="p-airways" data-tags="tableau">
+        <article class="project card" id="p-agentflow" data-tags="ai automation excel sql">
+          <figure class="project-media">
+            <img src="assets/work/ap-agent-flow.jpg" srcset="assets/work/ap-agent-flow-480w.jpg 480w, assets/work/ap-agent-flow-800w.jpg 800w, assets/work/ap-agent-flow.jpg 1600w" sizes="(max-width: 899px) 100vw, 56vw" alt="AP Reporting Agent Flow builder after a successful run: a request form with a 10/25/2021 to 11/03/2026 date range, a workflow canvas of AI agent nodes in department swimlanes from SQL extract to Excel builder and manager approval, and the Insights Agent response with open value, past-due share and suppliers at risk" width="1600" height="1000" loading="lazy">
+            <figcaption class="media-note">Latest project. Click any node to see its agent response, input and output; the Excel report builds in the browser.</figcaption>
+          </figure>
+          <div class="card-body">
+            <h3>AP Reporting Agent Flow</h3>
+            <p class="project-field">AI automation · AI agents, Excel</p>
+            <p class="project-result">Stakeholder request to Excel report across 7 departments</p>
+            <p class="project-desc">An n8n-style workflow builder where AI agents for each department take a report request from intake to a formatted Excel workbook. It is modeled on the payables reporting I ran at Citi, with a 3-business-day SLA and a manager sign-off.</p>
+            <p class="project-tools">n8n · JavaScript · SQL · ExcelJS · Claude · Prompt design</p>
+            <p class="project-links">
+              <a href="projects/ap-reporting-agent-flow/" target="_blank" rel="noopener">Open the builder <span aria-hidden="true">↗</span></a>
+              <a href="projects/ap-reporting-agent-flow/ap-reporting-agent-flow.n8n.json" download>n8n workflow <span aria-hidden="true">↓</span></a>
+            </p>
+            <details class="project-more">
+              <summary>How I did it</summary>
+              <ul>
+                <li>Mapped my Citi reporting process into seven department lanes: stakeholders, intake, data engineering, data quality, analytics, reporting and management review.</li>
+                <li>Gave every AI agent an editable role and task. Nodes can be added, removed, reordered, deactivated or moved between departments, and missing steps are flagged before a run.</li>
+                <li>Kept the numbers deterministic on a 900-invoice sample ledger: a read-only SQL extract by date range, FX to USD, duplicate and null checks with control-total reconciliation, aging buckets and supplier health scores.</li>
+                <li>Added a human approval step that can send the run back to Analytics with feedback, which produces a new revision of the report.</li>
+                <li>Generated a styled .xlsx in the browser with ExcelJS: summary, aging by region, supplier health, open invoices, data quality, agent notes and the run log.</li>
+                <li>Rebuilt the same flow as an importable n8n workflow: a request form trigger, Claude agent nodes, a priority switch, Postgres extract, validation gate, Gmail approval with a send-back loop, Excel file and a Google Sheets tracker, with each department as a swimlane.</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+    </div>
+
+    <div class="more-work" aria-labelledby="moreHeading">
+      <div class="more-head">
+        <h3 class="more-title" id="moreHeading">More work</h3>
+        <div class="slider-controls">
+          <button class="slider-btn" type="button" data-dir="-1" aria-label="Previous projects"><span aria-hidden="true">←</span></button>
+          <button class="slider-btn" type="button" data-dir="1" aria-label="Next projects"><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="slider" tabindex="0" role="region" aria-label="More work">
+        <article class="project card mini" id="p-airways" data-tags="tableau">
           <figure class="project-media has-video">
             <video class="project-video" muted loop playsinline preload="none" data-poster="assets/work/ba-metrics-poster.jpg" width="960" height="582" aria-label="Screen recording of the British Airways dashboard: switching the metric between overall rating, cabin staff, entertainment, food and ground service redraws every chart">
               <source src="assets/work/ba-metrics.webm" type="video/webm">
@@ -383,7 +394,7 @@ document.documentElement.classList.add('js');
           </div>
         </article>
 
-        <article class="project card" id="p-amazon" data-tags="sql tableau">
+        <article class="project card mini" id="p-amazon" data-tags="sql tableau">
           <figure class="project-media">
             <img src="assets/work/amazon-tableau.jpg" srcset="assets/work/amazon-tableau-480w.jpg 480w, assets/work/amazon-tableau-800w.jpg 800w, assets/work/amazon-tableau.jpg 1280w" sizes="(max-width: 899px) 100vw, 56vw" alt="Tableau dashboard: revenue by category, discounts against sales, satisfaction by category and high-rated products with low reach" width="1280" height="890" loading="lazy">
           </figure>
@@ -410,17 +421,7 @@ document.documentElement.classList.add('js');
             </details>
           </div>
         </article>
-    </div>
 
-    <div class="more-work" aria-labelledby="moreHeading">
-      <div class="more-head">
-        <h3 class="more-title" id="moreHeading">More work</h3>
-        <div class="slider-controls">
-          <button class="slider-btn" type="button" data-dir="-1" aria-label="Previous projects"><span aria-hidden="true">←</span></button>
-          <button class="slider-btn" type="button" data-dir="1" aria-label="Next projects"><span aria-hidden="true">→</span></button>
-        </div>
-      </div>
-      <div class="slider" tabindex="0" role="region" aria-label="More work">
         <article class="project card mini" id="p-cocacola" data-tags="powerbi excel">
           <figure class="project-media">
             <img src="assets/work/pbi-cocacola.jpg" srcset="assets/work/pbi-cocacola-480w.jpg 480w, assets/work/pbi-cocacola-800w.jpg 800w, assets/work/pbi-cocacola.jpg 1440w" sizes="(max-width: 899px) 100vw, 56vw" alt="Coca-Cola USA retail dashboard: total sales $12M, units sold, average price, operating profit, sales by brand and retailer, and profit margin by quarter" width="1440" height="810" loading="lazy">
@@ -944,8 +945,7 @@ document.documentElement.classList.add('js');
       <p class="label">Featured work</p>
       <a href="#p-aml">AML transaction monitoring</a>
       <a href="#p-food">Food affordability PH</a>
-      <a href="#p-airways">British Airways reviews</a>
-      <a href="#p-amazon">Amazon product insights</a>
+      <a href="#p-agentflow">AP Reporting Agent Flow</a>
     </nav>
     <nav class="foot-col" aria-label="Websites I run">
       <p class="label">Websites I run</p>

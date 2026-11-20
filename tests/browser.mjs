@@ -104,6 +104,9 @@ async function open(path) {
   const sent = page.waitForRequest('https://api.web3forms.com/**', { timeout: 5000 }).catch(() => null);
   await page.$eval('#mailForm', f => f.requestSubmit());
   if (!(await sent)) fails.push('home: contact form did not send');
+  // The contact sheet is frosted glass: it blurs the page behind and lets it show through.
+  const glass = await page.$eval('#mailDialog', d => { const s = getComputedStyle(d); return { blur: s.backdropFilter, bg: s.backgroundImage }; });
+  if (!glass.blur.includes('blur') || !glass.bg.includes('rgba')) fails.push(`home: contact sheet is not glass ${JSON.stringify(glass)}`);
   check('home');
 }
 
