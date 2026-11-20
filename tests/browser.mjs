@@ -98,6 +98,21 @@ async function open(path) {
   if (!work.open || work.tiles !== 6 || work.missing.length || !closedByTile || !closedByEsc) fails.push(`home: work panel ${JSON.stringify({ ...work, closedByTile, closedByEsc })}`);
   await page.click('.step-toggle[aria-controls="step-3"]');
   if (await page.$eval('#step-3', r => !r.classList.contains('is-open'))) fails.push('home: How I work step did not open');
+  // Dropdowns animate their height where the browser supports it.
+  const smooth = await page.$eval('.faq-list details', d => getComputedStyle(d, '::details-content').transitionProperty);
+  if (!smooth.includes('block-size')) fails.push(`home: dropdowns do not animate height (${smooth})`);
+  // Website tabs slide from the side you move toward: back to the first tab wipes in from the left.
+  await page.locator('#clients').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(800);
+  const tabs = await page.$$('.site-tab');
+  await tabs[1].click();
+  await page.waitForTimeout(100);
+  await tabs[0].click();
+  const wipe = await page.$eval('.site-shot.is-on', s => s.style.clipPath);
+  if (!wipe.startsWith('inset(0% 100%')) fails.push(`home: earlier site tab did not slide from the left (${wipe})`);
+  // Submitting with empty fields shakes them.
+  await page.$eval('#mailForm', f => f.requestSubmit());
+  if (!(await page.$eval('#mailName', i => i.classList.contains('shake')))) fails.push('home: empty contact field did not shake');
   await page.route('https://api.web3forms.com/**', r => r.fulfill({ json: { success: true } }));
   await page.evaluate(() => Object.entries({ mailName: 'Test', mailEmail: 'test@example.com', mailSubject: 'Test',
     mailMessage: 'Test message' }).forEach(([id, v]) => { document.getElementById(id).value = v; }));

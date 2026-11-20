@@ -684,15 +684,21 @@
       });
     }
 
+    // The new site slides in from the side you moved toward: a later tab from the right, an earlier one from the left.
+    const siteIndex = () => [...document.querySelectorAll('.site-tab')].findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+    let lastSite = siteIndex();
     document.addEventListener('site:change', event => {
       const panel = event.detail;
+      const now = siteIndex();
+      const dir = now < lastSite ? -1 : 1;
+      lastSite = now;
       if (!panel || !ScrollTrigger.isInViewport(clients, 0.1)) {
         return;
       }
       const shot = document.querySelector('.site-shot.is-on');
       gsap.timeline({ defaults: { ease, overwrite: true } })
-        .fromTo(shot, { clipPath: 'inset(0% 0% 0% 100%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'expo.inOut' })
-        .fromTo(panel.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, stagger: 0.06 }, '<0.15');
+        .fromTo(shot, { clipPath: dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, ease: 'expo.inOut' })
+        .fromTo(panel.children, { x: dir * 24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, stagger: 0.06 }, '<0.15');
     });
 
     /* Experience: each proof panel opens, its text follows */

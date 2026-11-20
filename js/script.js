@@ -455,6 +455,16 @@ mailDialog.addEventListener('click', event => {
   }
 });
 
+// Shake once to point at what went wrong: an empty field on submit, or a failed send.
+function shake(el) {
+  el.classList.remove('shake');
+  void el.offsetWidth; // restart the animation if it is already running
+  el.classList.add('shake');
+  el.addEventListener('animationend', () => el.classList.remove('shake'), { once: true });
+}
+
+mailForm.addEventListener('invalid', event => shake(event.target), true);
+
 mailForm.addEventListener('submit', async event => {
   event.preventDefault();
   const send = mailForm.querySelector('.mail-send');
@@ -486,6 +496,7 @@ mailForm.addEventListener('submit', async event => {
   } catch {
     // Keep what they typed so nothing is lost.
     mailStatus.textContent = `That did not send. Please try again, or email ${EMAIL} directly.`;
+    shake(send);
   } finally {
     send.disabled = false;
     send.classList.remove('is-sending');
