@@ -1,7 +1,7 @@
 # Matthew Ferrer: portfolio resources
 
 Complete portable website, exported September 24, 2026.
-Astor Realty Enterprise (AI Operations Lead): September 2026–now.
+Astor Realty Enterprise (AI Operations Lead, freelance): September 2026–December 2026.
 Citi experience: October 2025–October 2026.
 
 ## Folders
